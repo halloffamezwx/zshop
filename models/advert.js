@@ -1,5 +1,5 @@
 const db = require('../db');
-
+//广告实体
 module.exports = db.defineModel('advert', {
     id: {
         type: db.INTEGER,
@@ -11,7 +11,7 @@ module.exports = db.defineModel('advert', {
         type: db.STRING(200),
         allowNull: true
     },
-    position: db.INTEGER,
+    position: db.INTEGER, //位置 1-首页头部 2-首页中部
     image: db.STRING(100),
     url: {
         type: db.STRING(100),

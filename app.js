@@ -6,7 +6,7 @@ const controller = require('./controller');
 
 const templating = require('./templating');
 
-var compress = require('koa-compress');
+const compress = require('koa-compress');
 
 const rest = require('./rest');
 

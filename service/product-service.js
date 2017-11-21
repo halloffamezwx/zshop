@@ -1,14 +1,17 @@
+//商品service
 const model = require('../model');
 
 let product = model.product;
 
 module.exports = {
+    //查询所有商品
     getAllProducts: async () => {
         var products = await product.findAll();
         //console.log(JSON.stringify(products));
         return products;
     },
 
+    //根据关键字搜索商品
     searchProduct: async (searchKey, limit, offset, orderType) => {
         var orderStr = null;
         if (orderType == 1) {
@@ -35,6 +38,7 @@ module.exports = {
         return products;
     },
 
+    //取得相应的推荐商品
     getRecomProduct: async (recom) => {
         var products = await product.findAll({
             where: {
@@ -44,6 +48,7 @@ module.exports = {
         return products;
     },
 
+    //新增一个商品
     createProduct: async (name, price) => {
         await product.create({
             name: 'dfdfd',
@@ -54,6 +59,7 @@ module.exports = {
         return null;
     },
 
+    //根据id删除一个商品
     deleteProduct: async (id) => {
         
         return null;

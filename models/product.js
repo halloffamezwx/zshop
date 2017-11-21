@@ -1,5 +1,5 @@
 const db = require('../db');
-
+//商品实体
 module.exports = db.defineModel('product', {
     id: {
         type: db.INTEGER,
@@ -10,11 +10,11 @@ module.exports = db.defineModel('product', {
     description: db.STRING(200),
     price: db.DECIMAL(12, 2),
     image: db.STRING(100),
-    recommend: {
+    recommend: { //推荐 1-首页精品推荐
         type: db.INTEGER,
         allowNull: true
     },
-    sales: {
+    sales: { //销量
         type: db.INTEGER,
         defaultValue: 0
     }
