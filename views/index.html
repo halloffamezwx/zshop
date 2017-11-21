@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>首页</title>
+    <link rel="stylesheet" href="/static/css/weui.min.css"/>
+	<link rel="stylesheet" href="/static/css/style.css"/>
+	<link rel="stylesheet" href="/static/css/swipe.css"/>
+	<script data-main="/static/js/app/index-main" src="/static/js/lib/require.js" defer async="true"></script>
+</head>
+
+<body>
+	<div class="weui-tab__panel" id="index_content" style="display: block; ">
+		<div id='mySwipe' class='swipe'>
+			<div class='swipe-wrap'>
+				{% for hAd in hAds %}
+				<div><img src="{{hAd.image}}"></div>
+				{% endfor %}
+			</div>
+			
+			<ul class='swipe-wrap-circle'>
+				{% for hAd in hAds %}
+				<li id="disc_{{loop.index - 1}}"></li>
+				{% endfor %}
+			</ul>
+			<!--
+			<div style='text-align:center;padding-top:20px;'>
+				<button onclick='mySwipe.prev()'>prev</button> 
+				<button onclick='mySwipe.next()'>next</button>
+			</div>
+			-->
+		</div>	
+		
+		<div class="weui-flex wy-iconlist-box">
+			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu2.png"></div><p>正在建设</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu3.png"></div><p>正在建设</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu4.png"></div><p>订单管理</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu1.png"></div><p>正在建设</p></a></div>
+		</div>
+		<img src="{{mAdImg}}" style="width: 100%;margin-top:5px;"/>
+		
+		<div style="border-bottom: 2px solid #efeff4; font-size:12px;background-color: #fff;text-align:center;color:#666;padding:5px;">精品推荐</div>
+
+		{% for p in prods %}
+		{% if loop.index % 2 != 0 %}
+		<div class="weui-flex wy-iconlist-box-ex" >
+			<div class="weui-flex__item" style="background-color: #fff;">
+				<a href="javascript:;" class="wy-links-iconlist-ex" >
+					<div class="img"><img src="{{p.image}}"></div>
+					<p style="color:black;font-size:13px;">{{p.name}}</p>
+					<p>{{p.description}}</p>
+					<p style="color:red;">¥{{p.price}}</p>
+				</a>
+			</div>
+		{% else %}
+			<div class="weui-flex__item" style="margin-left:5px;background-color: #fff;">
+				<a href="javascript:;" class="wy-links-iconlist-ex" >
+					<div class="img"><img src="{{p.image}}"></div>
+					<p style="color:black;font-size:13px;">{{p.name}}</p>
+					<p>{{p.description}}</p>
+					<p style="color:red;">¥{{p.price}}</p>
+				</a>
+			</div>
+		</div>
+		{% endif %}
+
+		{% if loop.index == loop.length %}
+			<div class="weui-flex__item" style="margin-left:5px;background-color: #fff;">
+				<a href="javascript:;" class="wy-links-iconlist-ex" ></a>
+			</div>
+		</div>
+		{% endif %}
+		{% endfor %}
+		
+	</div>
+	
+	<div class="weui-tab__panel" id="goods_content" style="display: none; ">
+        <div class="weui-search-bar" id="searchBar" style="position: fixed;height: 44px; top: 0; left: 0; right: 0;z-index: 100;">
+            <div class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search" ></i>
+                    <input type="search" v-model="key" @keyup.13="search(false)" v-on:blur="searchInputBlur()" v-on:input="searchInputInput()" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear" v-on:click="searchClearClick()"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText" v-on:click="searchTextClick()">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </div>
+			<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel" v-on:click="searchCancelClick()">取消</a>
+        </div>
+		<div class="weui-cells searchbar-result" id="searchResult" style="position: fixed;z-index: 9999;width: 100%;top: 44px;">
+            <div class="weui-cell weui-cell_access" v-on:click="search(false, '魅蓝');">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>魅蓝</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access" v-on:click="search(false, '魅族');">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>魅族</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access" v-on:click="search(false, 'Note7');">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>Note7</p>
+                </div>
+            </div>
+        </div>   
+		
+		<div class="weui-panel weui-panel_access" style="margin-top:44px;">
+			<div class="weui-panel__hd" v-show="sprods.length > 0">
+				<div class="weui-flex" style="text-align:center;font-size:14px;">
+					<div class="weui-flex__item" v-bind:class="[ordertype == 0 ? 'color-green' : 'color-gray']" v-on:click="search(false, null, 0);">综合</div>
+					<div class="weui-flex__item" v-bind:class="[(ordertype == 1 || ordertype == 2) ? 'color-green' : 'color-gray']" v-on:click="search(false, null, 1);">按销量 
+						<div style="display: inline-block;">
+							<div style="margin-bottom:1px;" v-bind:class="[ordertype == 1 ? 'triangle-up-green' : 'triangle-up']"></div> 
+							<div v-bind:class="[ordertype == 2 ? 'triangle-down-green' : 'triangle-down']"></div>
+						</div>
+					</div>
+					<div class="weui-flex__item" v-bind:class="[(ordertype == 3 || ordertype == 4) ? 'color-green' : 'color-gray']" v-on:click="search(false, null, 3);">按价格
+						<div style="display: inline-block;">
+							<div style="margin-bottom:1px;" v-bind:class="[ordertype == 3 ? 'triangle-up-green' : 'triangle-up']"></div> 
+							<div v-bind:class="[ordertype == 4 ? 'triangle-down-green' : 'triangle-down']"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="weui-panel__bd">
+				<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" v-for="sp in sprods">
+					<div class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" v-bind:src=sp.image alt="">
+					</div>
+					<div class="weui-media-box__bd" >
+						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;" v-text="sp.name"></h4>
+						<p class="weui-media-box__desc" style="margin-bottom:10px;" v-text="sp.description"></p>
+						<p class="weui-media-box__desc" style="color:red;" v-text="'¥' + sp.price"></p>
+					</div>
+				</a>
+			</div>
+			<div class="weui-panel__ft" v-show="hasdata">
+				<a href="javascript:void(0);" v-on:click="search(true)" v-show="!loading" id="loadmore-button" class="weui-cell weui-cell_access weui-cell_link">
+					<div class="weui-cell__bd" style="text-align:center;" >加载更多</div>
+				</a>    
+				<a href="javascript:void(0);" id="loadmore-loading" v-show="loading && loadMoreflag" style="text-align:center;display:none;" class="weui-cell weui-cell_access weui-cell_link">
+					<div class="weui-cell__bd" >
+						<i class="weui-loading"></i>
+						<span class="weui-loadmore__tips">正在加载</span>
+					</div>
+				</a> 
+			</div>
+		</div>
+		<div class="weui-loadmore weui-loadmore_line" id="nodata" v-show="!hasdata">
+			<span class="weui-loadmore__tips" style="background-color: #f8f8f8;">暂无数据</span>
+		</div>
+
+		<div id="loadingToast" v-show="loading && !loadMoreflag">
+			<div class="weui-mask_transparent"></div>
+			<div class="weui-toast">
+				<i class="weui-loading weui-icon_toast"></i>
+				<p class="weui-toast__content" style="font-size:12px;">数据加载中</p>
+			</div>
+		</div>
+    </div>
+
+	<div class="weui-tab__panel" id="cart_content" style="display: none; ">
+		
+    </div>
+	
+	<div class="weui-tab__panel" id="my_content" style="display: none; ">
+		<div class="weui-cells" style="margin-top: 0px;">
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="/static/images/bear.jpg" alt="" style="width:70px;height:70px;border-radius: 4px;margin-right: 10px;">
+				</div>
+				<div class="weui-cell__bd">
+					<h4 class="weui-media-box__title" style="font-size:13px;margin-bottom:5px;">墨菲</h4>
+					<p class="weui-media-box__desc" style="margin-bottom:10px;">ID: halloffame</p>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</a>
+		</div>
+		
+		<div class="weui-cells">
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="/static/images/center-icon-order-all.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">我的订单</p>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</a>
+		</div>
+		<div class="weui-flex wy-iconlist-box">
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="/static/images/center-icon-order-dfk.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待付款</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="/static/images/center-icon-order-dfh.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待发货</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="/static/images/center-icon-order-dsh.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待收货</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="/static/images/center-icon-order-dpj.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待评价</p></a></div>
+		</div>
+		
+		<div class="weui-cells">
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="/static/images/center-icon-sc.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">我的收藏</p>
+				</div>
+			</a>
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="/static/images/center-icon-dz.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">地址管理</p>
+				</div>
+			</a>
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="/static/images/center-icon-dlmm.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">密码修改</p>
+				</div>
+			</a>
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="/static/images/center-icon-out.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">退出登录</p>
+				</div>
+			</a>
+		</div>
+		
+    </div>
+	
+    <div class="weui-tabbar">
+        <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on" id="index">
+            <img src="/static/images/index_on.png" alt="" class="weui-tabbar__icon" id="index_img">
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item" id="goods">
+            <img src="/static/images/goods.png" alt="" class="weui-tabbar__icon" id="goods_img">
+            <p class="weui-tabbar__label">商品</p>
+        </a>
+        <a href="/zshop/cart" class="weui-tabbar__item" id="cart">
+            <img src="/static/images/cart.png" alt="" class="weui-tabbar__icon" id="cart_img">
+            <p class="weui-tabbar__label">购物车</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item" id="my">
+            <img src="/static/images/my.png" alt="" class="weui-tabbar__icon" id="my_img">
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+
+	<div style="display: none;" id="alertDialog">
+		<div class="weui-mask"></div>
+		<div class="weui-dialog">
+			<div class="weui-dialog__hd"><strong class="weui-dialog__title" style="font-size:13px;" id="alertDialogTitle"></strong></div>
+			<div class="weui-dialog__bd" style="font-size:13px;" id="alertDialogContent"></div>
+			<div class="weui-dialog__ft">
+				<a href="javascript:;" id="iKnow" class="weui-dialog__btn weui-dialog__btn_primary" style="font-size:12px;">我知道了</a>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

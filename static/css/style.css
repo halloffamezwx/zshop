@@ -1,0 +1,75 @@
+body,html {
+	height: 100%; 
+	background-color: #f8f8f8;
+}
+.searchbar-result {
+	display: none;
+	margin-top: 0;
+	font-size: 14px;
+	color: #666;
+}
+
+/*首页图标链接*/
+.wy-iconlist-box{background:#fff; padding:0;}
+.wy-links-iconlist{display:block; text-align:center; margin:10px 0;}
+.wy-links-iconlist .img{margin:0 23px;}
+.wy-links-iconlist img{width:100%;}
+.wy-links-iconlist p{font-size:12px; color:#666; margin-top:5px;}
+
+.wy-iconlist-box-ex{background:#f8f8f8; padding:0;margin-bottom:5px;}
+.wy-links-iconlist-ex{display:block; text-align:center; margin:10px 0;}
+.wy-links-iconlist-ex .img{margin:0 23px;}
+.wy-links-iconlist-ex img{width:100%;}
+.wy-links-iconlist-ex p{font-size:12px; color:#666; margin-top:5px;}
+
+.radius{border-radius:50%; -moz-border-radius:50%; -ms-border-radius:50%; -o-border-radius:50%; -webkit-border-radius:50%;}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 4px solid gray;
+}
+.triangle-down {
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid gray;
+}
+.triangle-up-green {
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 4px solid green;
+}
+.triangle-down-green {
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid green;
+}
+
+.center-list-icon{width:20px; height:auto;}
+
+.wy-header{ height:41px; border-bottom:1px solid #e1e1e1; position:fixed;z-index:9999; width:100%;background-color:#f7f7fa;}
+.wy-header-icon-back{position: absolute; left:0; top:0; width: 40px;height: 44px; }
+.wy-header-icon-back a {width:20px;height:20px; margin: 12px 0 0 10px; background:url(../images/icon-back.png) no-repeat; background-size:20px; display:block;}
+.wy-header-title{margin: 0 50px;text-align: center;height: 44px;line-height: 44px;font-size: 15px; color:#252525;}
+
+.Spinner{display:block;overflow:hidden;width:88px;margin:0;}
+.Spinner .Amount{width:26px;height:14px;padding:4px 5px;line-height:14px;border-top:1px solid #d9d9d9; border-bottom:1px solid #d9d9d9;float:left;text-align:center;color:#333;outline:0; font-size:14px;border-left:0px;border-right:0px;}
+.Spinner a{display:inline-block;width:22px;height:22px;border:1px solid #d9d9d9;background-color:#f7f7f7;float:left;cursor:pointer;outline:0;}
+.Spinner a i{font-style:normal;background:url(../images/BuynBtn.png) no-repeat;display:block;width:12px;height:12px;margin:5px;text-indent:999999%;overflow:hidden;}
+.Spinner .Decrease i{background-position:-12px -12px;}
+.Spinner .Increase i{background-position:-12px -0px;}
+.Spinner .DisDe i{background-position:-0px -12px;}
+.Spinner .DisIn i{background-position:-0px -0px;}
+
+.wy-dele{width:20px; height:20px; background:url(../images/icon-dele.png) no-repeat; display:block; background-size:20px;}
+
+.color-green {color:green;}
+.color-gray {color:gray;}
