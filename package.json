@@ -11,11 +11,11 @@
         "async",
         "nunjucks"
     ],
-    "author": "Michael Liao",
-    "license": "Apache-2.0",
+    "author": "halloffamezwx",
+    "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/michaelliao/learn-javascript.git"
+        "url": "https://github.com/halloffamezwx/zshop.git"
     },
     "dependencies": {
         "koa": "2.0.0",
