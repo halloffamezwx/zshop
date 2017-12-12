@@ -1,7 +1,7 @@
 //首页ctrl
 const productService = require('../service/product-service');
 const adService = require('../service/ad-service');
-const APIError = require('../rest').APIError;
+const APIError = require('../middleware/rest').APIError;
 
 module.exports = {
     //首页

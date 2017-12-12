@@ -1,5 +1,5 @@
 //商品service
-const model = require('../model');
+const model = require('../middleware/model');
 
 let product = model.product;
 

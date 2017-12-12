@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../middleware/db');
 //广告实体
 module.exports = db.defineModel('advert', {
     id: {

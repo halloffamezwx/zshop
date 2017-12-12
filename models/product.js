@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../middleware/db');
 //商品实体
 module.exports = db.defineModel('product', {
     id: {

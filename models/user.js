@@ -1,4 +1,4 @@
-const db = require('../db');
+const db = require('../middleware/db');
 //用户实体
 module.exports = db.defineModel('user', {
     email: {

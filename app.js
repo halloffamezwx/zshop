@@ -40,7 +40,7 @@ app.use(session({
 
 // static file support:
 if (! isProduction) {
-    let staticFiles = require('./static-files');
+    let staticFiles = require('./middleware/static-files');
     app.use(staticFiles('/static/', __dirname + '/static'));
 }
 

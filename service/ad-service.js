@@ -1,5 +1,5 @@
 //广告service
-const model = require('../model');
+const model = require('../middleware/model');
 
 let advert = model.advert;
 
