@@ -2,13 +2,13 @@ const Koa = require('koa');
 
 const bodyParser = require('koa-bodyparser');
 
-const controller = require('./controller');
+const controller = require('./middleware/controller');
 
-const templating = require('./templating');
+const templating = require('./middleware/templating');
 
 const compress = require('koa-compress');
 
-const rest = require('./rest');
+const rest = require('./middleware/rest');
 
 const app = new Koa();
 const session = require("koa-session2");

@@ -1,5 +1,5 @@
 //初始化数据库 包括表和表数据 谨慎执行
-const model = require('./model.js');
+const model = require('./middleware/model.js');
 const fs = require('mz/fs');
 var sequelize = model.sequelize;
 
