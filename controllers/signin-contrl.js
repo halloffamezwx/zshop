@@ -1,20 +1,26 @@
 //登录ctrl
+const userService = require('../service/user-service');
+const APIError = require('../middleware/rest').APIError;
+
 module.exports = {
     'POST /api/signin': async (ctx, next) => {
+        //console.log(JSON.stringify(ctx.request.body));
         var
-            email = ctx.request.body.email || '',
-            password = ctx.request.body.password || '';
-        if (email === 'admin@example.com' && password === '123456') {
-            console.log('signin ok!');
-            ctx.render('signin-ok.html', {
-                title: 'Sign In OK',
-                name: 'Mr Node'
-            });
+            mobile = ctx.request.body.mobile || '',
+            password = ctx.request.body.password || '',
+            userIn = new Object();
+        userIn.mobile = mobile;
+        userIn.passwd = password;
+
+        var user = await userService.getOneUser(userIn); 
+        if (user) {
+            ctx.rest({user: user});
         } else {
-            console.log('signin failed!');
-            ctx.render('signin-failed.html', {
-                title: 'Sign In Failed'
-            });
+            throw new APIError('login:error_mobile_passwd', '手机号或密码错误');
         }
+    },
+    
+    'GET /signout': async (ctx, next) => {
+        ctx.render('login.html');
     }
 };
