@@ -10,8 +10,12 @@ module.exports = {
         var headAds = await adService.getAdByPosition(1); //头部广告
         var midAds = await adService.getAdByPosition(2); //中部广告
         
-        //ctx.session.user = midAds;
-        ctx.render('index.html', { prods: products, hAds: headAds, mAdImg: midAds[0].image });
+        ctx.render('index.html', { 
+            prods: products, 
+            hAds: headAds, 
+            mAdImg: midAds[0].image,
+            user: ctx.session.user
+        });
     },
 
     //商品搜索

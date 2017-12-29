@@ -1,6 +1,7 @@
 //登录ctrl
 const userService = require('../service/user-service');
 const APIError = require('../middleware/rest').APIError;
+const indexContrl = require('../controllers/index-contrl');
 
 module.exports = {
     'POST /api/signin': async (ctx, next) => {
@@ -14,13 +15,22 @@ module.exports = {
 
         var user = await userService.getOneUser(userIn); 
         if (user) {
-            ctx.rest({user: user});
+            var userTemp = new Object();
+            userTemp.name = user.name;
+            userTemp.userId = user.userId;
+            ctx.session.user = userTemp;
+            ctx.rest({user: userTemp});
         } else {
             throw new APIError('login:error_mobile_passwd', '手机号或密码错误');
         }
     },
     
     'GET /signout': async (ctx, next) => {
+        ctx.session.user = null;
+        return await indexContrl['GET /'](ctx, next);
+    },
+
+    'GET /login': async (ctx, next) => {
         ctx.render('login.html');
     }
 };

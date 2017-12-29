@@ -31,6 +31,11 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 		$(".weui-tabbar__item").click(function () {
 			var currentId = $(this).attr("id");
 			var preId = $(".weui-bar__item_on").attr("id");
+
+			if (currentId == 'my' && $('#userName').html() == '') {
+				window.location.href = '/zshop/login';
+				return;
+			}
 			
 			$(".weui-bar__item_on img").attr("src", "/static/images/" + preId + ".png");
 			$(".weui-bar__item_on").removeClass("weui-bar__item_on");

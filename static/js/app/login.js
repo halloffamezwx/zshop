@@ -41,6 +41,7 @@ requirejs(["jquery"], function($){
 				data: JSON.stringify(userReq)
 			}).done(function (r) {
 				console.log(JSON.stringify(r));
+				window.location.href = '/zshop/';
 			}).fail(function (jqXHR, textStatus) { // Not 200
 				showTip(jqXHR.responseJSON.message);
 			});
