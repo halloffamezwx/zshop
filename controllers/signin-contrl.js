@@ -18,6 +18,7 @@ module.exports = {
             var userTemp = new Object();
             userTemp.name = user.name;
             userTemp.userId = user.userId;
+            userTemp.headImage = user.headImage;
             ctx.session.user = userTemp;
             ctx.rest({user: userTemp});
         } else {

@@ -18,5 +18,6 @@ module.exports = db.defineModel('user', {
     gender: { //true:男，false:女
         type: db.BOOLEAN,
         allowNull: true
-    }
+    },
+    headImage: db.STRING(100) //头像
 });

@@ -171,7 +171,7 @@
 		<div class="weui-cells" style="margin-top: 0px;">
 			<a href="javascript:;" class="weui-cell weui-cell_access">
 				<div class="weui-cell__hd">
-					<img src="/static/images/bear.jpg" alt="" style="width:70px;height:70px;border-radius: 4px;margin-right: 10px;">
+					<img src="{{user.headImage}}" alt="" style="width:70px;height:70px;border-radius: 4px;margin-right: 10px;">
 				</div>
 				<div class="weui-cell__bd">
 					<h4 class="weui-media-box__title" id="userName" style="font-size:13px;margin-bottom:5px;">{{user.name}}</h4>
@@ -224,7 +224,7 @@
 					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">密码修改</p>
 				</div>
 			</a>
-			<a href="/zshop/signout" class="weui-cell weui-cell_access">
+			<a href="javascript:;" class="weui-cell weui-cell_access" id="signoutHref">
 				<div class="weui-cell__hd">
 					<img src="/static/images/center-icon-out.png" alt="" class="center-list-icon">
 				</div>
@@ -262,6 +262,18 @@
 			<div class="weui-dialog__bd" style="font-size:13px;" id="alertDialogContent"></div>
 			<div class="weui-dialog__ft">
 				<a href="javascript:;" id="iKnow" class="weui-dialog__btn weui-dialog__btn_primary" style="font-size:12px;">我知道了</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="confirmDialog" style="display: none;">
+		<div class="weui-mask"></div>
+		<div class="weui-dialog">
+			<div class="weui-dialog__hd"><strong class="weui-dialog__title" style="font-size:13px;"></strong></div>
+			<div class="weui-dialog__bd" style="font-size:13px;" id="confirmDialogContent"></div>
+			<div class="weui-dialog__ft">
+				<a href="javascript:;" id="confirmAssist" class="weui-dialog__btn weui-dialog__btn_default" style="font-size:13px;">取 消</a>
+				<a href="javascript:;" id="confirmMain" class="weui-dialog__btn weui-dialog__btn_primary" style="font-size:13px;">确 认</a>
 			</div>
 		</div>
 	</div>

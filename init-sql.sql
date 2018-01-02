@@ -11,4 +11,4 @@ INSERT INTO `zshop`.`advert` (`id`, `name`, `description`, `position`, `image`, 
 INSERT INTO `zshop`.`advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (3, '首页头部轮播广告图片3', null, 1, '/static/images/ad/s3.png', null, now(), now(), 0);
 INSERT INTO `zshop`.`advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (4, '首页中部广告图片', null, 2, '/static/images/ad/ad_mid.png', null, now(), now(), 0);
 
-INSERT INTO `zshop`.`user` (`id`, `email`, `mobile`, `userId`, `passwd`, `name`, `gender`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), '768473188@qq.com', '18319643418', 'halloffame', '123456', '墨菲', 1, now(), now(), 0);
+INSERT INTO `zshop`.`user` (`id`, `email`, `mobile`, `userId`, `passwd`, `name`, `gender`, `headImage`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), '768473188@qq.com', '18319643418', 'halloffame', '123456', '墨菲', 1, '/static/images/head/bear.jpg', now(), now(), 0);

@@ -54,8 +54,38 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 			}
 		});
 
-		$('#iKnow').on('click', function(){
-			$('#alertDialog').hide();
+		function showAlert(msg, iKnowFun){
+			$('#alertDialogContent').html(msg);
+			//$('#alertDialogTitle').html(result.code);
+			if (!iKnowFun) {
+				iKnowFun = function(){
+					$('#alertDialogContent').html('');
+					$('#alertDialog').hide();
+				}
+			}
+			$('#iKnow').one('click', iKnowFun);
+			$('#alertDialog').show();
+		}
+
+		function showConfirm(msg, confirmFun, cancelFun) {
+			$('#confirmDialogContent').html(msg);
+			$('#confirmMain').unbind();
+			$('#confirmMain').on('click', confirmFun);
+			if (!cancelFun) {
+				cancelFun = function(){
+					$('#confirmDialogContent').html('');
+					$('#confirmDialog').hide();
+				}
+			}
+			$('#confirmAssist').unbind();
+			$('#confirmAssist').on('click', cancelFun);
+			$('#confirmDialog').show();
+		}
+		
+		$('#signoutHref').on('click', function(){
+			showConfirm('确认退出登录？', function(){
+				window.location.href = "/zshop/signout";
+			});
 		});
 
 		function hideSearchResult(){
@@ -71,9 +101,7 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 		function showError(resp) {
 			resp.json().then(function (result) {
 				console.log('Error: ' + JSON.stringify(result));
-				$('#alertDialogContent').html(result.message);
-				//$('#alertDialogTitle').html(result.code);
-				$('#alertDialog').show();
+				showAlert(result.message);
 			});
 		}
 
@@ -148,8 +176,7 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 					} 
 					if (!that.key || that.key.trim() == '') {
 						that.loading = false;
-						$('#alertDialogContent').html("搜索关键字不能为空");
-						$('#alertDialog').show();
+						showAlert("搜索关键字不能为空");
 						return;
 					}
 
