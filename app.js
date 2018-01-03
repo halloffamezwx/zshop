@@ -35,7 +35,8 @@ app.use(compress({
 }));
 
 app.use(session({
-    key: "SESSIONID" //default "koa:sess"
+    key: "SESSIONID", //default "koa:sess"
+    maxAge: 30 * 60 * 1000
 }));
 
 // static file support:
