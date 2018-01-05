@@ -1,15 +1,15 @@
+const myLog4js = require("./middleware/my-log4js");
+const uuid = require('node-uuid');
+const sysLogger = myLog4js.getLogger('system');
+sysLogger.addContext('logid', uuid.v4().replace(/-/g,""));
+console.log = sysLogger.info.bind(sysLogger);
+
 const Koa = require('koa');
-
 const bodyParser = require('koa-bodyparser');
-
 const controller = require('./middleware/controller');
-
 const templating = require('./middleware/templating');
-
 const compress = require('koa-compress');
-
 const rest = require('./middleware/rest');
-
 const app = new Koa();
 const session = require("koa-session2");
 
@@ -17,11 +17,18 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 // log request URL:
 app.use(async (ctx, next) => {
-    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
+    var logger = myLog4js.getLogger('zshop');
+    var logid = uuid.v4().replace(/-/g,"");
+    logger.addContext('logid', logid);
+    console.log = logger.info.bind(logger);
+    ctx.logger = logger;
+
+    logger.info(`Process ${ctx.request.method} ${ctx.request.url}...`);
     var
         start = new Date().getTime(),
         execTime;
     await next();
+    ctx.response.set('logid', logid);
     execTime = new Date().getTime() - start;
     ctx.response.set('X-Response-Time', `${execTime}ms`);
 });

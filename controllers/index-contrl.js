@@ -6,16 +6,19 @@ const APIError = require('../middleware/rest').APIError;
 module.exports = {
     //首页
     'GET /': async (ctx, next) => {
+        ctx.logger.info('===index in===');
         var products = await productService.getRecomProduct(1); //精品推荐
         var headAds = await adService.getAdByPosition(1); //头部广告
         var midAds = await adService.getAdByPosition(2); //中部广告
         
+        console.log('===index mid===');
         ctx.render('index.html', { 
             prods: products, 
             hAds: headAds, 
             mAdImg: midAds[0].image,
             user: ctx.session.user
         });
+        ctx.logger.info('===index out===');
     },
 
     //商品搜索
