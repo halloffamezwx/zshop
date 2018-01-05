@@ -101,7 +101,11 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 		function showError(resp) {
 			resp.json().then(function (result) {
 				console.log('Error: ' + JSON.stringify(result));
-				showAlert(result.message);
+				if (result.code == 'login:must_login') {
+					window.location.href = '/zshop/login';
+				} else {
+					showAlert(result.message);
+				}
 			});
 		}
 
