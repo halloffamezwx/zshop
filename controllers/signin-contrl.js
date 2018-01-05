@@ -28,7 +28,8 @@ module.exports = {
     
     'GET /signout': async (ctx, next) => {
         ctx.session.user = null;
-        return await indexContrl['GET /'](ctx, next);
+        //return await indexContrl['GET /'](ctx, next);
+        ctx.response.redirect('/zshop/');
     },
 
     'GET /login': async (ctx, next) => {
