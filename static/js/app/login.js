@@ -19,12 +19,17 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				publicTip.showTip("手机号格式不正确");
 				return;
 			}
+			if ( $("#loginBtn").hasClass('weui-btn_loading') ) {
+				return;
+			}
 
 			var userReq = {
                 mobile: mobile,
                 password: password
             };
 			
+			$("#loginBtn").addClass('weui-btn_loading');
+			$("#loginLoading").addClass('weui-loading');
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
@@ -37,6 +42,8 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 			}).fail(function (jqXHR, textStatus) { // Not 200
 				publicTip.showTip(jqXHR.responseJSON.message);
 				//publicTip.showTip(jqXHR.responseText);
+				$("#loginBtn").removeClass('weui-btn_loading');
+				$("#loginLoading").removeClass('weui-loading');
 			});
 			
 		});
