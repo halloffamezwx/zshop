@@ -1,30 +1,22 @@
 requirejs.config({
-    "baseUrl": "/static/js/lib"
+	"baseUrl": "/static/js/lib",
+	"paths": {
+        "publicTip": "/static/js/app/public-tip"
+    }
 });
 
-requirejs(["jquery"], function($){
+requirejs(["jquery", "publicTip"], function($, publicTip){
 	$(function() {
-		var tipTimeOutId;
-		function showTip(msg) {
-			$("#errorTip").html(msg);
-			clearTimeout(tipTimeOutId);
-			$("#errorTip").show(800);
-			
-			tipTimeOutId = setTimeout(function(){ 
-				$("#errorTip").hide(800);
-			}, 2000);
-		}
-		
 		$("#loginBtn").click(function () {
 			var mobile = $("#mobile").val();
 			var password = $("#password").val(); 
 
 			if (mobile.trim() == '' || password.trim() == '') {
-				showTip("手机号和密码必填");
+				publicTip.showTip("手机号和密码必填");
 				return;
 			}
 			if ( !/^1\d{10}$/.test(mobile) ) {
-				showTip("手机号格式不正确");
+				publicTip.showTip("手机号格式不正确");
 				return;
 			}
 
@@ -43,7 +35,8 @@ requirejs(["jquery"], function($){
 				console.log(JSON.stringify(r));
 				window.location.href = '/zshop/';
 			}).fail(function (jqXHR, textStatus) { // Not 200
-				showTip(jqXHR.responseJSON.message);
+				publicTip.showTip(jqXHR.responseJSON.message);
+				//publicTip.showTip(jqXHR.responseText);
 			});
 			
 		});

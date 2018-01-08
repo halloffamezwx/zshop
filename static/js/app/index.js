@@ -1,4 +1,4 @@
-define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
+define(["zepto", "vue", "vue-resource", "publicTip", "swipe"], function($, Vue, vueResource, publicTip){
 	//alert("load finished");
 	Vue.use(vueResource);
 	
@@ -53,37 +53,9 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 				swipeFun();
 			}
 		});
-
-		function showAlert(msg, iKnowFun){
-			$('#alertDialogContent').html(msg);
-			//$('#alertDialogTitle').html(result.code);
-			if (!iKnowFun) {
-				iKnowFun = function(){
-					$('#alertDialogContent').html('');
-					$('#alertDialog').hide();
-				}
-			}
-			$('#iKnow').one('click', iKnowFun);
-			$('#alertDialog').show();
-		}
-
-		function showConfirm(msg, confirmFun, cancelFun) {
-			$('#confirmDialogContent').html(msg);
-			$('#confirmMain').unbind();
-			$('#confirmMain').on('click', confirmFun);
-			if (!cancelFun) {
-				cancelFun = function(){
-					$('#confirmDialogContent').html('');
-					$('#confirmDialog').hide();
-				}
-			}
-			$('#confirmAssist').unbind();
-			$('#confirmAssist').on('click', cancelFun);
-			$('#confirmDialog').show();
-		}
 		
 		$('#signoutHref').on('click', function(){
-			showConfirm('确认退出登录？', function(){
+			publicTip.showConfirm('确认退出登录？', function(){
 				window.location.href = "/zshop/signout";
 			});
 		});
@@ -96,17 +68,6 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 			hideSearchResult();
 			$('#searchBar').removeClass('weui-search-bar_focusing');
 			$('#searchText').show();
-		}
-		
-		function showError(resp) {
-			resp.json().then(function (result) {
-				console.log('Error: ' + JSON.stringify(result));
-				if (result.code == 'login:must_login') {
-					window.location.href = '/zshop/login';
-				} else {
-					showAlert(result.message);
-				}
-			});
 		}
 
 		var gcVm = new Vue({
@@ -180,7 +141,7 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 					} 
 					if (!that.key || that.key.trim() == '') {
 						that.loading = false;
-						showAlert("搜索关键字不能为空");
+						publicTip.showAlert("搜索关键字不能为空");
 						return;
 					}
 
@@ -215,7 +176,7 @@ define(["zepto", "vue", "vue-resource", "swipe"], function($, Vue, vueResource){
 						});
 					}, function (resp) {
 						that.loading = false;
-						showError(resp);
+						publicTip.showError(resp);
 					});
 				}
 			}
