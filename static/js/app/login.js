@@ -1,7 +1,8 @@
 requirejs.config({
 	"baseUrl": "/static/js/lib",
 	"paths": {
-        "publicTip": "/static/js/app/public-tip"
+		"publicTip": "/static/js/app/public-tip",
+		"zepto": "zepto.min"
     }
 });
 
@@ -40,8 +41,9 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				console.log(JSON.stringify(r));
 				window.location.href = '/zshop/';
 			}).fail(function (jqXHR, textStatus) { // Not 200
-				publicTip.showTip(jqXHR.responseJSON.message);
+				//publicTip.showTip(jqXHR.responseJSON.message);
 				//publicTip.showTip(jqXHR.responseText);
+				publicTip.showTip(jqXHR.responseJSON);
 				$("#loginBtn").removeClass('weui-btn_loading');
 				$("#loginLoading").removeClass('weui-loading');
 			});

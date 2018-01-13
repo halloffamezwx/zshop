@@ -1,4 +1,4 @@
-define(["jquery"], function($){
+define(["zepto"], function($){
 	var showAlert = function (msg, iKnowFun){
 		$('#alertDialogContent').html(msg);
 		//$('#alertDialogTitle').html(result.code);
@@ -39,16 +39,20 @@ define(["jquery"], function($){
 	}
 
 	var tipTimeOutId;
-	function showTip(msg) {
+	var showTip = function (resp) {
 		//var msgObj = JSON.parse(msg);
-		$("#errorTip").html(msg);
-		clearTimeout(tipTimeOutId);
-		$("#errorTip").show(800);
-		
-		tipTimeOutId = setTimeout(function(){ 
-			$("#errorTip").hide(800);
-			//$("#errorTip").html('');
-		}, 2000);
+		if (resp.code == 'login:must_login') {
+			window.location.href = '/zshop/login';
+		} else {
+			$("#errorTip").html(resp.message);
+			clearTimeout(tipTimeOutId);
+			$("#errorTip").show(800);
+			
+			tipTimeOutId = setTimeout(function(){ 
+				$("#errorTip").hide(800);
+				$("#errorTip").html('');
+			}, 2000);
+		}
 	}
 
 	return {

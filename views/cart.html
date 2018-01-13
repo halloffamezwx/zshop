@@ -27,6 +27,7 @@
 	<div class="weui-tab__panel" >
 		<div class="weui-panel weui-panel_access" style="margin-top:41px">
 			<div class="weui-panel__bd">
+				{% for ucp in userCartProds %}
 				<div class="weui-media-box weui-media-box_appmsg">
 					<div class="weui-media-box__hd weui-cells_checkbox">
 						<label class="weui-check__label" for="cart-pto1">
@@ -34,86 +35,22 @@
 						</label>
 					</div>
 					<div class="weui-media-box__hd" style="width:92px;height:92px;">
-						<img class="weui-media-box__thumb" src="/static/images/good5.jpg" alt="">
+						<img class="weui-media-box__thumb" src="{{ucp.image}}" alt="">
 					</div>
 					<div class="weui-media-box__bd" >
-						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">魅蓝 Note6</h4>
-						<p class="weui-media-box__desc" style="margin-bottom:10px;">公开版 深空灰 64GB</p>
-						<p class="weui-media-box__desc" style="color:red;">¥1099</p>
-					</div>
-					<div class="weui-media-box__bd" >
-						<div style="float:right;">
-							<a href="javascript:;" class="wy-dele" style="margin-bottom:35px;margin-left:65px;"></a>
-							<div class="Spinner"></div>
-						</div>
-					</div>
-				</div>
-				<div class="weui-media-box weui-media-box_appmsg">
-					<div class="weui-media-box__hd weui-cells_checkbox">
-						<label class="weui-check__label" for="cart-pto2">
-							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto2"><i class="weui-icon-checked"></i></div>
-						</label>
-					</div>
-					<div class="weui-media-box__hd" style="width:92px;height:92px;">
-						<img class="weui-media-box__thumb" src="/static/images/good4.jpg" alt="">
-					</div>
-					<div class="weui-media-box__bd">
-						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">魅蓝 Note6</h4>
-						<p class="weui-media-box__desc" style="margin-bottom:10px;">公开版 深空灰 64GB</p>
-						<p class="weui-media-box__desc" style="color:red;">¥1099</p>
+						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">{{ucp.name}}</h4>
+						<p class="weui-media-box__desc" style="margin-bottom:10px;">{{ucp.attriValuesStr}}</p>
+						<p class="weui-media-box__desc" style="color:red;">¥{{ucp.price}}</p>
 					</div>
 					<div class="weui-media-box__bd" >
 						<div style="float:right;">
 							<a href="javascript:;" class="wy-dele" style="margin-bottom:35px;margin-left:65px;"></a>
-							<div class="Spinner"></div>
+							<div class="Spinner" count="{{ucp.count}}"></div>
 						</div>
 					</div>
 				</div>
-				<div class="weui-media-box weui-media-box_appmsg">
-					<div class="weui-media-box__hd weui-cells_checkbox">
-						<label class="weui-check__label" for="cart-pto3">
-							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto3"><i class="weui-icon-checked"></i></div>
-						</label>
-					</div>
-					<div class="weui-media-box__hd" style="width:92px;height:92px;">
-						<img class="weui-media-box__thumb" src="/static/images/good3.jpg" alt="">
-					</div>
-					<div class="weui-media-box__bd">
-						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">魅蓝 Note6</h4>
-						<p class="weui-media-box__desc" style="margin-bottom:10px;">公开版 深空灰 64GB</p>
-						<p class="weui-media-box__desc" style="color:red;">¥1099</p>
-					</div>
-					<div class="weui-media-box__bd" >
-						<div style="float:right;">
-							<a href="javascript:;" class="wy-dele" style="margin-bottom:35px;margin-left:65px;"></a>
-							<div class="Spinner"></div>
-						</div>
-					</div>
-				</div>
-				<div class="weui-media-box weui-media-box_appmsg">
-					<div class="weui-media-box__hd weui-cells_checkbox">
-						<label class="weui-check__label" for="cart-pto4">
-							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto4"><i class="weui-icon-checked"></i></div>
-						</label>
-					</div>
-					<div class="weui-media-box__hd" style="width:92px;height:92px;">
-						<img class="weui-media-box__thumb" src="/static/images/good2.jpg" alt="">
-					</div>
-					<div class="weui-media-box__bd">
-						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">魅蓝 Note6</h4>
-						<p class="weui-media-box__desc" style="margin-bottom:10px;">公开版 深空灰 64GB</p>
-						<p class="weui-media-box__desc" style="color:red;">¥1099</p>
-					</div>
-					<div class="weui-media-box__bd" >
-						<div style="float:right;">
-							<a href="javascript:;" class="wy-dele" style="margin-bottom:35px;margin-left:65px;"></a>
-							<div class="Spinner"></div>
-						</div>
-					</div>
-				</div>
-				
+				{% endfor %}
 			</div>
-			
 		</div>
     </div>
 	

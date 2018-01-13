@@ -37,7 +37,10 @@ requirejs(["jquery", "jquery.Spinner"], function($){
 		});
 		
 		$("#cart-all").click();
-		$(".Spinner").Spinner({value:1, len:3, max:15});
+		
+		$(".Spinner").each(function(){
+			$(this).Spinner({value:$(this).attr("count"), len:3, max:15});
+		});
 	});
 	
 })
