@@ -27,7 +27,7 @@
 	<div class="weui-tab__panel" >
 		<div class="weui-panel weui-panel_access" style="margin-top:41px">
 			<div class="weui-panel__bd">
-				{% for ucp in userCartProds %}
+				{% for ucp in cartProds %}
 				<div class="weui-media-box weui-media-box_appmsg">
 					<div class="weui-media-box__hd weui-cells_checkbox">
 						<label class="weui-check__label" for="cart-pto1">
@@ -44,14 +44,19 @@
 					</div>
 					<div class="weui-media-box__bd" >
 						<div style="float:right;">
-							<a href="javascript:;" class="wy-dele" style="margin-bottom:35px;margin-left:65px;"></a>
-							<div class="Spinner" count="{{ucp.count}}"></div>
+							<a href="javascript:;" cid="{{ucp.cid}}" class="wy-dele" style="margin-bottom:35px;margin-left:65px;"></a>
+							<div class="Spinner" count="{{ucp.count}}" stock="{{ucp.stock}}"></div>
 						</div>
 					</div>
 				</div>
 				{% endfor %}
 			</div>
 		</div>
+		{% if totalSize == 0 %}
+		<div class="weui-loadmore weui-loadmore_line" id="nodata">
+			<a class="weui-loadmore__tips" style="background-color: #f8f8f8;" href="/zshop/">购物车空空如也，点此去逛逛</a>
+		</div>
+		{% endif %}
     </div>
 	
 	<div class="weui-tabbar" style="position:fixed">
@@ -61,12 +66,13 @@
 			</label>
 		</div>
 		<div style="margin:0 auto;line-height: 47px;font-size: 12px;">
-			总计 : <span style="color:red">￥4905.00</span>
+			总计 : <span style="color:red">￥{{totalPrice}}</span>
 		</div>
 		<a href="#" style="width: 110px;background-color: gray;color:#fff;text-align:center;line-height: 44px;font-size: 13px;" id="settlement">
 			结算
 		</a>
 	</div>
 
+	{% include "public-tip.html" %}
 </body>
 </html>

@@ -55,11 +55,24 @@ define(["zepto"], function($){
 		}
 	}
 
+	var showLoadingToast = function (flag, msg) {
+		if (!msg) {
+			msg = "数据加载中";
+		} 
+		$("#publicLoadingToastContent").html(msg);
+		if (flag) {
+			$("#publicLoadingToast").show();
+		} else {
+			$("#publicLoadingToast").hide();
+		}
+	}
+
 	return {
 		showAlert: showAlert,
 		showConfirm: showConfirm,
 		showError: showError,
-		showTip: showTip
+		showTip: showTip,
+		showLoadingToast: showLoadingToast
 　　};
 })
 	

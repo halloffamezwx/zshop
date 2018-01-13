@@ -6,6 +6,7 @@ module.exports = db.defineModel('product', {
         autoIncrement: true,
         primaryKey: true
     },
+    groupId: db.INTEGER,
     name: db.STRING(100),
     description: db.STRING(200),
     price: db.DECIMAL(12, 2),
@@ -16,6 +17,10 @@ module.exports = db.defineModel('product', {
     },
     sales: { //销量
         type: db.INTEGER,
+        defaultValue: 0
+    },
+    stock: { //库存
+        type: db.INTEGER, 
         defaultValue: 0
     }
 });

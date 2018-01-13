@@ -35,6 +35,7 @@ module.exports = {
             offset: parseInt(offset),
             order: orderStr
         });
+        //console.log(JSON.stringify(products));
         return products;
     },
 
@@ -45,6 +46,7 @@ module.exports = {
                 recommend: recom
             }
         });
+        //console.log(JSON.stringify(products));
         return products;
     },
 
