@@ -25,7 +25,7 @@ module.exports = {
                 }
             }
             qcarts[i].attriValuesStr = attriValuesStr;
-            totalPrice += qcarts[i].price;
+            totalPrice += qcarts[i].price * qcarts[i].count;
         }
         var result = new Object();
         result.totalPrice = totalPrice;

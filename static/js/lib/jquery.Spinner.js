@@ -12,16 +12,32 @@
 			var a = $('<a></a>'); f(a,0,"Decrease","-");	//加
 			var c = $('<a></a>'); f(c,0,"Increase","+");	//减
 			var b = $('<input/>');f(b,1,"Amount");cv(0);	//值
+			var oldValue = b.val();
 			
 			$(this).append(a).append(b).append(c);
-			a.click(function(){cv(-1)});
-			b.keyup(function(){cv(0)});
-			c.click(function(){cv(+1)});
+			a.click(function(){
+				cv(-1);
+				if (opts.changeValue && a.hasClass('Decrease')) {
+					opts.changeValue(b.val(), function (){cv(+1);}, function (){oldValue = b.val();});
+				}
+			});
+			b.keyup(function(){cv(0);});
+			c.click(function(){
+				cv(+1);
+				if (opts.changeValue && c.hasClass('Increase')) {
+					opts.changeValue(b.val(), function (){cv(-1);}, function (){oldValue = b.val();});
+				}
+			});
+			b.change(function(){
+				if (opts.changeValue) {
+					opts.changeValue(b.val(), function (){b.val(oldValue);cv(0);}, function (){oldValue = b.val();});
+				}
+			});
 			b.bind('keyup paste change',function(e){
 				e.keyCode==keyCodes.up&&cv(+1);
 				e.keyCode==keyCodes.down&&cv(-1);
 			});
-			
+	
 			function cv(n){
 				b.val(b.val().replace(/[^\d]/g,''));
 				bv=parseInt(b.val()||options.min)+n;

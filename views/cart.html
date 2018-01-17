@@ -30,8 +30,8 @@
 				{% for ucp in cartProds %}
 				<div class="weui-media-box weui-media-box_appmsg">
 					<div class="weui-media-box__hd weui-cells_checkbox">
-						<label class="weui-check__label" for="cart-pto1">
-							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto1"><i class="weui-icon-checked"></i></div>
+						<label class="weui-check__label" for="cart-pto{{loop.index}}">
+							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto{{loop.index}}"><i class="weui-icon-checked"></i></div>
 						</label>
 					</div>
 					<div class="weui-media-box__hd" style="width:92px;height:92px;">
@@ -40,12 +40,12 @@
 					<div class="weui-media-box__bd" >
 						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">{{ucp.name}}</h4>
 						<p class="weui-media-box__desc" style="margin-bottom:10px;">{{ucp.attriValuesStr}}</p>
-						<p class="weui-media-box__desc" style="color:red;">¥{{ucp.price}}</p>
+						<p class="weui-media-box__desc" id="pricep_{{ucp.cid}}" style="color:red;">¥{{ucp.price}}</p>
 					</div>
 					<div class="weui-media-box__bd" >
 						<div style="float:right;">
 							<a href="javascript:;" cid="{{ucp.cid}}" class="wy-dele" style="margin-bottom:35px;margin-left:65px;"></a>
-							<div class="Spinner" count="{{ucp.count}}" stock="{{ucp.stock}}"></div>
+							<div class="Spinner" id="spinner_{{ucp.cid}}" cid="{{ucp.cid}}" count="{{ucp.count}}" stock="{{ucp.stock}}"></div>
 						</div>
 					</div>
 				</div>
@@ -59,6 +59,7 @@
 		{% endif %}
     </div>
 	
+	{% if totalSize > 0 %}
 	<div class="weui-tabbar" style="position:fixed">
 		<div class="weui-media-box__hd weui-cells_checkbox" style="line-height: 44px;margin-left:15px;">
 			<label class="weui-check__label" for="cart-all" >
@@ -66,12 +67,13 @@
 			</label>
 		</div>
 		<div style="margin:0 auto;line-height: 47px;font-size: 12px;">
-			总计 : <span style="color:red">￥{{totalPrice}}</span>
+			总计 : <span style="color:red" id="totalPrice">￥{{totalPrice}}</span>
 		</div>
 		<a href="#" style="width: 110px;background-color: gray;color:#fff;text-align:center;line-height: 44px;font-size: 13px;" id="settlement">
 			结算
 		</a>
 	</div>
+	{% endif %}
 
 	{% include "public-tip.html" %}
 </body>
