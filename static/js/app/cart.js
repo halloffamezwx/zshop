@@ -11,40 +11,6 @@ requirejs.config({
 
 requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 	$(function() {
-		$("#cart-all").click(function () {
-			if ( $(this).prop('checked') ) { 
-				$("input[name=cartpro]").each(function () {
-					$(this).prop("checked", true);
-				});
-			} else {
-				$("input[name=cartpro]").each(function () {
-					$(this).prop("checked", false);
-				});
-			}
-		});
-		
-		$("input[type=checkbox]").click(function () {
-			var cartCheckedSize = $("input[name='cartpro']:checked").size();
-			var cartSize = $("input[name='cartpro']").size();
-			
-			if ( cartCheckedSize >= 1 ) {
-				$("#settlement").css("background-color", "green");
-			} else {
-				$("#settlement").css("background-color", "gray");
-			}
-			
-			if (cartCheckedSize == cartSize) {
-				$("#cart-all").prop("checked", true);
-			} else {
-				$("#cart-all").prop("checked", false);
-			}
-		});
-		
-		var cartSize = $("input[name='cartpro']").size();
-		if ( cartSize > 0 ) {
-			$("#cart-all").click();
-		}
-		
 		$(".Spinner").each(function(){
 			var stock = $(this).attr("stock");
 			var count = $(this).attr("count");
@@ -73,8 +39,10 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 						url: '/zshop/userapi/chgCartProdCount',
 						data: {cid: cid, newValue: newValue}
 					}).done(function (r) {
-						console.log(JSON.stringify(r));
 						chgSuccFun();
+						var tPrice = Math.floor(getTotalPrice() * 100) / 100;
+						$("#totalPrice").html("￥" + tPrice);
+						publicTip.showLoadingToast(false);
 					}).fail(function (jqXHR, textStatus) { // Not 200
 						chgFailFun();
 						publicTip.showLoadingToast(false);
@@ -84,22 +52,60 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 			}
 		});
 
+		$("#cart-all").click(function () {
+			if ( $(this).prop('checked') ) { 
+				$("input[name=cartpro]").each(function () {
+					$(this).prop("checked", true);
+				});
+			} else {
+				$("input[name=cartpro]").each(function () {
+					$(this).prop("checked", false);
+				});
+			}
+		});
+		
+		$("input[type=checkbox]").click(function () {
+			var cartCheckedSize = $("input[name='cartpro']:checked").size();
+			var cartSize = $("input[name='cartpro']").size();
+			
+			if ( cartCheckedSize >= 1 ) {
+				$("#settlement").css("background-color", "green");
+			} else {
+				$("#settlement").css("background-color", "gray");
+			}
+			
+			if (cartCheckedSize == cartSize) {
+				$("#cart-all").prop("checked", true);
+			} else {
+				$("#cart-all").prop("checked", false);
+			}
+			var tPrice = Math.floor(getTotalPrice() * 100) / 100;
+			$("#totalPrice").html("￥" + tPrice);
+		});
+		
+		var cartSize = $("input[name='cartpro']").size();
+		if ( cartSize > 0 ) {
+			$("#cart-all").click();
+		}
+		
 		function getTotalPrice(){
 			var totalPrice = 0.00;
 			$('p[id^=pricep_]').each(function(){
 				var pricepId = $(this).attr("id");
-				var price = $(this).html().replace(/¥/g,"");
-				var count = $("#spinner_" + pricepId.split("_")[1]).find("input").val();
-				//console.log('price=' + price);
-				//console.log('count=' + count);
-				var onePrice = parseFloat(price) * parseInt(count);
-				//console.log('price * count=' + onePrice);
-				totalPrice += onePrice;
+				var cid = pricepId.split("_")[1];
+				var isCheck = $("#cart-pto" + cid).prop('checked');
+
+				if (isCheck) {
+					var price = $(this).html().replace(/¥/g,"");
+					var count = $("#spinner_" + cid).find("input").val();
+					var onePrice = parseFloat(price) * parseInt(count);
+					totalPrice += onePrice;
+				}
 			});
 			console.log('totalPrice=' + totalPrice);
 			return totalPrice;
 		}
-		getTotalPrice();
+		//getTotalPrice();
 
 		$(".wy-dele").click(function () {
 			var that = this;

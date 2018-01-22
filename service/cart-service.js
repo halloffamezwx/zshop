@@ -38,6 +38,13 @@ module.exports = {
 
     //根据id删除一个购物车商品
     deleteCardProd: async (id) => {
-        await cart.destroy({where: {id: id}});
+        await cart.destroy({where: {id: parseInt(id)}});
+    },
+
+    //修改购物车商品数量
+    updateCardProdCount: async (id, count) => {
+        //await cart.update({count: parseInt(count), updatedAt: Date.now()}, {where: {id: parseInt(id)}});
+        await sequelize.query('UPDATE cart SET count = :count, updatedAt = now(), version = version + 1 WHERE id = :id', 
+                        { replacements: { count: parseInt(count), id: parseInt(id) } });
     }
 };

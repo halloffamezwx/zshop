@@ -14,5 +14,12 @@ module.exports = {
         await cartService.deleteCardProd(cid); 
         //ctx.rest();
         ctx.rest({code: 'system:success', message: '成功'});
+    },
+
+    'POST /userapi/chgCartProdCount': async (ctx, next) => {
+        var cid = ctx.request.body.cid || '';
+        var newValue = ctx.request.body.newValue || '';
+        await cartService.updateCardProdCount(cid, newValue); 
+        ctx.rest();
     }
 };

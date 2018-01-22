@@ -9,22 +9,24 @@
 		var keyCodes = {up:38, down:40}
 		return this.each(function() {
 		
-			var a = $('<a></a>'); f(a,0,"Decrease","-");	//加
-			var c = $('<a></a>'); f(c,0,"Increase","+");	//减
+			var a = $('<a></a>'); f(a,0,"Decrease","-");	//减
+			var c = $('<a></a>'); f(c,0,"Increase","+");	//加
 			var b = $('<input/>');f(b,1,"Amount");cv(0);	//值
 			var oldValue = b.val();
 			
 			$(this).append(a).append(b).append(c);
 			a.click(function(){
+				var isNotDisabled = a.hasClass('Decrease');
 				cv(-1);
-				if (opts.changeValue && a.hasClass('Decrease')) {
+				if (opts.changeValue && isNotDisabled) {
 					opts.changeValue(b.val(), function (){cv(+1);}, function (){oldValue = b.val();});
 				}
 			});
 			b.keyup(function(){cv(0);});
 			c.click(function(){
+				var isNotDisabled = c.hasClass('Increase');
 				cv(+1);
-				if (opts.changeValue && c.hasClass('Increase')) {
+				if (opts.changeValue && isNotDisabled) {
 					opts.changeValue(b.val(), function (){cv(-1);}, function (){oldValue = b.val();});
 				}
 			});

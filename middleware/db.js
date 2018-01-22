@@ -17,7 +17,8 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
         max: 5,
         min: 0,
         idle: 10000
-    }
+    },
+    timezone: '+08:00'
 });
 
 const ID_TYPE = Sequelize.STRING(50);

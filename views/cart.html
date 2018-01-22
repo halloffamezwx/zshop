@@ -30,8 +30,8 @@
 				{% for ucp in cartProds %}
 				<div class="weui-media-box weui-media-box_appmsg">
 					<div class="weui-media-box__hd weui-cells_checkbox">
-						<label class="weui-check__label" for="cart-pto{{loop.index}}">
-							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto{{loop.index}}"><i class="weui-icon-checked"></i></div>
+						<label class="weui-check__label" for="cart-pto{{ucp.cid}}">
+							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto{{ucp.cid}}"><i class="weui-icon-checked"></i></div>
 						</label>
 					</div>
 					<div class="weui-media-box__hd" style="width:92px;height:92px;">
