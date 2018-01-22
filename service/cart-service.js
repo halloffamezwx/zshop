@@ -1,7 +1,7 @@
 //购物车service
 const model = require('../middleware/model');
 var sequelize = model.sequelize;
-let prodAttriValue = model.prodAttriValue;
+let prodAttriValue = model.prod_attri_value;
 let cart = model.cart;
 
 module.exports = {
