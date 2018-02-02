@@ -73,3 +73,25 @@ body,html {
 
 .color-green {color:green;}
 .color-gray {color:gray;}
+
+.promotion-foot-menu-kefu{background:url(../images/icon-kefu.png) no-repeat; background-size:22px;}
+.promotion-foot-menu-collection{background:url(../images/icon-collection.png) no-repeat; background-size:22px;}
+.promotion-foot-menu-cart{background:url(../images/footer03.png) no-repeat; background-size:22px;}
+.promotion-foot-menu-items{position:relative; padding:5px 10px 0; text-align:center;}
+.promotion-foot-menu-label{line-height:38px; color:#fff;font-size: 13px;}
+
+.wy-media-box2{margin:10px 0; background:#fff; padding:5px 10px; border-top:0px solid #e1e1e1; border-bottom:0px solid #e1e1e1;}
+.wy-media-box2 .weui-media-box_appmsg{border-top:0px solid #ededed; padding-top:0px;}
+.wy-media-box2 .weui-media-box_appmsg:first-child{border:0; padding-top:0; }
+.wy-media-box2.txtpd .weui-media-box_appmsg{padding-top:0; border:0;}
+.weui-media-box_appmsg .weui-media-box__hd.proinfo-txt-l{width:38px; height:auto; vertical-align:top;}
+.promotion-label-tit{font-size:13px; color:gray; line-height:12px;}
+.promotion-label-tit img{width:80%;}
+.promotion-sku{padding:8px 0 5px 0;}
+.promotion-sku li{float:left; margin:0 20px 1px 0;list-style:none;}
+.promotion-sku li a{display:block;border:1px solid #ddd; border-radius:3px; background-color:#fff;min-width:20px;padding:7px 12px; max-width:100%;text-align: center; font-size:12px; color:gray; position:relative;}
+.promotion-sku li.active a:after{content:""; width:12px; height:12px; background:url(../images/xuanze.png) no-repeat; background-size:12px; position:absolute; right:0; bottom:0;}
+.promotion-sku li.active a{border:1px solid green; margin:-1px; color:green;}
+.wy-header-titlebut{color:gray;}
+.wy-header-titlebut-active{color:green;border-bottom: 1px solid green;padding-bottom:9px;}
+.wy-product-content{padding-top:40px;padding-bottom:45px;}

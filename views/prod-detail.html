@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="/static/css/weui.min.css"/>
+	<link rel="stylesheet" href="/static/css/style.css"/>
+	<link rel="stylesheet" href="/static/css/swipe.css"/>
+	<script data-main="/static/js/app/prod-detail" src="/static/js/lib/require.js" defer async="true"></script>
+    <style>
+        /*返回顶部*/
+        #tophovertree{display:block;position:fixed;width:36px;height:36px;right:10px;bottom:60px;cursor:pointer;background-image:url(/static/images/tophovertree.gif);opacity:0.9;display:none}
+    </style>
+</head>
+
+<body>
+    <header class="wy-header">
+        <div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
+        <div class="wy-header-title">
+            <span class="wy-header-titlebut wy-header-titlebut-active" id="product">商品</span>
+            <span class="wy-header-titlebut" style="margin-left:70px;" id="detail">详情</span>
+            <span class="wy-header-titlebut" style="margin-left:70px;" id="evaluate">评价</span>
+        </div>
+	</header>
+
+	<div id="productDiv" class="wy-product-content">
+		<div id='mySwipe' class='swipe' >
+			<div class='swipe-wrap'>
+				{% for di in product.detailImagesArr %}
+				<div style="background-color:white;"><img src="/static/images/product/detail/{{di}}" style="border-bottom:2px solid #f8f8f8;"></div>
+				{% endfor %}
+			</div>
+			
+			<ul class='swipe-wrap-circle'>
+				{% for di in product.detailImagesArr %}
+				<li id="disc_{{loop.index - 1}}"></li>
+				{% endfor %}
+			</ul>
+		</div>
+		
+		<div style="background-color:white;">
+			<div class="weui-cell" >
+				<div class="weui-cell__bd" >
+					<h4 class="weui-media-box__title" style="font-size:13px;margin-bottom:7px;">{{product.name}} {{product.description}}</h4>
+					<p class="weui-media-box__desc" style="color:red;margin-bottom:9px;">¥{{product.price}}</p>
+					<p class="weui-media-box__desc" style="font-size:13px;">{{product.attriValueStr}}</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="weui-cells" style="margin-top:5px;">
+			<div class="weui-cell">
+				<div class="">
+					<p style="font-size:13px;color:gray;">数量</p>
+				</div>
+				<div class="" style="margin-left:19px;">
+					<div class="Spinner"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="wy-media-box2 weui-media-box_text" style="margin-top:5px;">
+			{% for ga in product.groupAttris %}
+			<div class="weui-media-box_appmsg">
+				<div class="weui-media-box__hd proinfo-txt-l" style="line-height: 0px;"><span class="promotion-label-tit">{{ga.attriName}}</span></div>
+				<div class="weui-media-box__bd">
+					<div class="promotion-sku clear">
+						<ul>
+							{% for gav in ga.groupAttriValueArr %}
+							<li {% if gav.isCheck %}class="active"{% endif %}><a href="javascript:;">{{gav.attriValue}}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	
+	<input type="hidden" id="detailHtmlUrl" name="detailHtmlUrl" value="{{product.detailHtml}}"/>
+	<div id="detailDiv" style="display: none;" class="wy-product-content" >
+		<a href="javascript:void(0);" id="detailDiv-loading" style="text-align:center;color:gray;" class="weui-cell weui-cell_link">
+			<div class="weui-cell__bd" >
+				<i class="weui-loading"></i>
+				<span class="weui-loadmore__tips">正在加载</span>
+			</div>
+		</a>
+		<div class="weui-loadmore weui-loadmore_line" id="detailDiv-reload" style="display:none;">
+			<div class="weui-loadmore__tips" style="background-color: #f8f8f8;">系统异常，点此重新加载</div>
+		</div>
+	</div>
+	<div id="evaluateDiv" style="display: none;" class="wy-product-content"></div>
+	
+	<span id="tophovertree" title="返回顶部"></span>
+	
+	<div class="weui-tabbar" style="line-height: 16px;position:fixed;">
+	    <a href="javascript:;" class="promotion-foot-menu-items">
+			<div class="weui-tabbar__icon promotion-foot-menu-kefu" style="width:20px;height:20px;"></div>
+			<p class="weui-tabbar__label">客服</p>
+	    </a>
+	    <a href="javascript:;" id='' class="promotion-foot-menu-items">
+			<div class="weui-tabbar__icon promotion-foot-menu-collection" style="width:20px;height:20px;"></div>
+			<p class="weui-tabbar__label">取消收藏</p>
+	    </a>
+	    <a href="/zshop/user/cart" class="promotion-foot-menu-items">
+			{% if cardProdNum > 0 %}
+			<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">{{cardProdNum}}</span>
+			{% endif %}
+			<div class="weui-tabbar__icon promotion-foot-menu-cart" style="width:20px;height:20px;"></div>
+			<p class="weui-tabbar__label">购物车</p>
+	    </a>
+	    <a href="javascript:;" class="weui-tabbar__item" style="background-color:green;">
+			<p class="promotion-foot-menu-label">加入购物车</p>
+	    </a>
+	    <a href="javascript:;" class="weui-tabbar__item" >
+			<p class="promotion-foot-menu-label" style="color:gray;">立即购买</p>
+	    </a>
+	</div>
+
+</body>
+</html>

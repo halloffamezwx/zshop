@@ -46,13 +46,19 @@ define(["zepto"], function($){
 		} else {
 			$("#errorTip").html(resp.message);
 			clearTimeout(tipTimeOutId);
-			$("#errorTip").show(800);
+			//$("#errorTip").show(800);
+			$("#errorTip").show();
 			
 			tipTimeOutId = setTimeout(function(){ 
-				$("#errorTip").hide(800);
+				$("#errorTip").hide();
 				$("#errorTip").html('');
 			}, 2000);
 		}
+	}
+	var showTipForStr = function (tipMsg) {
+		var msgObj = new Object();
+		msgObj.message = tipMsg;
+		showTip(msgObj);
 	}
 
 	var showLoadingToast = function (flag, msg) {
@@ -72,6 +78,7 @@ define(["zepto"], function($){
 		showConfirm: showConfirm,
 		showError: showError,
 		showTip: showTip,
+		showTipForStr: showTipForStr,
 		showLoadingToast: showLoadingToast
 　　};
 })

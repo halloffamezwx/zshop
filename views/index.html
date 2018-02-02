@@ -46,7 +46,7 @@
 		{% if loop.index % 2 != 0 %}
 		<div class="weui-flex wy-iconlist-box-ex" >
 			<div class="weui-flex__item" style="background-color: #fff;">
-				<a href="javascript:;" class="wy-links-iconlist-ex" >
+				<a href="/zshop/prodDetail/{{p.id}}" class="wy-links-iconlist-ex" >
 					<div class="img"><img src="{{p.image}}"></div>
 					<p style="color:black;font-size:13px;">{{p.name}}</p>
 					<p>{{p.description}}</p>
@@ -55,7 +55,7 @@
 			</div>
 		{% else %}
 			<div class="weui-flex__item" style="margin-left:5px;background-color: #fff;">
-				<a href="javascript:;" class="wy-links-iconlist-ex" >
+				<a href="/zshop/prodDetail/{{p.id}}" class="wy-links-iconlist-ex" >
 					<div class="img"><img src="{{p.image}}"></div>
 					<p style="color:black;font-size:13px;">{{p.name}}</p>
 					<p>{{p.description}}</p>

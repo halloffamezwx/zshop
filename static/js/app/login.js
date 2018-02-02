@@ -13,11 +13,11 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 			var password = $("#password").val(); 
 
 			if (mobile.trim() == '' || password.trim() == '') {
-				publicTip.showTip("手机号和密码必填");
+				publicTip.showTipForStr("手机号和密码必填");
 				return;
 			}
 			if ( !/^1\d{10}$/.test(mobile) ) {
-				publicTip.showTip("手机号格式不正确");
+				publicTip.showTipForStr("手机号格式不正确");
 				return;
 			}
 			if ( $("#loginBtn").hasClass('weui-btn_loading') ) {

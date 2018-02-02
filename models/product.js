@@ -6,7 +6,7 @@ module.exports = db.defineModel('product', {
         autoIncrement: true,
         primaryKey: true
     },
-    groupId: db.INTEGER,
+    groupId: db.INTEGER, //比如拥有不同颜色属性的产品属于同一组
     name: db.STRING(100),
     description: db.STRING(200),
     price: db.DECIMAL(12, 2),
@@ -22,5 +22,7 @@ module.exports = db.defineModel('product', {
     stock: { //库存
         type: db.INTEGER, 
         defaultValue: 0
-    }
+    },
+    detailImages: db.STRING(300),
+    detailHtml: db.STRING(100)
 });

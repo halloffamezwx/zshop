@@ -7,23 +7,22 @@ define(["zepto", "vue", "vue-resource", "publicTip", "swipe"], function($, Vue, 
 			var mySwipeElem = document.getElementById('mySwipe');
 			window.mySwipe = Swipe(mySwipeElem, {
 				//startSlide: 4,
-				auto: 2000,
+				auto: 2500,
 				//continuous: true,
 				//disableScroll: true,
 				//stopPropagation: true,
 				callback: function(index, element) {
-					var preIndex = index - 1;
-					if (preIndex == -1) {
-						preIndex = mySwipe.getNumSlides() - 1;
-					}
+					//var preIndex = index - 1;
+					//if (preIndex == -1) {
+					//	preIndex = mySwipe.getNumSlides() - 1;
+					//}
 					//$("#disc_" + preIndex).css("list-style-type", "circle");
 					//$("#disc_" + index).css("list-style-type", "disc");
-					$("#disc_" + preIndex).css("color", "#c8c9cb");
+					//$("#disc_" + preIndex).css("color", "#c8c9cb");
+					$(".swipe-wrap-circle li").css("color", "#c8c9cb");
 					$("#disc_" + index).css("color", "green");
 				},
-				//transitionEnd: function(index, element) {
-				//	
-				//}
+				//transitionEnd: function(index, element) {}
 			});
 		}
 		swipeFun();
