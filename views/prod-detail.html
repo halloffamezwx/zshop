@@ -55,7 +55,7 @@
 					<p style="font-size:13px;color:gray;">数量</p>
 				</div>
 				<div class="" style="margin-left:19px;">
-					<div class="Spinner"></div>
+					<div class="Spinner" id="pcs"></div>
 				</div>
 			</div>
 		</div>
@@ -78,7 +78,10 @@
 		</div>
 	</div>
 	
+	<input type="hidden" id="pid" name="pid" value="{{product.id}}"/>
+	<input type="hidden" id="pstock" name="pstock" value="{{product.stock}}"/>
 	<input type="hidden" id="detailHtmlUrl" name="detailHtmlUrl" value="{{product.detailHtml}}"/>
+
 	<div id="detailDiv" style="display: none;" class="wy-product-content" >
 		<a href="javascript:void(0);" id="detailDiv-loading" style="text-align:center;color:gray;" class="weui-cell weui-cell_link">
 			<div class="weui-cell__bd" >
@@ -105,12 +108,14 @@
 	    </a>
 	    <a href="/zshop/user/cart" class="promotion-foot-menu-items">
 			{% if cardProdNum > 0 %}
-			<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">{{cardProdNum}}</span>
+			<span class="weui-badge" id="cardProdNum" style="position: absolute;top: -.4em;right: 1em;">{{cardProdNum}}</span>
+			{% else %}
+			<span class="weui-badge" id="cardProdNum" style="position: absolute;top: -.4em;right: 1em;display:none;">0</span>
 			{% endif %}
 			<div class="weui-tabbar__icon promotion-foot-menu-cart" style="width:20px;height:20px;"></div>
 			<p class="weui-tabbar__label">购物车</p>
 	    </a>
-	    <a href="javascript:;" class="weui-tabbar__item" style="background-color:green;">
+	    <a href="javascript:;" id="addCart" class="weui-tabbar__item" style="background-color:green;">
 			<p class="promotion-foot-menu-label">加入购物车</p>
 	    </a>
 	    <a href="javascript:;" class="weui-tabbar__item" >
@@ -118,5 +123,6 @@
 	    </a>
 	</div>
 
+	{% include "public-tip.html" %}
 </body>
 </html>

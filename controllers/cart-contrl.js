@@ -1,5 +1,6 @@
 //购物车ctrl
 const cartService = require('../service/cart-service');
+const APIError = require('../middleware/rest').APIError;
 
 module.exports = {
     'GET /user/cart': async (ctx, next) => {
@@ -20,6 +21,16 @@ module.exports = {
         var cid = ctx.request.body.cid || '';
         var newValue = ctx.request.body.newValue || '';
         await cartService.updateCardProdCount(cid, newValue); 
+        ctx.rest();
+    },
+
+    'POST /userapi/addCartProd': async (ctx, next) => {
+        var pid = ctx.request.body.pid || '';
+        var pcount = ctx.request.body.pcount || '1';
+        if (!pid || pid.trim() == '') {
+            throw new APIError('cart:empty_pid', '商品ID不能为空');
+        }
+        await cartService.addCartProd(pid, pcount, ctx.session.user.userId); 
         ctx.rest();
     }
 };

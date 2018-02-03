@@ -1,4 +1,4 @@
-define(["zepto", "vue", "vue-resource", "publicTip", "swipe"], function($, Vue, vueResource, publicTip){
+define(["jquery", "vue", "vue-resource", "publicTip", "swipe"], function($, Vue, vueResource, publicTip){
 	//alert("load finished");
 	Vue.use(vueResource);
 	

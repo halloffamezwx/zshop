@@ -48,6 +48,14 @@ module.exports = {
     },
 
     getCardProdNum: async (userId) => {
-        return cart.count({where: {userId: userId}});
+        return await cart.count({where: {userId: userId}});
+    },
+
+    addCartProd: async (pid, pcount, userId) => {
+        await cart.create({
+            userId: userId,
+            prodId: parseInt(pid),
+            count: parseInt(pcount)
+        });
     }
 };

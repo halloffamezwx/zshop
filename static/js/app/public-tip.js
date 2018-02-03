@@ -1,4 +1,4 @@
-define(["zepto"], function($){
+define(["jquery"], function($){
 	var showAlert = function (msg, iKnowFun){
 		$('#alertDialogContent').html(msg);
 		//$('#alertDialogTitle').html(result.code);
@@ -73,13 +73,29 @@ define(["zepto"], function($){
 		}
 	}
 
+	let toastTimeOutId;
+	var showToast = function (msg) {
+		if (!msg) {
+			msg = "已完成";
+		} 
+		$("#publicToastContent").html(msg);
+		clearTimeout(toastTimeOutId);
+		$("#publicToast").show();
+		
+		toastTimeOutId = setTimeout(function(){ 
+			$("#publicToast").hide();
+			$("#publicToastContent").html('');
+		}, 1000);
+	}
+
 	return {
 		showAlert: showAlert,
 		showConfirm: showConfirm,
 		showError: showError,
 		showTip: showTip,
 		showTipForStr: showTipForStr,
-		showLoadingToast: showLoadingToast
+		showLoadingToast: showLoadingToast,
+		showToast: showToast
 　　};
 })
 	

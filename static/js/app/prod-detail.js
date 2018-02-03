@@ -32,6 +32,13 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 			});
 		}
 		swipeFun();
+
+		let max = 5;
+		let stock = parseInt($("#pstock").val());
+		if (stock < max) {
+			max = stock;
+		}
+		$("#pcs").Spinner({value:1, len:3, max:max});
 		
 		let isLoadDetail = false;
 		$(".wy-header-titlebut").click(function () {
@@ -68,7 +75,29 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 			});
 		}
 		
-		$(".Spinner").Spinner({value:1, len:3, max:15});
+		$("#addCart").click(function () {
+			publicTip.showLoadingToast(true, "加入中");
+			$.ajax({
+				type: 'post',
+				dataType: 'json',
+				url: '/zshop/userapi/addCartProd',
+				data: {
+					pid: $("#pid").val(), 
+					pcount: $("#pcs").find("input").val()
+				}
+			}).done(function (r) {
+				//console.log(JSON.stringify(r));
+				publicTip.showLoadingToast(false);
+				publicTip.showToast("已加入");
+				let cardProdNum = parseInt($("#cardProdNum").html());
+				cardProdNum = cardProdNum + 1;
+				$("#cardProdNum").html(cardProdNum);
+				$("#cardProdNum").show();
+			}).fail(function (jqXHR, textStatus) { 
+				publicTip.showLoadingToast(false);
+				publicTip.showTip(jqXHR.responseJSON);
+			});
+		});
 	});
 	
 })
