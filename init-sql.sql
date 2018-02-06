@@ -43,3 +43,6 @@ INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `upd
 INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 3, 7, now(), now(), 0);
 INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 3, 9, now(), now(), 0);
 INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 4, 8, now(), now(), 0);
+
+INSERT INTO `collection` (`id`, `userId`, `prodId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 'halloffame', 2, now(), now(), 0);
+INSERT INTO `collection` (`id`, `userId`, `prodId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 'halloffame', 1, now(), now(), 0);

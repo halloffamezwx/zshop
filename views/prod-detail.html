@@ -81,6 +81,7 @@
 	<input type="hidden" id="pid" name="pid" value="{{product.id}}"/>
 	<input type="hidden" id="pstock" name="pstock" value="{{product.stock}}"/>
 	<input type="hidden" id="detailHtmlUrl" name="detailHtmlUrl" value="{{product.detailHtml}}"/>
+	<input type="hidden" id="collectionId" name="collectionId" value="{{collection.id}}"/>
 
 	<div id="detailDiv" style="display: none;" class="wy-product-content" >
 		<a href="javascript:void(0);" id="detailDiv-loading" style="text-align:center;color:gray;" class="weui-cell weui-cell_link">
@@ -102,9 +103,14 @@
 			<div class="weui-tabbar__icon promotion-foot-menu-kefu" style="width:20px;height:20px;"></div>
 			<p class="weui-tabbar__label">客服</p>
 	    </a>
-	    <a href="javascript:;" id='' class="promotion-foot-menu-items">
+	    <a href="javascript:;" id='collectionHref' class="promotion-foot-menu-items">
+			{% if collection %}
+			<div class="weui-tabbar__icon promotion-foot-menu-collection-on" style="width:20px;height:20px;"></div>
+			<p class="weui-tabbar__label" style="color: green;">收藏</p>
+			{% else %}
 			<div class="weui-tabbar__icon promotion-foot-menu-collection" style="width:20px;height:20px;"></div>
-			<p class="weui-tabbar__label">取消收藏</p>
+			<p class="weui-tabbar__label">收藏</p>
+			{% endif %}
 	    </a>
 	    <a href="/zshop/user/cart" class="promotion-foot-menu-items">
 			{% if cardProdNum > 0 %}

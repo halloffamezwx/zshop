@@ -76,8 +76,9 @@ body,html {
 
 .promotion-foot-menu-kefu{background:url(../images/icon-kefu.png) no-repeat; background-size:22px;}
 .promotion-foot-menu-collection{background:url(../images/icon-collection.png) no-repeat; background-size:22px;}
+.promotion-foot-menu-collection-on{background:url(../images/icon-collection-on.png) no-repeat; background-size:22px;}
 .promotion-foot-menu-cart{background:url(../images/footer03.png) no-repeat; background-size:22px;}
-.promotion-foot-menu-items{position:relative; padding:5px 10px 0; text-align:center;}
+.promotion-foot-menu-items{position:relative; padding:5px 14px 0; text-align:center;}
 .promotion-foot-menu-label{line-height:38px; color:#fff;font-size: 13px;}
 
 .wy-media-box2{margin:10px 0; background:#fff; padding:5px 10px; border-top:0px solid #e1e1e1; border-bottom:0px solid #e1e1e1;}

@@ -98,6 +98,40 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 				publicTip.showTip(jqXHR.responseJSON);
 			});
 		});
+
+		$("#collectionHref").click(function () {
+			let id = $("#collectionId").val();
+			let msg = '取消收藏';
+			if (id.trim() == '') msg = '收藏';
+			publicTip.showLoadingToast(true, msg + "中");
+			$.ajax({
+				type: 'post',
+				dataType: 'json',
+				url: '/zshop/userapi/collection',
+				data: {
+					id: id, 
+					pid: $("#pid").val()
+				}
+			}).done(function (r) {
+				$("#collectionId").val(r.id);
+				if (r.id) {
+					$("#collectionHref").find("div").addClass('promotion-foot-menu-collection-on');
+					$("#collectionHref").find("div").removeClass('promotion-foot-menu-collection');
+					//$("#collectionHref").find("p").html('取消收藏');
+					$("#collectionHref").find("p").css("color", "green");
+				} else {
+					$("#collectionHref").find("div").addClass('promotion-foot-menu-collection');
+					$("#collectionHref").find("div").removeClass('promotion-foot-menu-collection-on');
+					//$("#collectionHref").find("p").html('收藏');
+					$("#collectionHref").find("p").css("color", "gray");
+				}
+				publicTip.showLoadingToast(false);
+				publicTip.showToast("已" + msg);
+			}).fail(function (jqXHR, textStatus) { 
+				publicTip.showLoadingToast(false);
+				publicTip.showTip(jqXHR.responseJSON);
+			});
+		});
 	});
 	
 })
