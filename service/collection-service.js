@@ -1,6 +1,6 @@
 //收藏service
 const model = require('../middleware/model');
-
+var sequelize = model.sequelize;
 let collection = model.collection;
 
 module.exports = {
@@ -12,6 +12,14 @@ module.exports = {
                 prodId: parseInt(prodId)
             }
         });
+    },
+
+    getCollection: async (userId) => {
+        return await sequelize.query("SELECT t.id, t.prodId, t1.`name`, t1.price, t1.image, t1.description "
+                                   + "FROM collection t "
+                                   + "LEFT JOIN product t1 ON t.prodId = t1.id "
+                                   + "WHERE t.userId = :userId",
+                     {replacements: {userId: userId}, type: sequelize.QueryTypes.SELECT});
     },
 
     collection: async (id, userId, pid) => {

@@ -57,6 +57,7 @@
 				<div class="" style="margin-left:19px;">
 					<div class="Spinner" id="pcs"></div>
 				</div>
+				<div style="font-size:13px;color:gray;margin-left:7px;">(库存{{product.stock}}件)</div>
 			</div>
 		</div>
 		
@@ -68,7 +69,7 @@
 					<div class="promotion-sku clear">
 						<ul>
 							{% for gav in ga.groupAttriValueArr %}
-							<li {% if gav.isCheck %}class="active"{% endif %}><a href="javascript:;">{{gav.attriValue}}</a></li>
+							<li class="{{gav.class}}"><a href="javascript:;">{{gav.attriValue}}</a></li>
 							{% endfor %}
 						</ul>
 					</div>

@@ -4,7 +4,7 @@ INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`,
 INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`, `recommend`, `sales`, `stock`, `detailImages`, `detailHtml`, `createdAt`, `updatedAt`, `version`) VALUES (4, 3, '魅蓝 Note4', '疾速双摄  1400万前置美拍', 1499.99, '/static/images/product/good4.jpg', null, 0, 88, 'prod_detail0.jpg;prod_detail1.jpg;prod_detail2.jpg', '/static/html/prod_detail/prod-detial0.html', now(), now(), 0)
 INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`, `recommend`, `sales`, `stock`, `detailImages`, `detailHtml`, `createdAt`, `updatedAt`, `version`) VALUES (5, 5, '魅蓝 Note5', '疾速双摄  1500万前置美拍', 1599.99, '/static/images/product/good5.jpg', 1, 3, 99, 'prod_detail0.jpg;prod_detail1.jpg;prod_detail2.jpg', '/static/html/prod_detail/prod-detial0.html', now(), now(), 0)
 INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`, `recommend`, `sales`, `stock`, `detailImages`, `detailHtml`, `createdAt`, `updatedAt`, `version`) VALUES (6, 6, '魅蓝 Note6', '疾速双摄  1600万前置美拍', 1699.99, '/static/images/product/good6.jpg', 1, 5, 44, 'prod_detail0.jpg;prod_detail1.jpg;prod_detail2.jpg', '/static/html/prod_detail/prod-detial0.html', now(), now(), 0)
-INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`, `recommend`, `sales`, `stock`, `detailImages`, `detailHtml`, `createdAt`, `updatedAt`, `version`) VALUES (7, 7, '魅蓝 Note7', '疾速双摄  1700万前置美拍', 1799.99, '/static/images/product/good1.jpg', 1, 0, 33, 'prod_detail0.jpg;prod_detail1.jpg;prod_detail2.jpg', '/static/html/prod_detail/prod-detial0.html', now(), now(), 0)
+INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`, `recommend`, `sales`, `stock`, `detailImages`, `detailHtml`, `createdAt`, `updatedAt`, `version`) VALUES (7, 1, '魅蓝 Note7', '疾速双摄  1700万前置美拍', 1799.99, '/static/images/product/good1.jpg', 1, 0, 33, 'prod_detail0.jpg;prod_detail1.jpg;prod_detail2.jpg', '/static/html/prod_detail/prod-detial0.html', now(), now(), 0)
 
 INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (1, '首页头部轮播广告图片1', null, 1, '/static/images/ad/s1.png', null, now(), now(), 0);
 INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (2, '首页头部轮播广告图片2', null, 1, '/static/images/ad/s2.png', null, now(), now(), 0);
@@ -26,6 +26,7 @@ INSERT INTO `group_attri` (`id`, `prodGroup`, `attriId`, `attriName`, `createdAt
 
 INSERT INTO `group_attri_value` (`id`, `groupAttriId`, `attriValue`, `createdAt`, `updatedAt`, `version`) VALUES (1, 1, '深空灰', now(), now(), 0);
 INSERT INTO `group_attri_value` (`id`, `groupAttriId`, `attriValue`, `createdAt`, `updatedAt`, `version`) VALUES (2, 1, '红色', now(), now(), 0);
+INSERT INTO `group_attri_value` (`id`, `groupAttriId`, `attriValue`, `createdAt`, `updatedAt`, `version`) VALUES (10, 1, '蓝色', now(), now(), 0);
 INSERT INTO `group_attri_value` (`id`, `groupAttriId`, `attriValue`, `createdAt`, `updatedAt`, `version`) VALUES (3, 2, '公开版', now(), now(), 0);
 INSERT INTO `group_attri_value` (`id`, `groupAttriId`, `attriValue`, `createdAt`, `updatedAt`, `version`) VALUES (4, 2, '定制版', now(), now(), 0);
 INSERT INTO `group_attri_value` (`id`, `groupAttriId`, `attriValue`, `createdAt`, `updatedAt`, `version`) VALUES (5, 3, '64GB', now(), now(), 0);
@@ -43,6 +44,9 @@ INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `upd
 INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 3, 7, now(), now(), 0);
 INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 3, 9, now(), now(), 0);
 INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 4, 8, now(), now(), 0);
+INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 7, 1, now(), now(), 0);
+INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 7, 4, now(), now(), 0);
+INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 7, 5, now(), now(), 0);
 
 INSERT INTO `collection` (`id`, `userId`, `prodId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 'halloffame', 2, now(), now(), 0);
 INSERT INTO `collection` (`id`, `userId`, `prodId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 'halloffame', 1, now(), now(), 0);

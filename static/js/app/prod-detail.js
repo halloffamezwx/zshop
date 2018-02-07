@@ -34,11 +34,15 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 		swipeFun();
 
 		let max = 5;
+		let min = 1;
 		let stock = parseInt($("#pstock").val());
 		if (stock < max) {
 			max = stock;
 		}
-		$("#pcs").Spinner({value:1, len:3, max:max});
+		if (stock < min) {
+			min = stock;
+		}
+		$("#pcs").Spinner({value:min, len:3, max:max});
 		
 		let isLoadDetail = false;
 		$(".wy-header-titlebut").click(function () {
@@ -107,7 +111,7 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
-				url: '/zshop/userapi/collection',
+				url: '/zshop/userapi/collection/act',
 				data: {
 					id: id, 
 					pid: $("#pid").val()

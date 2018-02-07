@@ -127,7 +127,7 @@
 				</div>
 			</div>
 			<div class="weui-panel__bd">
-				<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" v-for="sp in sprods">
+				<a :href="'/zshop/prodDetail/' + sp.id" class="weui-media-box weui-media-box_appmsg" v-for="sp in sprods">
 					<div class="weui-media-box__hd" style="width:92px;height:92px;">
 						<img class="weui-media-box__thumb" v-bind:src=sp.image alt="">
 					</div>
@@ -200,7 +200,7 @@
 		</div>
 		
 		<div class="weui-cells">
-			<a href="javascript:;" class="weui-cell weui-cell_access">
+			<a href="/zshop/user/collection/index" class="weui-cell weui-cell_access">
 				<div class="weui-cell__hd">
 					<img src="/static/images/center-icon-sc.png" alt="" class="center-list-icon">
 				</div>

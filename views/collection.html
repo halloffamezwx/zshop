@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>我的收藏</title>
+    <link rel="stylesheet" href="/static/css/weui.min.css"/>
+	<link rel="stylesheet" href="/static/css/style.css"/>
+	<script data-main="/static/js/app/collection" src="/static/js/lib/require.js" defer async="true"></script>
+    <style>
+		.weui-media-box_appmsg .weui-media-box__hd {
+			width: 20px;
+		}
+		/*
+		.weui-media-box {
+			padding: 3px;
+		}*/
+	</style>
+</head>
+
+<body>
+	<header class="wy-header">
+	    <div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
+	    <div class="wy-header-title">我的收藏</div>
+	</header>
+
+	<div class="weui-tab__panel" >
+		<div class="weui-panel weui-panel_access" style="margin-top:41px">
+			<div class="weui-panel__bd">
+				{% for c in collections %}
+				<div class="weui-media-box weui-media-box_appmsg">
+					<a href="/zshop/prodDetail/{{c.prodId}}" class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" src="{{c.image}}" alt="">
+					</a>
+					<div class="weui-media-box__bd" >
+						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">{{c.name}}</h4>
+						<p class="weui-media-box__desc" style="margin-bottom:10px;">{{c.description}}</p>
+						<p class="weui-media-box__desc" style="color:red;">¥{{c.price}}</p>
+					</div>
+					<div class="weui-media-box__bd" >
+						<div style="float:right;">
+							<a href="/zshop/user/collection/del/{{c.id}}" class="wy-dele" style="margin-bottom:35px;margin-left:65px;"></a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% if totalSize == 0 %}
+		<div class="weui-loadmore weui-loadmore_line">
+			<a class="weui-loadmore__tips" style="background-color: #f8f8f8;" href="/zshop/">您还没有收藏的商品，点此去逛逛</a>
+		</div>
+		{% endif %}
+    </div>
+
+	{% include "public-tip.html" %}
+</body>
+</html>

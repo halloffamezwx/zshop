@@ -80,28 +80,56 @@ module.exports = {
                                                     + 'LEFT JOIN prod_attri t2 ON t1.id = t2.groupAttriValueId '
                                                     + 'WHERE t.prodGroup = :prodGroup',
                                       {replacements: {prodGroup: qProduct.groupId}, type: sequelize.QueryTypes.SELECT});
+        for (let i = 0; i < groupAttris.length; i++) {
+            let groupAttriValueMap = new Map();
+            
+            for (let j = 0; j < groupAttriValues.length; j++) {
+                if (groupAttris[i].attriId == groupAttriValues[j].attriId) {
+                    let groupAttriValueObj = groupAttriValueMap.get(groupAttriValues[j].attriValue);
+                    
+                    if (groupAttriValueObj) {
+                        if (groupAttriValues[j].prodId == pid) {
+                            groupAttriValueObj.isCheck = true;
+                            groupAttriValueObj.class = "active";
+                        }
+                        if (!groupAttriValues[j].prodId) {
+                            groupAttriValueObj.disabled = true;
+                            groupAttriValueObj.class = "disabled";
+                        }
+                    } else {
+                        let groupAttriValueObj = new Object();
+                        groupAttriValueObj.attriValue = groupAttriValues[j].attriValue;
+                        if (groupAttriValues[j].prodId == pid) {
+                            groupAttriValueObj.isCheck = true;
+                            groupAttriValueObj.class = "active";
+                        }
+                        if (!groupAttriValues[j].prodId) {
+                            groupAttriValueObj.disabled = true;
+                            groupAttriValueObj.class = "disabled";
+                        }
+                        groupAttriValueMap.set(groupAttriValues[j].attriValue, groupAttriValueObj);
+                    }
+                }
+            }
+
+            groupAttris[i].groupAttriValueMap = groupAttriValueMap;
+        }
+
         let attriValueStr = "";
         for (let i = 0; i < groupAttris.length; i++) {
             let groupAttriValueArr = new Array();
             
-            for (let j = 0; j < groupAttriValues.length; j++) {
-                if (groupAttris[i].attriId == groupAttriValues[j].attriId) {
-                    let groupAttriValueObj = new Object();
-                    groupAttriValueObj.attriValue = groupAttriValues[j].attriValue;
-                    groupAttriValueObj.isCheck = false;
-
-                    if (groupAttriValues[j].prodId == pid) {
-                        groupAttriValueObj.isCheck = true;
-                        if (attriValueStr == "") {
-                            attriValueStr += groupAttriValues[j].attriValue;
-                        } else {
-                            attriValueStr += " " + groupAttriValues[j].attriValue;
-                        }
+            for (let item of groupAttris[i].groupAttriValueMap.entries()) {
+                //console.log(item[0] + " = " + item[1]);
+                groupAttriValueArr.push(item[1]);
+                if (item[1].isCheck) {
+                    if (attriValueStr == "") {
+                        attriValueStr += item[1].attriValue;
+                    } else {
+                        attriValueStr += " " + item[1].attriValue;
                     }
-                    groupAttriValueArr.push(groupAttriValueObj);
                 }
             }
-            
             groupAttris[i].groupAttriValueArr = groupAttriValueArr;
         }
         
