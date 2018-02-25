@@ -89,11 +89,11 @@ body,html {
 .promotion-label-tit{font-size:13px; color:gray; line-height:12px;}
 .promotion-label-tit img{width:80%;}
 .promotion-sku{padding:8px 0 5px 0;}
-.promotion-sku li{float:left; margin:0 20px 1px 0;list-style:none;}
+.promotion-sku li{float:left; margin:5px 11px 1px 0;list-style:none;}
 .promotion-sku li a{display:block;border:1px solid #ccc; border-radius:3px; background-color:#fff;min-width:20px;padding:7px 12px; max-width:100%;text-align: center; font-size:12px; color:#666; position:relative;}
 .promotion-sku li.active a:after{content:""; width:12px; height:12px; background:url(../images/xuanze.png) no-repeat; background-size:12px; position:absolute; right:0; bottom:0;}
-.promotion-sku li.active a{border:1px solid green; margin:-1px; color:green;}
-.promotion-sku li.disabled a{border:1px dashed #ccc; margin:-1px; color:#999;}
+.promotion-sku li.active a{border:1px solid green; color:green;}
+.promotion-sku li.disabled a{border:1px dashed #ccc; color:#999;}
 .wy-header-titlebut{color:gray;}
 .wy-header-titlebut-active{color:green;border-bottom: 1px solid green;padding-bottom:9px;}
 .wy-product-content{padding-top:40px;padding-bottom:45px;}

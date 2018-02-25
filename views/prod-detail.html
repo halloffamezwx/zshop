@@ -67,9 +67,9 @@
 				<div class="weui-media-box__hd proinfo-txt-l" style="line-height: 0px;"><span class="promotion-label-tit">{{ga.attriName}}</span></div>
 				<div class="weui-media-box__bd">
 					<div class="promotion-sku clear">
-						<ul>
+						<ul class="gavUl">
 							{% for gav in ga.groupAttriValueArr %}
-							<li class="{{gav.class}}"><a href="javascript:;">{{gav.attriValue}}</a></li>
+							<li class="{{gav.class}} {{ga.attriId}}" groupAttriId="{{ga.attriId}}" disableFlag="{{gav.disabled}}"><a href="javascript:;">{{gav.attriValue}}</a></li>
 							{% endfor %}
 						</ul>
 					</div>
@@ -131,5 +131,6 @@
 	</div>
 
 	{% include "public-tip.html" %}
+	<input type="hidden" id="gavJsonStr" value="{{product.gavJsonStr}}"/>
 </body>
 </html>
