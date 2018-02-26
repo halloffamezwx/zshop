@@ -64,6 +64,7 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 			if (matchProdId) {
 				window.location.href = '/zshop/prodDetail/' + matchProdId;
 			} else {
+				$("#addCart").css("background-color", "gray");
 				if (!selFlag) {
 					$(".gavUl li:not(." + selGroupAttriId + ")").removeClass("active");
 					selFlag = true;
@@ -89,7 +90,10 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 					if (isMatch) {
 						$(this).removeClass("disabled");
 					} else {
-						$(this).addClass("disabled");
+						if ( !$(this).hasClass("disabled") ) {
+							$(this).addClass("disabled");
+							$(this).removeClass("active");
+						}
 					}
 				});
 			}
@@ -164,6 +168,9 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 		}
 		
 		$("#addCart").click(function () {
+			if (selFlag) {
+				return;
+			}
 			publicTip.showLoadingToast(true, "加入中");
 			$.ajax({
 				type: 'post',
