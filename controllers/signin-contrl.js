@@ -9,6 +9,7 @@ module.exports = {
         var
             mobile = ctx.request.body.mobile || '',
             password = ctx.request.body.password || '',
+            loginSuccUrl = ctx.request.body.loginSuccUrl,
             userIn = new Object();
         userIn.mobile = mobile;
         userIn.passwd = password;
@@ -20,7 +21,7 @@ module.exports = {
             userTemp.userId = user.userId;
             userTemp.headImage = user.headImage;
             ctx.session.user = userTemp;
-            ctx.rest({user: userTemp});
+            ctx.rest({user: userTemp, loginSuccUrl: loginSuccUrl});
         } else {
             throw new APIError('login:error_mobile_passwd', '手机号或密码错误');
         }
@@ -33,6 +34,7 @@ module.exports = {
     },
 
     'GET /login': async (ctx, next) => {
-        ctx.render('login.html');
+        let loginSuccUrl = ctx.query.loginSuccUrl || '/zshop/';
+        ctx.render('login.html', {loginSuccUrl: loginSuccUrl});
     }
 };

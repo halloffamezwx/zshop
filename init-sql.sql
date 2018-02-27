@@ -6,10 +6,10 @@ INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`,
 INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`, `recommend`, `sales`, `stock`, `detailImages`, `detailHtml`, `createdAt`, `updatedAt`, `version`) VALUES (6, 6, '魅蓝 Note6', '疾速双摄  1600万前置美拍', 1699.99, '/static/images/product/good6.jpg', 1, 5, 44, 'prod_detail0.jpg;prod_detail1.jpg;prod_detail2.jpg', '/static/html/prod_detail/prod-detial0.html', now(), now(), 0)
 INSERT INTO `product` (`id`, `groupId`, `name`, `description`, `price`, `image`, `recommend`, `sales`, `stock`, `detailImages`, `detailHtml`, `createdAt`, `updatedAt`, `version`) VALUES (7, 1, '魅蓝 Note7', '疾速双摄  1700万前置美拍', 1799.99, '/static/images/product/good1.jpg', 1, 0, 33, 'prod_detail0.jpg;prod_detail1.jpg;prod_detail2.jpg', '/static/html/prod_detail/prod-detial0.html', now(), now(), 0)
 
-INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (1, '首页头部轮播广告图片1', null, 1, '/static/images/ad/s1.png', null, now(), now(), 0);
-INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (2, '首页头部轮播广告图片2', null, 1, '/static/images/ad/s2.png', null, now(), now(), 0);
-INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (3, '首页头部轮播广告图片3', null, 1, '/static/images/ad/s3.png', null, now(), now(), 0);
-INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (4, '首页中部广告图片', null, 2, '/static/images/ad/ad_mid.png', null, now(), now(), 0);
+INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (1, '首页头部轮播广告图片1', null, 1, '/static/images/vt/s1.png', null, now(), now(), 0);
+INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (2, '首页头部轮播广告图片2', null, 1, '/static/images/vt/s2.png', null, now(), now(), 0);
+INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (3, '首页头部轮播广告图片3', null, 1, '/static/images/vt/s3.png', null, now(), now(), 0);
+INSERT INTO `advert` (`id`, `name`, `description`, `position`, `image`, `url`, `createdAt`, `updatedAt`, `version`) VALUES (4, '首页中部广告图片', null, 2, '/static/images/vt/mid.png', null, now(), now(), 0);
 
 INSERT INTO `user` (`id`, `email`, `mobile`, `userId`, `passwd`, `name`, `gender`, `headImage`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), '768473188@qq.com', '18312345678', 'halloffame', '123456', '墨菲', 1, '/static/images/head/bear.jpg', now(), now(), 0);
 

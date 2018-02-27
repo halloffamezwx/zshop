@@ -26,7 +26,8 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 
 			var userReq = {
                 mobile: mobile,
-                password: password
+				password: password,
+				loginSuccUrl: $("#loginSuccUrl").val()
             };
 			
 			$("#loginBtn").addClass('weui-btn_loading');
@@ -39,7 +40,7 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				data: JSON.stringify(userReq)
 			}).done(function (r) {
 				console.log(JSON.stringify(r));
-				window.location.href = '/zshop/';
+				window.location.href = r.loginSuccUrl;
 			}).fail(function (jqXHR, textStatus) { // Not 200
 				//publicTip.showTip(jqXHR.responseJSON.message);
 				//publicTip.showTip(jqXHR.responseText);

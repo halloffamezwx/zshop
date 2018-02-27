@@ -13,6 +13,7 @@ const rest = require('./middleware/rest');
 const app = new Koa();
 const session = require("koa-session2");
 
+console.log(`process.env.NODE_ENV = [${process.env.NODE_ENV}]`);
 const isProduction = process.env.NODE_ENV === 'production';
 
 // log request URL:
@@ -47,10 +48,10 @@ app.use(session({
 }));
 
 // static file support:
-if (! isProduction) {
+//if (! isProduction) {
     let staticFiles = require('./middleware/static-files');
     app.use(staticFiles('/static/', __dirname + '/static'));
-}
+//}
 
 // parse request body:
 app.use(bodyParser());

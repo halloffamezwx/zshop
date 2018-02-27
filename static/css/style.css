@@ -59,6 +59,8 @@ body,html {
 .wy-header-icon-back{position: absolute; left:0; top:0; width: 40px;height: 44px; }
 .wy-header-icon-back a {width:20px;height:20px; margin: 12px 0 0 10px; background:url(../images/icon-back.png) no-repeat; background-size:20px; display:block;}
 .wy-header-title{margin: 0 50px;text-align: center;height: 44px;line-height: 44px;font-size: 15px; color:#252525;}
+.wy-header-icon-index{position: absolute; right:0; top:0; width: 40px;height: 44px; }
+.wy-header-icon-index a {width:23px;height:23px; margin: 10px 0 0 5px; background:url(../images/index_bak.png) no-repeat; background-size:23px; display:block;}
 
 .Spinner{display:block;overflow:hidden;width:88px;margin:0;}
 .Spinner .Amount{width:26px;height:14px;padding:4px 5px;line-height:14px;border-top:1px solid #d9d9d9; border-bottom:1px solid #d9d9d9;float:left;text-align:center;color:#333;outline:0; font-size:14px;border-left:0px;border-right:0px;}

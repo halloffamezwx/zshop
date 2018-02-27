@@ -31,7 +31,7 @@ define(["jquery"], function($){
 		resp.json().then(function (result) {
 			console.log('Error: ' + JSON.stringify(result));
 			if (result.code == 'login:must_login') {
-				window.location.href = '/zshop/login';
+				window.location.href = '/zshop/login?loginSuccUrl=' + window.location.pathname;
 			} else {
 				showAlert(result.message);
 			}
@@ -42,7 +42,7 @@ define(["jquery"], function($){
 	var showTip = function (resp) {
 		//var msgObj = JSON.parse(msg);
 		if (resp.code == 'login:must_login') {
-			window.location.href = '/zshop/login';
+			window.location.href = '/zshop/login?loginSuccUrl=' + window.location.pathname;
 		} else {
 			$("#errorTip").html(resp.message);
 			clearTimeout(tipTimeOutId);

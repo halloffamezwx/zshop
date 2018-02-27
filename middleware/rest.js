@@ -26,7 +26,7 @@ module.exports = {
                 }
             } else if (ctx.request.path.startsWith('/zshop/user/')) {
                 if ( !ctx.session.user ) {
-                    ctx.response.redirect('/zshop/login');
+                    ctx.response.redirect('/zshop/login?loginSuccUrl=' + ctx.request.path);
                     //ctx.render('login.html');
                     return;
                 }

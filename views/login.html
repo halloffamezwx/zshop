@@ -17,11 +17,11 @@
 <body style="background-color: #ffffff;">
 	<header class="wy-header">
 		<div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
-	    <div class="wy-header-title">登录商城</div>
+		<div class="wy-header-title">登录商城</div>
+		<div class="wy-header-icon-index"><a href="/zshop/"></a></div>
 	</header>
-	<br/>
 	
-	<div class="weui-cells weui-cells_form" style="margin-top:16px;">
+	<div class="weui-cells weui-cells_form" style="padding-top: 44px;margin-top: 0px;">
 		<div class="weui-cell" style="font-size: 13px;">
 			<div class="weui-cell__hd" ><label class="weui-label">手机号</label></div>
 			<div class="weui-cell__bd">
@@ -71,7 +71,7 @@
 		</label>
 		<br/>
 	</div>
-	
+	<input type="hidden" id="loginSuccUrl" value="{{loginSuccUrl}}"/>
 	{% include "public-tip.html" %}
 
 </body>
