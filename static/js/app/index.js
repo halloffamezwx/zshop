@@ -1,4 +1,5 @@
-define(["jquery", "vue", "vue-resource", "publicTip", "swipe"], function($, Vue, vueResource, publicTip){
+//define(["jquery", "vue", "vue-resource", "publicTip", "swipe"], function($, Vue, vueResource, publicTip){
+define(["jquery", "vue", "vue-resource", "publicTip", "swiper-4.1.6.min"], function($, Vue, vueResource, publicTip, Swiper){
 	//alert("load finished");
 	Vue.use(vueResource);
 	
@@ -25,7 +26,19 @@ define(["jquery", "vue", "vue-resource", "publicTip", "swipe"], function($, Vue,
 				//transitionEnd: function(index, element) {}
 			});
 		}
-		swipeFun();
+		//swipeFun();
+		
+		var mySwiper = new Swiper ('.swiper-container', {
+			loop: true,
+			autoplay : {
+			    delay:2000
+		    },
+			// 分页器
+			pagination: {
+			    el: '.swiper-pagination',
+				clickable: true
+			}
+		});
 		
 		$(".weui-tabbar__item").click(function () {
 			var currentId = $(this).attr("id");

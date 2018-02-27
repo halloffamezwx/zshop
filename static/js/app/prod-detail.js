@@ -9,8 +9,17 @@ requirejs.config({
     }
 });
 
-requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, publicTip){
+requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], function($, publicTip, Swiper){
 	$(function() {
+		var mySwiper = new Swiper ('.swiper-container', {
+			loop: true,
+			// 分页器
+			pagination: {
+			    el: '.swiper-pagination',
+				clickable: true
+			}
+		});
+		
 		var gavJsonArr = JSON.parse($("#gavJsonStr").val());
 		let gavMap = new Map();
 		let gavObMap = new Map();
@@ -98,28 +107,6 @@ requirejs(["jquery", "publicTip", "jquery.Spinner", "swipe"], function($, public
 				});
 			}
 		});
-
-		function swipeFun() {
-			var mySwipeElem = document.getElementById('mySwipe');
-			window.mySwipe = Swipe(mySwipeElem, {
-				//startSlide: 4,
-				//auto: 2000,
-				//continuous: true,
-				//disableScroll: true,
-				//stopPropagation: true,
-				callback: function(index, element) {
-					//var preIndex = index - 1;
-					//if (preIndex == -1) {
-					//	preIndex = mySwipe.getNumSlides() - 1;
-					//}
-					//$("#disc_" + preIndex).css("color", "#c8c9cb");
-					$(".swipe-wrap-circle li").css("color", "#c8c9cb");
-					$("#disc_" + index).css("color", "green");
-				},
-				//transitionEnd: function(index, element) {}
-			});
-		}
-		swipeFun();
 
 		let max = 5;
 		let min = 1;

@@ -6,11 +6,15 @@
     <title>商品详情</title>
     <link rel="stylesheet" href="/static/css/weui.min.css"/>
 	<link rel="stylesheet" href="/static/css/style.css"/>
-	<link rel="stylesheet" href="/static/css/swipe.css"/>
+	<link rel="stylesheet" href="/static/css/swiper-4.1.6.min.css"/>
 	<script data-main="/static/js/app/prod-detail" src="/static/js/lib/require.js" defer async="true"></script>
     <style>
         /*返回顶部*/
         #tophovertree{display:block;position:fixed;width:36px;height:36px;right:10px;bottom:60px;cursor:pointer;background-image:url(/static/images/tophovertree.gif);opacity:0.9;display:none}
+
+		.swiper-pagination-bullet-active {
+			background: green;
+		}
     </style>
 </head>
 
@@ -25,18 +29,14 @@
 	</header>
 
 	<div id="productDiv" class="wy-product-content">
-		<div id='mySwipe' class='swipe' >
-			<div class='swipe-wrap'>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
 				{% for di in product.detailImagesArr %}
-				<div style="background-color:white;"><img src="/static/images/product/detail/{{di}}" style="border-bottom:2px solid #f8f8f8;"></div>
+				<div class="swiper-slide"><img src="/static/images/product/detail/{{di}}" width="100%"></div>
 				{% endfor %}
 			</div>
-			
-			<ul class='swipe-wrap-circle'>
-				{% for di in product.detailImagesArr %}
-				<li id="disc_{{loop.index - 1}}"></li>
-				{% endfor %}
-			</ul>
+			<!-- 分页器 -->
+			<div class="swiper-pagination"></div>
 		</div>
 		
 		<div style="background-color:white;">

@@ -6,13 +6,19 @@
     <title>首页</title>
     <link rel="stylesheet" href="/static/css/weui.min.css"/>
 	<link rel="stylesheet" href="/static/css/style.css"/>
-	<link rel="stylesheet" href="/static/css/swipe.css"/>
+	<!-- link rel="stylesheet" href="/static/css/swipe.css"/> -->
+	<link rel="stylesheet" href="/static/css/swiper-4.1.6.min.css"/>
+	<style>
+		.swiper-pagination-bullet-active {
+			background: green;
+		}
+	</style>
 	<script data-main="/static/js/app/index-main" src="/static/js/lib/require.js" defer async="true"></script>
 </head>
 
 <body>
 	<div class="weui-tab__panel" id="index_content" style="display: block; ">
-		<div id='mySwipe' class='swipe'>
+		<!-- div id='mySwipe' class='swipe'>
 			<div class='swipe-wrap'>
 				{% for hAd in hAds %}
 				<div><img src="{{hAd.image}}"></div>
@@ -24,13 +30,22 @@
 				<li id="disc_{{loop.index - 1}}"></li>
 				{% endfor %}
 			</ul>
-			<!--
+			
 			<div style='text-align:center;padding-top:20px;'>
 				<button onclick='mySwipe.prev()'>prev</button> 
 				<button onclick='mySwipe.next()'>next</button>
 			</div>
-			-->
-		</div>	
+			
+		</div> -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				{% for hAd in hAds %}
+				<div class="swiper-slide"><img src="{{hAd.image}}" width="100%"></div>
+				{% endfor %}
+			</div>
+			<!-- 分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
 		
 		<div class="weui-flex wy-iconlist-box">
 			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu2.png"></div><p>正在建设</p></a></div>
