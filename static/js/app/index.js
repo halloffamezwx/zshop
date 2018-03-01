@@ -1,5 +1,5 @@
 //define(["jquery", "vue", "vue-resource", "publicTip", "swipe"], function($, Vue, vueResource, publicTip){
-define(["jquery", "vue", "vue-resource", "publicTip", "swiper-4.1.6.min"], function($, Vue, vueResource, publicTip, Swiper){
+define(["jquery", "vue", "vue-resource", "publicTip", "swiper-4.1.6.min", "public"], function($, Vue, vueResource, publicTip, Swiper, public){
 	//alert("load finished");
 	Vue.use(vueResource);
 	
@@ -41,17 +41,37 @@ define(["jquery", "vue", "vue-resource", "publicTip", "swiper-4.1.6.min"], funct
 		});
 		
 		$(".weui-tabbar__item").click(function () {
-			var currentId = $(this).attr("id");
-			var preId = $(".weui-bar__item_on").attr("id");
+			let tabbarItemJqObj = $(this);
+			var currentId = tabbarItemJqObj.attr("id");
 
 			if (currentId == 'my' && $('#userName').html() == '') {
-				window.location.href = '/zshop/login';
-				return;
+				publicTip.showLoadingToast(true);
+				$.ajax({
+					type: 'post',
+					dataType: 'json',
+					url: '/zshop/userapi/getLoginUserInfo'
+				}).done(function (r) {
+					$('#userName').html(r.name);
+					$('#userId').html(r.userId);
+					$('#userHeadImage').attr("src", r.headImage);
+					publicTip.showLoadingToast(false);
+					changeTabbarStyle(tabbarItemJqObj, currentId);
+				}).fail(function (jqXHR, textStatus) { 
+					publicTip.showLoadingToast(false);
+					jqXHR.responseJSON.loginSuccUrl = "/zshop?actTabbar=my";
+					publicTip.showTip(jqXHR.responseJSON);
+				});
+			} else {
+				changeTabbarStyle(tabbarItemJqObj, currentId);
 			}
-			
+		});
+
+		function changeTabbarStyle(tabbarItemJqObj, currentId) {
+			var preId = $(".weui-bar__item_on").attr("id");
+
 			$(".weui-bar__item_on img").attr("src", "/static/images/" + preId + ".png");
 			$(".weui-bar__item_on").removeClass("weui-bar__item_on");
-			$(this).addClass("weui-bar__item_on");
+			tabbarItemJqObj.addClass("weui-bar__item_on");
 			
 			//$("div.weui-tab__panel[style='display: block;']").hide();
 			$(".weui-tab__panel").hide();
@@ -59,12 +79,17 @@ define(["jquery", "vue", "vue-resource", "publicTip", "swiper-4.1.6.min"], funct
 			$("#" + currentId + "_img").attr("src", "/static/images/" + currentId + "_on.png");	
 			
 			//mySwipe.next();
-			if (currentId == 'index' && preId != 'index') {
-				$(".swipe-wrap-circle li").css("color", "#c8c9cb");
-				$(".swipe-wrap-circle li:first-child").css("color", "green");
-				swipeFun();
-			}
-		});
+			//if (currentId == 'index' && preId != 'index') {
+			//	$(".swipe-wrap-circle li").css("color", "#c8c9cb");
+			//	$(".swipe-wrap-circle li:first-child").css("color", "green");
+			//	swipeFun();
+			//}
+		}
+
+		let actTabbar = public.getQueryString()["actTabbar"];
+		if (actTabbar) {
+			$("#" + actTabbar).click();
+		}
 		
 		$('#signoutHref').on('click', function(){
 			publicTip.showConfirm('确认退出登录？', function(){

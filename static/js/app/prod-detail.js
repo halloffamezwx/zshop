@@ -21,90 +21,118 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 		});
 		
 		var gavJsonArr = JSON.parse($("#gavJsonStr").val());
-		let gavMap = new Map();
 		let gavObMap = new Map();
 
 		for (let i = 0; i < gavJsonArr.length; i++) {
 			if (!gavJsonArr[i].prodId) continue;
 
-			let gavArr = gavMap.get(gavJsonArr[i].prodId);
 			let gavOb = gavObMap.get(gavJsonArr[i].prodId);
-			if (!gavArr) gavArr = new Array();
 			if (!gavOb) gavOb = new Map();
-
-			gavArr.push(gavJsonArr[i]);
 			gavOb.set(gavJsonArr[i].attriId, gavJsonArr[i].attriValue);
 
-			gavMap.set(gavJsonArr[i].prodId, gavArr);
 			gavObMap.set(gavJsonArr[i].prodId, gavOb);
 		}
 
-		let selFlag = false;
-		$(".gavUl li").click(function () {
-			if ($(this).hasClass("active") || $(this).hasClass("disabled")) {
-				return;
-			}
-			let selGroupAttriId = $(this).attr("groupAttriId");
-			let selGroupAttriValue = $(this).find("a").html();
-			$(".active." + selGroupAttriId).removeClass("active");
-			$(this).addClass("active");
-
-			let activeMap = new Map();
-			$(".active").each(function () {
-				activeMap.set($(this).attr("groupAttriId"), $(this).find("a").html());
-			});
-
-			let matchProdId;
-			for (let gavItem of gavMap.entries()) {
-				let gavArr = gavItem[1];
-				let isMatch = true; 
-				for (let i = 0; i < gavArr.length; i++) {
-					if ( activeMap.get(gavArr[i].attriId) != gavArr[i].attriValue ) {
-						isMatch = false;
-						break;
+		function changeLiDisStatus() {
+			$(".gavUl li").each(function () {
+				if ( $(this).attr("disableFlag") == "true" ) {
+					return;
+				}
+				let itGaId = $(this).attr("groupAttriId");
+				let itGaValue = $(this).find("a").html();
+				
+				if ( $(".active." + itGaId).length > 0 ) {
+					if ( $(this).hasClass("disabled") ) {
+						$(this).removeClass("disabled");
 					}
+					return;
 				}
 
-				if (isMatch) {
-					matchProdId = gavItem[0];
-					break;
-				}
-			}
-			if (matchProdId) {
-				window.location.href = '/zshop/prodDetail/' + matchProdId;
-			} else {
-				$("#addCart").css("background-color", "gray");
-				if (!selFlag) {
-					$(".gavUl li:not(." + selGroupAttriId + ")").removeClass("active");
-					selFlag = true;
-				}
+				let activeMap = new Map();
+				$(".active").each(function () {
+					activeMap.set($(this).attr("groupAttriId"), $(this).find("a").html());
+				});
 
-				$(".gavUl li:not(." + selGroupAttriId + ")").each(function () {
-					if ( $(this).attr("disableFlag") == "ture" ) {
-						return;
+				let isMatch = false;
+				for (let gavItem of gavObMap.entries()) {
+					let gavOb = gavItem[1];
+					if (gavOb.get(itGaId) != itGaValue) {
+						continue;
 					}
-					let itGaId = $(this).attr("groupAttriId");
-					let itGaValue = $(this).find("a").html();
 
-					let isMatch = false;
-					for (let gavItem of gavObMap.entries()) {
-						let gavOb = gavItem[1];
-						 
-						if (gavOb.get(selGroupAttriId) == selGroupAttriValue && gavOb.get(itGaId) == itGaValue) {
-							isMatch = true;
+					let isMatchActive = true;
+					for (let activeItem of activeMap.entries()) {
+						if (gavOb.get(activeItem[0]) != activeItem[1]) {
+							isMatchActive = false;
 							break;
 						}
 					}
 					
-					if (isMatch) {
-						$(this).removeClass("disabled");
-					} else {
-						if ( !$(this).hasClass("disabled") ) {
-							$(this).addClass("disabled");
-							$(this).removeClass("active");
+					if (isMatchActive) {
+						isMatch = true;
+						break;
+					}
+				}
+				
+				if (isMatch) {
+					$(this).removeClass("disabled");
+				} else {
+					if ( !$(this).hasClass("disabled") ) {
+						$(this).addClass("disabled");
+						$(this).removeClass("active");
+					}
+				}
+			});
+		}
+
+		let selFlag = false;
+		$(".gavUl li").click(function () {
+			if ($(this).hasClass("disabled")) {
+				return;
+			}
+			
+			let selGroupAttriId = $(this).attr("groupAttriId");
+			let selGroupAttriValue = $(this).find("a").html();
+
+			if ( $(this).hasClass("active") ) {
+				$(this).removeClass("active");
+				changeLiDisStatus();
+			} else {
+				$(".active." + selGroupAttriId).removeClass("active");
+				$(this).addClass("active");
+
+				let activeMap = new Map();
+				$(".active").each(function () {
+					activeMap.set($(this).attr("groupAttriId"), $(this).find("a").html());
+				});
+
+				let matchProdId;
+				for (let gavItem of gavObMap.entries()) {
+					let isMatch = true; 
+					let gavOb = gavItem[1];
+
+					for (let gavObItem of gavOb.entries()) {
+						if ( activeMap.get(gavObItem[0]) != gavObItem[1] ) {
+							isMatch = false;
+							break;
 						}
 					}
-				});
+
+					if (isMatch) {
+						matchProdId = gavItem[0];
+						break;
+					}
+				}
+				if (matchProdId) {
+					window.location.href = '/zshop/prodDetail/' + matchProdId;
+				} else {
+					$("#addCart").css("background-color", "gray");
+					if (!selFlag) {
+						$(".gavUl li:not(." + selGroupAttriId + ")").removeClass("active");
+						selFlag = true;
+					}
+					changeLiDisStatus();
+				}
 			}
 		});
 

@@ -26,8 +26,7 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 
 			var userReq = {
                 mobile: mobile,
-				password: password,
-				loginSuccUrl: $("#loginSuccUrl").val()
+				password: password
             };
 			
 			$("#loginBtn").addClass('weui-btn_loading');
@@ -40,7 +39,7 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				data: JSON.stringify(userReq)
 			}).done(function (r) {
 				console.log(JSON.stringify(r));
-				window.location.href = r.loginSuccUrl;
+				window.location.href = $("#loginSuccUrl").val();
 			}).fail(function (jqXHR, textStatus) { // Not 200
 				//publicTip.showTip(jqXHR.responseJSON.message);
 				//publicTip.showTip(jqXHR.responseText);
