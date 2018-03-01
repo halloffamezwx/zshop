@@ -21,16 +21,16 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 		});
 		
 		var gavJsonArr = JSON.parse($("#gavJsonStr").val());
-		let gavObMap = new Map();
+		var gavObMap = new Map();
 
-		for (let i = 0; i < gavJsonArr.length; i++) {
+		for (var i = 0; i < gavJsonArr.length; i++) {
 			if (!gavJsonArr[i].prodId) continue;
 
-			let gavOb = gavObMap.get(gavJsonArr[i].prodId);
-			if (!gavOb) gavOb = new Map();
-			gavOb.set(gavJsonArr[i].attriId, gavJsonArr[i].attriValue);
+			var gavObA = gavObMap.get(gavJsonArr[i].prodId);
+			if (!gavObA) gavObA = new Map();
+			gavObA.set(gavJsonArr[i].attriId, gavJsonArr[i].attriValue);
 
-			gavObMap.set(gavJsonArr[i].prodId, gavOb);
+			gavObMap.set(gavJsonArr[i].prodId, gavObA);
 		}
 
 		function changeLiDisStatus() {
@@ -38,8 +38,8 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 				if ( $(this).attr("disableFlag") == "true" ) {
 					return;
 				}
-				let itGaId = $(this).attr("groupAttriId");
-				let itGaValue = $(this).find("a").html();
+				var itGaId = $(this).attr("groupAttriId");
+				var itGaValue = $(this).find("a").html();
 				
 				if ( $(".active." + itGaId).length > 0 ) {
 					if ( $(this).hasClass("disabled") ) {
@@ -48,20 +48,20 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 					return;
 				}
 
-				let activeMap = new Map();
+				var activeMap = new Map();
 				$(".active").each(function () {
 					activeMap.set($(this).attr("groupAttriId"), $(this).find("a").html());
 				});
 
-				let isMatch = false;
-				for (let gavItem of gavObMap.entries()) {
-					let gavOb = gavItem[1];
+				var isMatch = false;
+				for (var gavItem of gavObMap.entries()) {
+					var gavOb = gavItem[1];
 					if (gavOb.get(itGaId) != itGaValue) {
 						continue;
 					}
 
-					let isMatchActive = true;
-					for (let activeItem of activeMap.entries()) {
+					var isMatchActive = true;
+					for (var activeItem of activeMap.entries()) {
 						if (gavOb.get(activeItem[0]) != activeItem[1]) {
 							isMatchActive = false;
 							break;
@@ -85,14 +85,14 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 			});
 		}
 
-		let selFlag = false;
+		var selFlag = false;
 		$(".gavUl li").click(function () {
 			if ($(this).hasClass("disabled")) {
 				return;
 			}
 			
-			let selGroupAttriId = $(this).attr("groupAttriId");
-			let selGroupAttriValue = $(this).find("a").html();
+			var selGroupAttriId = $(this).attr("groupAttriId");
+			var selGroupAttriValue = $(this).find("a").html();
 
 			if ( $(this).hasClass("active") ) {
 				$(this).removeClass("active");
@@ -101,17 +101,17 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 				$(".active." + selGroupAttriId).removeClass("active");
 				$(this).addClass("active");
 
-				let activeMap = new Map();
+				var activeMap = new Map();
 				$(".active").each(function () {
 					activeMap.set($(this).attr("groupAttriId"), $(this).find("a").html());
 				});
 
-				let matchProdId;
-				for (let gavItem of gavObMap.entries()) {
-					let isMatch = true; 
-					let gavOb = gavItem[1];
+				var matchProdId;
+				for (var gavItem of gavObMap.entries()) {
+					var isMatch = true; 
+					var gavOb = gavItem[1];
 
-					for (let gavObItem of gavOb.entries()) {
+					for (var gavObItem of gavOb.entries()) {
 						if ( activeMap.get(gavObItem[0]) != gavObItem[1] ) {
 							isMatch = false;
 							break;
@@ -136,9 +136,9 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 			}
 		});
 
-		let max = 5;
-		let min = 1;
-		let stock = parseInt($("#pstock").val());
+		var max = 5;
+		var min = 1;
+		var stock = parseInt($("#pstock").val());
 		if (stock < max) {
 			max = stock;
 		}
@@ -147,7 +147,7 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 		}
 		$("#pcs").Spinner({value:min, len:3, max:max});
 		
-		let isLoadDetail = false;
+		var isLoadDetail = false;
 		$(".wy-header-titlebut").click(function () {
 			var currentId = $(this).attr("id");
 			$(".wy-product-content").hide();
@@ -199,7 +199,7 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 				//console.log(JSON.stringify(r));
 				publicTip.showLoadingToast(false);
 				publicTip.showToast("已加入");
-				let cardProdNum = parseInt($("#cardProdNum").html());
+				var cardProdNum = parseInt($("#cardProdNum").html());
 				cardProdNum = cardProdNum + 1;
 				$("#cardProdNum").html(cardProdNum);
 				$("#cardProdNum").show();
@@ -210,8 +210,8 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 		});
 
 		$("#collectionHref").click(function () {
-			let id = $("#collectionId").val();
-			let msg = '取消收藏';
+			var id = $("#collectionId").val();
+			var msg = '取消收藏';
 			if (id.trim() == '') msg = '收藏';
 			publicTip.showLoadingToast(true, msg + "中");
 			$.ajax({

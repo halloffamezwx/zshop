@@ -41,7 +41,7 @@ define(["jquery", "vue", "vue-resource", "publicTip", "swiper-4.1.6.min", "publi
 		});
 		
 		$(".weui-tabbar__item").click(function () {
-			let tabbarItemJqObj = $(this);
+			var tabbarItemJqObj = $(this);
 			var currentId = tabbarItemJqObj.attr("id");
 
 			if (currentId == 'my' && $('#userName').html() == '') {
@@ -86,7 +86,7 @@ define(["jquery", "vue", "vue-resource", "publicTip", "swiper-4.1.6.min", "publi
 			//}
 		}
 
-		let actTabbar = public.getQueryString()["actTabbar"];
+		var actTabbar = public.getQueryString()["actTabbar"];
 		if (actTabbar) {
 			$("#" + actTabbar).click();
 		}

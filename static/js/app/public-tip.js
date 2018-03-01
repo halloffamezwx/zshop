@@ -31,7 +31,7 @@ define(["jquery"], function($){
 		resp.json().then(function (result) {
 			console.log('Error: ' + JSON.stringify(result));
 			if (result.code == 'login:must_login') {
-				let loginSuccUrl = result.loginSuccUrl || window.location.pathname || "/zshop/";
+				var loginSuccUrl = result.loginSuccUrl || window.location.pathname || "/zshop/";
 				window.location.href = '/zshop/login?loginSuccUrl=' + loginSuccUrl;
 			} else {
 				showAlert(result.message);
@@ -43,7 +43,7 @@ define(["jquery"], function($){
 	var showTip = function (resp) {
 		//var msgObj = JSON.parse(msg);
 		if (resp.code == 'login:must_login') {
-			let loginSuccUrl = resp.loginSuccUrl || window.location.pathname || "/zshop/";
+			var loginSuccUrl = resp.loginSuccUrl || window.location.pathname || "/zshop/";
 			window.location.href = '/zshop/login?loginSuccUrl=' + loginSuccUrl;
 		} else {
 			$("#errorTip").html(resp.message);
@@ -75,7 +75,7 @@ define(["jquery"], function($){
 		}
 	}
 
-	let toastTimeOutId;
+	var toastTimeOutId;
 	var showToast = function (msg) {
 		if (!msg) {
 			msg = "已完成";
