@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>商城</title>
+    <link rel="stylesheet" href="./style/weui.min.css"/>
+	<link rel="stylesheet" href="./style/style.css"/>
+	<!-- link rel="stylesheet" href="./style/swipe.css"/ -->
+	<link rel="stylesheet" href="./style/swiper-4.1.6.min.css">
+	<script data-main="js/app/index_main" src="js/lib/require.js" defer async="true"></script>
+	<style>
+		.swiper-pagination-bullet-active {
+			background: green;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="weui-tab__panel" id="index_content" style="display: block; ">
+		<!-- <div id='mySwipe' class='swipe'>
+			<div class='swipe-wrap'>
+				<div><img src="./images/s1.png"></div>
+				<div><img src="./images/s2.png"></div>
+				<div><img src="./images/s3.png"></div>
+			</div>
+			
+			<ul class='swipe-wrap-circle'>
+			    <li id="disc_0"></li>
+			    <li id="disc_1"></li>
+			    <li id="disc_2"></li>
+			</ul>
+			
+			<div style='text-align:center;padding-top:20px;'>
+				<button onclick='mySwipe.prev()'>prev</button> 
+				<button onclick='mySwipe.next()'>next</button>
+			</div>
+			
+		</div> -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="./images/s1.png" width="100%"></div>
+				<div class="swiper-slide"><img src="./images/s2.png" width="100%"></div>
+				<div class="swiper-slide"><img src="./images/s3.png" width="100%"></div>
+			</div>
+			<!-- 分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
+		
+		<div class="weui-flex wy-iconlist-box">
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="./images/menu2.png"></div><p>精选推荐</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="./images/menu3.png"></div><p>酒水专场</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="./images/menu4.png"></div><p>订单管理</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="./images/menu1.png"></div><p>商家入驻</p></a></div>
+		</div>
+		<img src="./images/mid.png" style="width: 100%;margin-top:5px;"/>
+		
+		<div style="border-bottom: 2px solid #efeff4; font-size:12px;background-color: #fff;text-align:center;color:#666;padding:5px;">精品推荐</div>
+		<div class="weui-flex wy-iconlist-box-ex" >
+			<div class="weui-flex__item" style="background-color: #fff;">
+				<a href="prod-detail.html" class="wy-links-iconlist-ex" >
+					<div class="img"><img src="./images/good1.jpg"></div>
+					<p style="color:black;font-size:13px;">魅蓝 Note6</p>
+					<p>疾速双摄  1600万前置美拍</p>
+					<p style="color:red;">¥1099</p>
+				</a>
+			</div>
+			<div class="weui-flex__item" style="margin-left:5px;background-color: #fff;">
+				<a href="prod-detail.html" class="wy-links-iconlist-ex" >
+					<div class="img"><img src="./images/good2.jpg"></div>
+					<p style="color:black;font-size:13px;">魅蓝 Note6</p>
+					<p>疾速双摄  1600万前置美拍</p>
+					<p style="color:red;">¥1099</p>
+				</a>
+			</div>
+		</div>
+		<div class="weui-flex wy-iconlist-box-ex" >
+			<div class="weui-flex__item" style="background-color: #fff;">
+				<a href="prod-detail.html" class="wy-links-iconlist-ex" >
+					<div class="img"><img src="./images/good3.jpg"></div>
+					<p style="color:black;font-size:13px;">魅蓝 Note6</p>
+					<p>疾速双摄  1600万前置美拍</p>
+					<p style="color:red;">¥1099</p>
+				</a>
+			</div>
+			<div class="weui-flex__item" style="margin-left:5px;background-color: #fff;">
+				<a href="prod-detail.html" class="wy-links-iconlist-ex" >
+					<div class="img"><img src="./images/good4.jpg"></div>
+					<p style="color:black;font-size:13px;">魅蓝 Note6</p>
+					<p>疾速双摄  1600万前置美拍</p>
+					<p style="color:red;">¥1099</p>
+				</a>
+			</div>
+		</div>
+		<div class="weui-flex wy-iconlist-box-ex" >
+			<div class="weui-flex__item" style="background-color: #fff;">
+				<a href="prod-detail.html" class="wy-links-iconlist-ex" >
+					<div class="img"><img src="./images/good5.jpg"></div>
+					<p style="color:black;font-size:13px;">魅蓝 Note6</p>
+					<p>疾速双摄  1600万前置美拍</p>
+					<p style="color:red;">¥1099</p>
+				</a>
+			</div>
+			<div class="weui-flex__item" style="margin-left:5px;background-color: #fff;">
+				<a href="javascript:;" class="wy-links-iconlist-ex" ></a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="weui-tab__panel" id="goods_content" style="display: none; ">
+        <div class="weui-search-bar" id="searchBar" style="position: fixed;height: 44px; top: 0; left: 0; right: 0;z-index: 100;">
+            <form class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+        </div>
+        <div class="weui-cells searchbar-result" id="searchResult" style="position: fixed;z-index: 9999;width: 100%;top: 44px;">
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_access">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>实时搜索文本</p>
+                </div>
+            </div>
+        </div>
+		
+		<div class="weui-panel weui-panel_access" style="margin-top:44px;">
+			<div class="weui-panel__hd">
+				<div class="weui-flex" style="text-align:center;font-size:14px;">
+					<div class="weui-flex__item" >综合</div>
+					<div class="weui-flex__item" style="color:green;">按销量 
+						<div style="display: inline-block;">
+							<div class="triangle-up" style="margin-bottom:1px;"></div> 
+							<div class="triangle-down" ></div>
+						</div>
+					</div>
+					<div class="weui-flex__item">按价格</div>
+				</div>
+			</div>
+			<div class="weui-panel__bd">
+				<a href="prod-detail.html" class="weui-media-box weui-media-box_appmsg">
+					<div class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" src="./images/good5.jpg" alt="">
+					</div>
+					<div class="weui-media-box__bd" >
+						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">魅蓝 Note6</h4>
+						<p class="weui-media-box__desc" style="margin-bottom:10px;">疾速双摄  1600万前置美拍</p>
+						<p class="weui-media-box__desc" style="color:red;">¥1099</p>
+					</div>
+				</a>
+				<a href="prod-detail.html" class="weui-media-box weui-media-box_appmsg">
+					<div class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" src="./images/good4.jpg" alt="">
+					</div>
+					<div class="weui-media-box__bd">
+						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">魅蓝 Note6</h4>
+						<p class="weui-media-box__desc" style="margin-bottom:10px;">疾速双摄  1600万前置美拍</p>
+						<p class="weui-media-box__desc" style="color:red;">¥1099</p>
+					</div>
+				</a>
+				<a href="prod-detail.html" class="weui-media-box weui-media-box_appmsg">
+					<div class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" src="./images/good3.jpg" alt="">
+					</div>
+					<div class="weui-media-box__bd">
+						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">魅蓝 Note6</h4>
+						<p class="weui-media-box__desc" style="margin-bottom:10px;">疾速双摄  1600万前置美拍</p>
+						<p class="weui-media-box__desc" style="color:red;">¥1099</p>
+					</div>
+				</a>
+				<a href="prod-detail.html" class="weui-media-box weui-media-box_appmsg">
+					<div class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" src="./images/good2.jpg" alt="">
+					</div>
+					<div class="weui-media-box__bd">
+						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">魅蓝 Note6</h4>
+						<p class="weui-media-box__desc" style="margin-bottom:10px;">疾速双摄  1600万前置美拍</p>
+						<p class="weui-media-box__desc" style="color:red;">¥1099</p>
+					</div>
+				</a>
+			</div>
+			<div class="weui-panel__ft">
+				<a href="javascript:void(0);" id="loadmore-button" class="weui-cell weui-cell_access weui-cell_link">
+					<div class="weui-cell__bd" style="text-align:center;" >加载更多</div>
+				</a>    
+				<a href="javascript:void(0);" id="loadmore-loading" style="text-align:center;display:none;" class="weui-cell weui-cell_access weui-cell_link">
+					<div class="weui-cell__bd" >
+						<i class="weui-loading"></i>
+						<span class="weui-loadmore__tips">正在加载</span>
+					</div>
+				</a>			
+			</div>
+		</div>
+		<div class="weui-loadmore weui-loadmore_line" style="display:none;" id="noData">
+			<span class="weui-loadmore__tips" style="background-color: #f8f8f8;">暂无数据</span>
+		</div>
+    </div>
+	
+	<div class="weui-tab__panel" id="cart_content" style="display: none; ">
+		
+    </div>
+	
+	<div class="weui-tab__panel" id="my_content" style="display: none; ">
+		<div class="weui-cells" style="margin-top: 0px;">
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="./images/bear.jpg" alt="" style="width:70px;height:70px;border-radius: 4px;margin-right: 10px;">
+				</div>
+				<div class="weui-cell__bd">
+					<h4 class="weui-media-box__title" style="font-size:13px;margin-bottom:5px;">墨菲</h4>
+					<p class="weui-media-box__desc" style="margin-bottom:10px;">ID: halloffame</p>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</a>
+		</div>
+		
+		<div class="weui-cells">
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="images/center-icon-order-all.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">我的订单</p>
+				</div>
+				<div class="weui-cell__ft"></div>
+			</a>
+		</div>
+		<div class="weui-flex wy-iconlist-box">
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="./images/center-icon-order-dfk.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待付款</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="./images/center-icon-order-dfh.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待发货</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="./images/center-icon-order-dsh.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待收货</p></a></div>
+			<div class="weui-flex__item"><a href="javascript:alert('建设中...');" class="wy-links-iconlist"><div class="img"><img src="./images/center-icon-order-dpj.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待评价</p></a></div>
+		</div>
+		
+		<div class="weui-cells">
+			<a href="collection.html" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="images/center-icon-sc.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">我的收藏</p>
+				</div>
+			</a>
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="images/center-icon-dz.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">地址管理</p>
+				</div>
+			</a>
+			<a href="javascript:;" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="images/center-icon-dlmm.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">密码修改</p>
+				</div>
+			</a>
+			<a href="login.html" class="weui-cell weui-cell_access">
+				<div class="weui-cell__hd">
+					<img src="images/center-icon-out.png" alt="" class="center-list-icon">
+				</div>
+				<div class="weui-cell__bd">
+					<p style="font-size:13px;margin-left:10px;margin-bottom:5px;">退出登录</p>
+				</div>
+			</a>
+		</div>
+		
+    </div>
+	
+    <div class="weui-tabbar">
+        <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on" id="index">
+            <img src="./images/index_on.png" alt="" class="weui-tabbar__icon" id="index_img">
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item" id="goods">
+            <img src="./images/goods.png" alt="" class="weui-tabbar__icon" id="goods_img">
+            <p class="weui-tabbar__label">商品</p>
+        </a>
+        <a href="./cart.html" class="weui-tabbar__item" id="cart">
+            <img src="./images/cart.png" alt="" class="weui-tabbar__icon" id="cart_img">
+            <p class="weui-tabbar__label">购物车</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item" id="my">
+            <img src="./images/my.png" alt="" class="weui-tabbar__icon" id="my_img">
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+
+</body>
+</html>

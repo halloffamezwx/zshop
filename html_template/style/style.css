@@ -1,0 +1,82 @@
+body,html {
+	height: 100%; 
+	background-color: #f8f8f8;
+}
+.searchbar-result {
+	display: none;
+	margin-top: 0;
+	font-size: 14px;
+	color: #666;
+}
+
+/*首页图标链接*/
+.wy-iconlist-box{background:#fff; padding:0;}
+.wy-links-iconlist{display:block; text-align:center; margin:10px 0;}
+.wy-links-iconlist .img{margin:0 23px;}
+.wy-links-iconlist img{width:100%;}
+.wy-links-iconlist p{font-size:12px; color:#666; margin-top:5px;}
+
+.wy-iconlist-box-ex{background:#f8f8f8; padding:0;margin-bottom:5px;}
+.wy-links-iconlist-ex{display:block; text-align:center; margin:10px 0;}
+.wy-links-iconlist-ex .img{margin:0 23px;}
+.wy-links-iconlist-ex img{width:100%;}
+.wy-links-iconlist-ex p{font-size:12px; color:#666; margin-top:5px;}
+
+.radius{border-radius:50%; -moz-border-radius:50%; -ms-border-radius:50%; -o-border-radius:50%; -webkit-border-radius:50%;}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 4px solid gray;
+}
+.triangle-down {
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid green;
+}
+
+.center-list-icon{width:20px; height:auto;}
+
+.wy-header{ height:41px; border-bottom:1px solid #e1e1e1; position:fixed;z-index:9999; width:100%;background-color:#f7f7fa;}
+.wy-header-icon-back{position: absolute; left:0; top:0; width: 40px;height: 44px; }
+.wy-header-icon-back a {width:20px;height:20px; margin: 12px 0 0 10px; background:url(../images/icon-back.png) no-repeat; background-size:20px; display:block;}
+.wy-header-title{margin: 0 50px;text-align: center;height: 44px;line-height: 44px;font-size: 15px; color:#252525;}
+.wy-header-icon-index{position: absolute; right:0; top:0; width: 40px;height: 44px; }
+.wy-header-icon-index a {width:25px;height:25px; margin: 9px 0 0 3px; background:url(../images/head_index.png) no-repeat; background-size:25px; display:block;}
+
+.Spinner{display:block;overflow:hidden;width:88px;margin:0;}
+.Spinner .Amount{width:26px;height:14px;padding:4px 5px;line-height:14px;border-top:1px solid #d9d9d9; border-bottom:1px solid #d9d9d9;float:left;text-align:center;color:#333;outline:0; font-size:14px;border-left:0px;border-right:0px;}
+.Spinner a{display:inline-block;width:22px;height:22px;border:1px solid #d9d9d9;background-color:#f7f7f7;float:left;cursor:pointer;outline:0;}
+.Spinner a i{font-style:normal;background:url(../images/BuynBtn.png) no-repeat;display:block;width:12px;height:12px;margin:5px;text-indent:999999%;overflow:hidden;}
+.Spinner .Decrease i{background-position:-12px -12px;}
+.Spinner .Increase i{background-position:-12px -0px;}
+.Spinner .DisDe i{background-position:-0px -12px;}
+.Spinner .DisIn i{background-position:-0px -0px;}
+
+.wy-dele{width:20px; height:20px; background:url(../images/icon-dele.png) no-repeat; display:block; background-size:20px;}
+
+.promotion-foot-menu-kefu{background:url(../images/icon-kefu.png) no-repeat; background-size:22px;}
+.promotion-foot-menu-collection{background:url(../images/icon-collection.png) no-repeat; background-size:22px;}
+.promotion-foot-menu-cart{background:url(../images/footer03.png) no-repeat; background-size:22px;}
+.promotion-foot-menu-items{position:relative; padding:5px 10px 0; text-align:center;}
+.promotion-foot-menu-label{line-height:38px; color:#fff;font-size: 13px;}
+
+.wy-media-box2{margin:10px 0; background:#fff; padding:5px 10px; border-top:0px solid #e1e1e1; border-bottom:0px solid #e1e1e1;}
+.wy-media-box2 .weui-media-box_appmsg{border-top:0px solid #ededed; padding-top:0px;}
+.wy-media-box2 .weui-media-box_appmsg:first-child{border:0; padding-top:0; }
+.wy-media-box2.txtpd .weui-media-box_appmsg{padding-top:0; border:0;}
+.weui-media-box_appmsg .weui-media-box__hd.proinfo-txt-l{width:38px; height:auto; vertical-align:top;}
+.promotion-label-tit{font-size:13px; color:gray; line-height:12px;}
+.promotion-label-tit img{width:80%;}
+.promotion-sku{padding:8px 0 5px 0;}
+.promotion-sku li{float:left; margin:5px 10px 1px 0;list-style:none;}
+.promotion-sku li a{display:block;border:1px solid #ddd; border-radius:3px; background-color:#fff;min-width:20px;padding:7px 12px; max-width:100%;text-align: center; font-size:12px; color:gray; position:relative;}
+.promotion-sku li.active a:after{content:""; width:12px; height:12px; background:url(../images/xuanze.png) no-repeat; background-size:12px; position:absolute; right:0; bottom:0;}
+.promotion-sku li.active a{border:1px solid green; color:green;}
+.wy-header-titlebut{color:gray;}
+.wy-header-titlebut-active{color:green;border-bottom: 1px solid green;padding-bottom:9px;}
+.wy-product-content{padding-top:40px;padding-bottom:45px;}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="./style/weui.min.css"/>
+	<link rel="stylesheet" href="./style/style.css"/>
+	<link rel="stylesheet" href="./style/swiper-4.1.6.min.css">
+	<script data-main="js/app/prod-detail" src="js/lib/require.js" defer async="true"></script>
+    <style>
+		/*返回顶部*/
+		#tophovertree{display:block;position:fixed;width:36px;height:36px;right:10px;bottom:60px;cursor:pointer;background-image:url(./images/tophovertree.gif);opacity:0.9;display:none}
+		
+		.swiper-pagination-bullet-active {
+			background: green;
+		}
+	</style>
+</head>
+
+<body>
+	<header class="wy-header">
+	    <div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
+	    <div class="wy-header-title">
+			<span class="wy-header-titlebut wy-header-titlebut-active" id="product">商品</span>
+			<span class="wy-header-titlebut" style="margin-left:40px;" id="detail">详情</span>
+			<span class="wy-header-titlebut" style="margin-left:40px;" id="evaluate">评价</span>
+		</div>
+		<div class="wy-header-icon-index"><a href="index.html"></a></div>
+	</header>
+
+	<div id="productDiv" class="wy-product-content">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="./images/prod_detail0.jpg" width="100%"></div>
+				<div class="swiper-slide"><img src="./images/prod_detail1.jpg" width="100%"></div>
+				<div class="swiper-slide"><img src="./images/prod_detail2.jpg" width="100%"></div>
+			</div>
+			<!-- 分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
+		
+		<div style="background-color:white;">
+			<div class="weui-cell" >
+				<div class="weui-cell__bd" >
+					<h4 class="weui-media-box__title" style="font-size:13px;margin-bottom:7px;">魅蓝 Note6 疾速双摄  1600万前置美拍</h4>
+					<p class="weui-media-box__desc" style="color:red;margin-bottom:9px;">¥1099</p>
+					<p class="weui-media-box__desc" style="font-size:13px;">公开版 深空灰 64GB</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="weui-cells" style="margin-top:5px;">
+			<div class="weui-cell">
+				<div class="">
+					<p style="font-size:13px;color:gray;">数量</p>
+				</div>
+				<div class="" style="margin-left:19px;">
+					<div class="Spinner"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="wy-media-box2 weui-media-box_text" style="margin-top:5px;">
+			<div class="weui-media-box_appmsg">
+				<div class="weui-media-box__hd proinfo-txt-l" style="line-height: 0px;margin-top: 11px;"><span class="promotion-label-tit">颜色</span></div>
+				<div class="weui-media-box__bd">
+					<div class="promotion-sku clear">
+						<ul>
+							<li class="active"><a href="javascript:;">深空灰</a></li>
+							<li><a href="javascript:;">香槟金</a></li>
+							<li><a href="javascript:;">磨砂黑</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="weui-media-box_appmsg">
+				<div class="weui-media-box__hd proinfo-txt-l" style="line-height: 0px;margin-top: 11px;"><span class="promotion-label-tit">版本</span></div>
+				<div class="weui-media-box__bd">
+					<div class="promotion-sku clear">
+						<ul>
+							<li><a href="javascript:;">公开版</a></li>
+							<li class="active"><a href="javascript:;">移动定制版</a></li>
+							<li><a href="javascript:;">联通定制版</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="weui-media-box_appmsg" >
+				<div class="weui-media-box__hd proinfo-txt-l" style="line-height: 0px;margin-top: 11px;"><span class="promotion-label-tit">内存</span></div>
+				<div class="weui-media-box__bd" >
+					<div class="promotion-sku clear" >
+						<ul>
+							<li><a href="javascript:;">8GB</a></li>
+							<li class="active"><a href="javascript:;">16GB</a></li>
+							<li><a href="javascript:;">64GB</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<div id="detailDiv" style="display: none;" class="wy-product-content">
+		<img src="./images/prod_content1.jpg" style="width:100%;">
+		<img src="./images/prod_content2.jpg" style="width:100%;">
+		<img src="./images/prod_content3.png" style="width:100%;">
+		<img src="./images/prod_content4.png" style="width:100%;">
+		<img src="./images/prod_content5.png" style="width:100%;">
+		<img src="./images/prod_content6.png" style="width:100%;">
+		<img src="./images/prod_content7.png" style="width:100%;">
+		<img src="./images/prod_content8.png" style="width:100%;">
+		<img src="./images/prod_content9.png" style="width:100%;">
+		<img src="./images/prod_content10.png" style="width:100%;">
+		<img src="./images/prod_content11.png" style="width:100%;">
+		<img src="./images/prod_content12.png" style="width:100%;">
+		<img src="./images/prod_content13.jpg" style="width:100%;">
+	</div>
+	<div id="evaluateDiv" style="display: none;" class="wy-product-content"></div>
+	
+	<span id="tophovertree" title="返回顶部"></span>
+	
+	<div class="weui-tabbar" style="line-height: 16px;position:fixed;">
+	    <a href="javascript:;" class="promotion-foot-menu-items">
+			<div class="weui-tabbar__icon promotion-foot-menu-kefu" style="width:20px;height:20px;"></div>
+			<p class="weui-tabbar__label">客服</p>
+	    </a>
+	    <a href="javascript:;" id='' class="promotion-foot-menu-items">
+			<div class="weui-tabbar__icon promotion-foot-menu-collection" style="width:20px;height:20px;"></div>
+			<p class="weui-tabbar__label">取消收藏</p>
+	    </a>
+	    <a href="javascript:;" class="promotion-foot-menu-items">
+			<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+			<div class="weui-tabbar__icon promotion-foot-menu-cart" style="width:20px;height:20px;"></div>
+			<p class="weui-tabbar__label">购物车</p>
+	    </a>
+	    <a href="javascript:;" class="weui-tabbar__item" style="background-color:green;">
+			<p class="promotion-foot-menu-label">加入购物车</p>
+	    </a>
+	    <a href="javascript:;" class="weui-tabbar__item" >
+			<p class="promotion-foot-menu-label" style="color:gray;">立即购买</p>
+	    </a>
+	</div>
+
+</body>
+</html>

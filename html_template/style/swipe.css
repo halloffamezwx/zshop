@@ -1,0 +1,25 @@
+/* Swipe 2 required styles */
+.swipe {
+	overflow: hidden;
+	visibility: hidden;
+	position: relative;
+}
+.swipe-wrap div{
+	overflow: hidden;
+	position: relative;
+	/*max-height: 350px;*/
+}
+.swipe-wrap > div {
+	float: left;
+	width: 100%;
+	position: relative;
+}
+/* END required styles */
+
+.swipe-wrap img {
+	width: 100%;
+}
+
+.swipe-wrap-circle {position: absolute; z-index: 9999; bottom: 0; left: 50%; margin-left: -5%;}
+.swipe-wrap-circle li{float: left; margin-left: 20px;color: #c8c9cb;list-style-type: disc}
+.swipe-wrap-circle li:first-child{color: green;}
