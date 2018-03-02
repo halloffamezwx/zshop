@@ -4,15 +4,15 @@
 
 <b>一 部署方式</b></br>
 
-`<b><i>1</i></b> 安装Node.js（7.6版本以上，因为要支持async/await）；`</br>
-`<b><i>2</i></b> 安装mysql数据库（UTF-8编码的配置），创建数据库zshop；`</br>
-`<b><i>3</i></b> 下载本工程文件，可修改数据库的用户名密码等连接配置（middleware目录下的config-default.js和config-test.js两个配置文件），在根目录下执行npm install下载依赖库，然后执行node init-db.js（初始化数据库表和表数据）；`</br>
-`<b><i>4</i></b> 最后在工程根目录下执行node app.js，看到日志app started at port 3000...就代表启动成功了，浏览器访问<http://localhost:3000/zshop/>（pc浏览器请切换为手机模式）。`
+<b><i>1</i></b> `安装Node.js（7.6版本以上，因为要支持async/await）；`</br>
+<b><i>2</i></b> `安装mysql数据库（UTF-8编码的配置），创建数据库zshop；`</br>
+<b><i>3</i></b> `下载本工程文件，可修改数据库的用户名密码等连接配置（middleware目录下的config-default.js和config-test.js两个配置文件），在根目录下执行npm install下载依赖库，然后执行node init-db.js（初始化数据库表和表数据）；`</br>
+<b><i>4</i></b> `最后在工程根目录下执行node app.js，看到日志app started at port 3000...就代表启动成功了，浏览器访问<http://localhost:3000/zshop/>（pc浏览器请切换为手机模式）。`
 
 <b>二 涉及的技术框架</b></br>
 
-`<b><i>1</i></b> 前端：`weui.css，jquery，jquery.Spinner，requirejs，swiper-4.1.6，vue，vue-resource；</br>
-`<b><i>2</i></b> 后端：`koa2，koa-bodyparser，koa-router，nunjucks，mime，mz，koa-compress，sequelize，mysql，koa-session2，log4js。
+<b><i>1</i></b> `前端：`weui.css，jquery，jquery.Spinner，requirejs，swiper-4.1.6，vue，vue-resource；</br>
+<b><i>2</i></b> `后端：`koa2，koa-bodyparser，koa-router，nunjucks，mime，mz，koa-compress，sequelize，mysql，koa-session2，log4js。
 
 <b>三 工程目录的主要结构</b></br>
 |-zshop</br>
