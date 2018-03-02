@@ -1,4 +1,4 @@
-<b>zshop</b>是一个nodejs写的商城系统，看完廖雪峰的《JavaScript全栈教程》后，想练练手，已是开始踩坑之路。目前完成了首页，商品搜索，购物车，我的，登录，商品详情等，后面将继续完善其它功能。完善后会把数据库的er图画出来。
+<b>zshop</b>是一个nodejs写的商城系统，看完廖雪峰的[《JavaScript全栈教程》](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)后，想练练手，已是开始踩坑之路。目前完成了首页，商品搜索，购物车，我的，登录，商品详情等，后面将继续完善其它功能。完善后会把数据库的er图画出来。
 
 在线预览效果地址：<http://120.78.200.74:3000/zshop/>（pc浏览器请切换为手机模式）。部署在阿里云上面，CentOS 6.5 64位，1核cpu，1g内存，1m带宽，40g的普通硬盘。
 
@@ -7,7 +7,7 @@
 <b><i>1</i></b> 安装Node.js（7.6版本以上，因为要支持async/await）；</br>
 <b><i>2</i></b> 安装mysql数据库（UTF-8编码的配置），创建数据库zshop；</br>
 <b><i>3</i></b> 下载本工程文件，可修改数据库的用户名密码等连接配置（middleware目录下的config-default.js和config-test.js两个配置文件），在根目录下执行npm install下载依赖库，然后执行node init-db.js（初始化数据库表和表数据）；</br>
-<b><i>4</i></b> 最后在工程根目录下执行node app.js，看到日志app started at port 3000...就代表启动成功了，浏览器访问http://localhost:3000/zshop/（pc浏览器请切换为手机模式）。
+<b><i>4</i></b> 最后在工程根目录下执行node app.js，看到日志app started at port 3000...就代表启动成功了，浏览器访问<http://localhost:3000/zshop/>（pc浏览器请切换为手机模式）。
 
 <b>二 涉及的技术框架</b></br>
 
@@ -15,7 +15,6 @@
 <b><i>2</i></b> 后端：koa2，koa-bodyparser，koa-router，nunjucks，mime，mz，koa-compress，sequelize，mysql，koa-session2，log4js。
 
 <b>三 工程目录的主要结构</b></br>
-
 |-zshop</br>
 &nbsp;&nbsp;&nbsp;|-controllers       &nbsp;&nbsp;&nbsp;&nbsp;//controller</br>
 &nbsp;&nbsp;&nbsp;|-html_template     &nbsp;&nbsp;&nbsp;&nbsp;//如果你只需要本项目的那些静态的html文件等</br>
@@ -44,4 +43,4 @@
 
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/7.png)
 
-<b>六 我的博客：</b><http://zhuwx.iteye.com/>
+<b>六 ` 我的博客` ：</b><http://zhuwx.iteye.com/>
