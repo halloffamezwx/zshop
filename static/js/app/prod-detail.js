@@ -86,6 +86,7 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 		}
 
 		var selFlag = false;
+		var disableAddCart = false;
 		$(".gavUl li").click(function () {
 			if ($(this).hasClass("disabled")) {
 				return;
@@ -96,6 +97,7 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 
 			if ( $(this).hasClass("active") ) {
 				$(this).removeClass("active");
+				disableAddCart = true;
 				$("#addCart").css("background-color", "gray");
 				changeLiDisStatus();
 			} else {
@@ -127,6 +129,7 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 				if (matchProdId) {
 					window.location.href = '/zshop/prodDetail/' + matchProdId;
 				} else {
+					disableAddCart = true;
 					$("#addCart").css("background-color", "gray");
 					if (!selFlag) {
 						$(".gavUl li:not(." + selGroupAttriId + ")").removeClass("active");
@@ -184,7 +187,7 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 		}
 		
 		$("#addCart").click(function () {
-			if (selFlag) {
+			if (disableAddCart) {
 				return;
 			}
 			publicTip.showLoadingToast(true, "加入中");
