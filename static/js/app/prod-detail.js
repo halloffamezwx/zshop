@@ -96,6 +96,7 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 
 			if ( $(this).hasClass("active") ) {
 				$(this).removeClass("active");
+				$("#addCart").css("background-color", "gray");
 				changeLiDisStatus();
 			} else {
 				$(".active." + selGroupAttriId).removeClass("active");
