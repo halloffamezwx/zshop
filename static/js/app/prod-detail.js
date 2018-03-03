@@ -190,6 +190,10 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 			if (disableAddCart) {
 				return;
 			}
+			if (stock <= 0) {
+				publicTip.showAlert("库存为空");
+				return;
+			}
 			publicTip.showLoadingToast(true, "加入中");
 			$.ajax({
 				type: 'post',

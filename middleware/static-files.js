@@ -13,6 +13,14 @@ function staticFiles(url, dir) {
             } else {
                 ctx.response.status = 404;
             }
+        } else if (rpath == "/favicon.ico") {
+            let fp = "static/images/favicon.ico";
+            if (await fs.exists(fp)) {
+                ctx.response.type = mime.lookup(rpath);
+                ctx.response.body = await fs.readFile(fp);
+            } else {
+                ctx.response.status = 404;
+            }
         } else {
             await next();
         }
