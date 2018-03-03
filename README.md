@@ -43,4 +43,4 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
 
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/7.png)
 
-<b>六 我的博客：</b><http://zhuwx.iteye.com/>
+<b>六 我的博客：</b><http://zhuwx.iteye.com/>。
