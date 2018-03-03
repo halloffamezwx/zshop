@@ -1,6 +1,6 @@
 zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈教程》](https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000)后，想练练手，已是开始踩坑之路。目前完成了首页，商品搜索，购物车，我的，登录，商品详情等，后面将继续完善其它功能。完善后会把数据库的`er图`画出来。
 
-在线预览效果地址：<http://120.78.200.74:3000/zshop/>（pc浏览器请切换为手机模式）。部署在阿里云上面，`centOS 6.5 64位`，`1核cpu`，`1g内存`，`1m带宽`，`40g普通硬盘`。
+在线预览效果地址：<http://120.78.200.74:3000/zshop/>（pc浏览器请切换为手机模式）。部署在阿里云上面，`centOS 6.5 64位`，`1核cpu`，`1g内存`，`1m带宽`，`40g普通硬盘`，登录手机：18312345678，密码：123456。
 
 <b>一 部署方式：</b></br>
 
@@ -21,7 +21,7 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
 &nbsp;&nbsp;&nbsp;|-middleware        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//本项目的koa2的一些middleware</br>
 &nbsp;&nbsp;&nbsp;|-models            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//数据库实体</br>
 &nbsp;&nbsp;&nbsp;|-service           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//service</br>
-&nbsp;&nbsp;&nbsp;|-static            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//静态文件目录，包括图片，js，css等</br>
+&nbsp;&nbsp;&nbsp;|-static            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//静态文件目录，包括图片，js，css等，这部分可以部署在nginx</br>
 &nbsp;&nbsp;&nbsp;|-views             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//模板页面文件</br>
 &nbsp;&nbsp;&nbsp;|-app.js            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//程序主入口文件</br>
 &nbsp;&nbsp;&nbsp;|-init-db.js        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//执行这个可以初始化数据库表和表数据，谨慎执行</br>
@@ -31,12 +31,12 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
   
 <b>四 一些截图：</b></br>
 
-![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/1.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/2.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/3.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/4.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/5.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/6.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/1.jpg)
+![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/2.jpg)
+![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/3.jpg)
+![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/4.jpg)
+![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/5.jpg)
+![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/6.jpg)
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/8.jpg)
 
 <b>五 如果你觉得对你有所启发，star一下或者扫码请我喝杯咖啡，金额任意。</br>
