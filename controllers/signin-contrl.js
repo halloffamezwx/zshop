@@ -2,6 +2,7 @@
 const userService = require('../service/user-service');
 const APIError = require('../middleware/rest').APIError;
 const indexContrl = require('../controllers/index-contrl');
+//const captchapng = require('captchapng');
 
 module.exports = {
     'POST /api/signin': async (ctx, next) => {
@@ -38,5 +39,20 @@ module.exports = {
 
     'POST /userapi/getLoginUserInfo': async (ctx, next) => {
         ctx.rest(ctx.session.user);
+    },
+
+    'GET /captcha': async (ctx, next) => {
+        var numeric = parseInt(Math.random()*9000+1000);
+        //console.log("captcha=" + numeric);
+        ctx.session.captcha = numeric;
+
+        var p = new captchapng(110,45,numeric); // width,height,numeric captcha
+        p.color(248, 248, 248, 255);  // First color: background (red, green, blue, alpha)
+        p.color(80, 80, 80, 255); // Second color: paint (red, green, blue, alpha)
+
+        var img = p.getBase64();
+        var imgbase64 = new Buffer(img,'base64');
+        ctx.response.type = "image/png";
+        ctx.response.body = imgbase64;
     }
 };

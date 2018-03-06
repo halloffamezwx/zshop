@@ -28,6 +28,7 @@
         "sequelize": "3.24.1",
         "mysql": "2.11.1",
         "koa-session2": "",
-        "log4js": ""
+        "log4js": "",
+        "captchapng": ""
     }
 }
