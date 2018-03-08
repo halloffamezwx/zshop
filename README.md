@@ -2,24 +2,21 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
 
 在线预览效果地址：<http://120.78.200.74:3000/zshop/>（pc浏览器请切换为手机模式）。部署在阿里云上面，`centOS 6.5 64位`，`1核cpu`，`1g内存`，`1m带宽`，`40g普通硬盘`，登录手机：18312345678，密码：123456。
 
------------
+-------
 
-一 部署方式：
------------
+<b>一 部署方式：</b></br>
 
 <b><i>1</i></b> 安装`node.js`（7.6版本以上，因为要支持`async/await`）；</br>
 <b><i>2</i></b> 安装`mysql`数据库（utf-8编码的配置），创建数据库`zshop`；</br>
 <b><i>3</i></b> 下载本工程文件，可修改数据库的用户名密码等连接配置（middleware目录下的`config-default.js`和`config-test.js`两个配置文件），在根目录下执行`npm install`下载依赖库，然后执行`node init-db.js`（初始化数据库表和表数据）；</br>
 <b><i>4</i></b> 最后在工程根目录下执行`node app.js`，看到日志`app started at port 3000...`就代表启动成功了，浏览器访问<http://localhost:3000/zshop/>（pc浏览器请切换为手机模式）。
 
-二 涉及的技术框架：
-----------------
+<b>二 涉及的技术框架：</b></br>
 
 <b><i>1</i></b> 前端：`weui.css`，`jquery`，`jquery.spinner`，`requirejs`，`swiper-4.1.6`，`vue`，`vue-resource`；</br>
 <b><i>2</i></b> 后端：`koa2`，`koa-bodyparser`，`koa-router`，`nunjucks`，`mime`，`mz`，`koa-compress`，`sequelize`，`mysql`，`koa-session2`，`log4js`。
 
-三 工程目录的主要结构：
---------------------
+<b>三 工程目录的主要结构：</b></br>
 |-zshop</br>
 &nbsp;&nbsp;&nbsp;|-controllers       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//controller</br>
 &nbsp;&nbsp;&nbsp;|-html_template     &nbsp;&nbsp;//如果你只需要本项目的那些静态的html文件等</br>
@@ -34,8 +31,8 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
 &nbsp;&nbsp;&nbsp;|-LICENSE           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//MIT协议，拿走不谢</br>
 &nbsp;&nbsp;&nbsp;|-package.json      &nbsp;&nbsp;&nbsp;//依赖的库
   
-四 一些截图：
------------
+<b>四 一些截图：</b></br>
+
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/1.jpg)
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/2.jpg)
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/3.jpg)
@@ -44,11 +41,8 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/6.jpg)
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/8.jpg)
 
-五 如果你觉得对你有所启发，star一下或者扫码请我喝杯咖啡，金额任意。
--------------------------------------------------------------
+<b>五 如果你觉得对你有所启发，star一下或者扫码请我喝杯咖啡，金额任意。</b></br>
 
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/7.png)
 
-六 我的博客：
------------
-<http://zhuwx.iteye.com/>。
+<b>六 我的博客：</b><http://zhuwx.iteye.com/>。
