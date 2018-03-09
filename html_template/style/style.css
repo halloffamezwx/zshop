@@ -80,3 +80,9 @@ body,html {
 .wy-header-titlebut{color:gray;}
 .wy-header-titlebut-active{color:green;border-bottom: 1px solid green;padding-bottom:9px;}
 .wy-product-content{padding-top:40px;padding-bottom:45px;}
+
+.wy-media-box{margin:10px 0; background:#fff; padding:12px 10px; border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1;}
+.wy-media-box.address-select{margin-top:0; background:url(../images/location-border.png) repeat-x left bottom #fff; border-bottom:0; background-size:auto 3px;}
+.address-name{font-size:14px; color:black;}
+.address-name span{margin-right:10px;}
+.address-txt{font-size:13px; color:#999; line-height:29px;}
