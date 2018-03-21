@@ -129,5 +129,18 @@ module.exports = {
         qProduct.gavJsonStr = JSON.stringify(groupAttriValues);
         //console.log(JSON.stringify(qProduct));
         return qProduct;
+    },
+
+    getProdAttriValueStr:  async (pid) => {
+        let attriValues = await sequelize.query("SELECT GROUP_CONCAT(t1.attriValue SEPARATOR ' ') AS attriValuesStr "
+                                              + "FROM prod_attri t "
+                                              + "LEFT JOIN group_attri_value t1 ON t.groupAttriValueId = t1.id "
+                                              + "WHERE t.prodId = :prodId",
+                                {replacements: {prodId: pid}, type: sequelize.QueryTypes.SELECT});
+        if (attriValues[0].attriValuesStr) {
+            return attriValues[0].attriValuesStr;
+        } else {
+            return '精选商品';
+        }
     }
 };

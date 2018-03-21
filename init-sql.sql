@@ -51,3 +51,5 @@ INSERT INTO `prod_attri` (`id`, `prodId`, `groupAttriValueId`, `createdAt`, `upd
 
 INSERT INTO `collection` (`id`, `userId`, `prodId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 'halloffame', 2, now(), now(), 0);
 INSERT INTO `collection` (`id`, `userId`, `prodId`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 'halloffame', 1, now(), now(), 0);
+
+INSERT INTO `user_address` (`id`, `userId`, `province`, `city`, `area`, `address`, `name`, `phone`, `type`, `createdAt`, `updatedAt`, `version`) VALUES (UUID(), 'halloffame', '广东省', '广州市', '天河区', '电商产业园105号', '朱佩奇', '18312345678', 1, now(), now(), 0);

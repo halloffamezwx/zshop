@@ -20,7 +20,7 @@ console.log(`isProduction = [${isProduction}]`);
 // log request URL:
 app.use(async (ctx, next) => {
     var logger = myLog4js.getLogger('zshop');
-    var logid = uuid.v4().replace(/-/g,"");
+    var logid = uuid.v4().replace(/-/g, "");
     logger.addContext('logid', logid);
     console.log = logger.info.bind(logger);
     ctx.logger = logger;

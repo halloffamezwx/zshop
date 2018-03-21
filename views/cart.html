@@ -40,7 +40,7 @@
 					</a>
 					<div class="weui-media-box__bd" >
 						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">{{ucp.name}}</h4>
-						<p class="weui-media-box__desc" style="margin-bottom:10px;">{{ucp.attriValuesStr}}</p>
+						<p class="weui-media-box__desc" style="margin-bottom:10px;-webkit-line-clamp:1;">{{ucp.attriValuesStr}}</p>
 						<p class="weui-media-box__desc" id="pricep_{{ucp.cid}}" style="color:red;">¥{{ucp.price}}</p>
 					</div>
 					<div class="weui-media-box__bd" >
@@ -70,7 +70,7 @@
 		<div style="margin:0 auto;line-height: 47px;font-size: 12px;">
 			总计 : <span style="color:red" id="totalPrice">￥{{totalPrice}}</span>
 		</div>
-		<a href="#" style="width: 110px;background-color: gray;color:#fff;text-align:center;line-height: 44px;font-size: 13px;" id="settlement">
+		<a href="javascript:void(0);" style="width: 110px;background-color: gray;color:#fff;text-align:center;line-height: 44px;font-size: 13px;" id="settlement">
 			结算
 		</a>
 	</div>

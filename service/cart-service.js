@@ -1,5 +1,6 @@
 //购物车service
 const model = require('../middleware/model');
+const productService = require('./product-service');
 var sequelize = model.sequelize;
 let prodAttriValue = model.prod_attri_value;
 let cart = model.cart;
@@ -14,16 +15,8 @@ module.exports = {
                             {replacements: {userId: user.userId}, type: sequelize.QueryTypes.SELECT});
         let totalPrice = 0.00;
         for (let i = 0; i < qcarts.length; i++) {
-            let attriValues = await sequelize.query("SELECT GROUP_CONCAT(t1.attriValue SEPARATOR ' ') AS attriValuesStr "
-                                                     + "FROM prod_attri t "
-                                                     + "LEFT JOIN group_attri_value t1 ON t.groupAttriValueId = t1.id "
-                                                     + "WHERE t.prodId = :prodId",
-                                 {replacements: {prodId: qcarts[i].pid}, type: sequelize.QueryTypes.SELECT});
-            if (attriValues[0].attriValuesStr) {
-                qcarts[i].attriValuesStr = attriValues[0].attriValuesStr;
-            } else {
-                qcarts[i].attriValuesStr = '精选商品';
-            }
+            let attriValueStr = await productService.getProdAttriValueStr(qcarts[i].pid);
+            qcarts[i].attriValuesStr = attriValueStr;
             totalPrice += qcarts[i].price * qcarts[i].count;
         }
         var result = new Object();

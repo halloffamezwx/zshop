@@ -96,7 +96,7 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 				var isCheck = $("#cart-pto" + cid).prop('checked');
 
 				if (isCheck) {
-					var price = $(this).html().replace(/¥/g,"");
+					var price = $(this).html().replace(/¥/g, "");
 					var count = $("#spinner_" + cid).find("input").val();
 					var onePrice = parseFloat(price) * parseInt(count);
 					totalPrice += onePrice;
@@ -127,6 +127,31 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 				});
 			});
 			
+		});
+
+		$("#settlement").click(function () {
+			var cartIds = "";
+			$("input[name='cartpro']:checked").each(function (index) {
+				var cid = $(this).attr("id").replace(/cart-pto/g, "");
+				if (index == 0) {
+					cartIds = cid;
+				} else {
+					cartIds += "," + cid;
+				}
+			});	
+
+			publicTip.showLoadingToast(true, "操作中");
+			$.ajax({
+				type: 'post',
+				dataType: 'json',
+				url: '/zshop/userapi/settlementAct',
+				data: {cartIds: cartIds}
+			}).done(function (r) {
+				window.location.href = "/zshop/user/settlement/" + r.orderId;
+			}).fail(function (jqXHR, textStatus) { // Not 200
+				publicTip.showLoadingToast(false);
+				publicTip.showTip(jqXHR.responseJSON);
+			});
 		});
 	});
 	
