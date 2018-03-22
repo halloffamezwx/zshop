@@ -35,8 +35,11 @@ module.exports = {
 
             try {
                 await next();
+                if (ctx.transaction) ctx.transaction.commit();
             } catch (e) {
                 console.log('Process API error...' + e.stack);
+                if (ctx.transaction) ctx.transaction.rollback();
+                if (ctx.taskTimeOutId) clearTimeout(ctx.taskTimeOutId);
                 if (isRest) {
                     ctx.rest({code: e.code || 'internal:unknown_error', message: e.message || ''}, 400);
                 } else {

@@ -24,7 +24,7 @@ module.exports = {
             throw new APIError('settlement:empty_cartIds', 'cartIds不能为空');
         }
 
-        let orderId = await orderService.settlementAct(cartIds, userId);
+        let orderId = await orderService.settlementAct(ctx, cartIds, userId);
         ctx.rest({orderId: orderId});
     }
 };
