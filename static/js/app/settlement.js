@@ -7,23 +7,54 @@ requirejs.config({
 
 requirejs(["jquery", "publicTip"], function($, publicTip){
 	$(function() { 
+		var orderId = $('#orderId').val();
+
 		$("#wePayBtn").click(function () {
-			publicTip.showLoadingToast(true, "操作中");
+			if ( $("#wePayBtn").hasClass('weui-btn_loading') ) {
+				return;
+			}
+			$("#wePayBtn").addClass('weui-btn_loading');
+			$("#payLoading").addClass('weui-loading');
+
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
 				url: '/zshop/userapi/confirmOrder',
-				data: {orderId: $('#orderId').val()}
+				data: {orderId: orderId}
+			}).done(function (r) {
+				$("#wePayBtn").removeClass('weui-btn_loading');
+				$("#payLoading").removeClass('weui-loading');
+
+				var confirmMsg = "确认支付<font color='red'>" + r.totalPrice + "</font>元！</br>截止时间：" + r.payEndTime;
+				publicTip.showConfirm(confirmMsg, function() {
+					payOrder(r.totalPrice);
+				});
+			}).fail(function (jqXHR, textStatus) { // Not 200
+				$("#wePayBtn").removeClass('weui-btn_loading');
+				$("#payLoading").removeClass('weui-loading');
+
+				publicTip.showTip(jqXHR.responseJSON);
+			});
+		});
+
+		function payOrder(totalPrice) {
+			publicTip.showLoadingToast(true, "支付中");
+			$.ajax({
+				type: 'post',
+				dataType: 'json',
+				url: '/zshop/userapi/payOrder',
+				data: {
+					orderId: orderId,
+					totalPrice: totalPrice
+				}
 			}).done(function (r) {
 				publicTip.showLoadingToast(false);
-				publicTip.showConfirm("确认支付<font color='red'>" + r.totalPrice + "</font>元！", function(){
-
-				});
+				window.location.href = '/zshop/user/paySuccess/' + orderId;
 			}).fail(function (jqXHR, textStatus) { // Not 200
 				publicTip.showLoadingToast(false);
 				publicTip.showTip(jqXHR.responseJSON);
 			});
-		});
+		}
 	});
 	
 })

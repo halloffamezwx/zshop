@@ -1,4 +1,6 @@
 const db = require('../middleware/db');
+const moment = require('moment');
+
 //订单实体
 module.exports = db.defineModel('order', {
     userId: db.STRING(30), //用户id
@@ -23,5 +25,12 @@ module.exports = db.defineModel('order', {
         defaultValue: 10.00
     }, 
     prodPrice: db.DECIMAL(12, 2), //商品价格
-    totalPrice: db.DECIMAL(12, 2) //总价格 = 商品价格 + 配送费用
+    totalPrice: db.DECIMAL(12, 2), //总价格 = 商品价格 + 配送费用
+    payStartTime: { //支付有效开始时间
+        type: db.DATE,
+        allowNull: true
+        //get() {
+        //    return moment(this.getDataValue('ServiceTime')).utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
+        //}
+    }
 });

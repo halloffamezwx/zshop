@@ -4,6 +4,7 @@ const productService = require('./product-service');
 const uuid = require('node-uuid');
 const APIError = require('../middleware/rest').APIError;
 const timeoutFunMap = require('../middleware/rest').timeoutFunMap;
+const moment = require('moment');
 
 let order = model.order;
 let orderProd = model.order_prod;
@@ -120,9 +121,14 @@ module.exports = {
         let qOrder = await order.findOne( {where: {id: orderId, userId: userIdIn}} );
         if (qOrder) {
             if (qOrder.status == 2) {
-                result.payStartTime = qOrder.updatedAt;
+                let momentPayStartTime = moment(qOrder.payStartTime);
+                result.payStartTime = momentPayStartTime.utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
+                result.payEndTime = momentPayStartTime.add(30, 'minute').utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
                 result.totalPrice = qOrder.totalPrice;
                 return result;
+            }
+            if (qOrder.status != 1) {
+                throw new APIError('settlement:invalid_order', '订单状态不正确');
             }
         } else {
             throw new APIError('settlement:invalid_order', '订单不存在或已失效'); 
@@ -130,12 +136,14 @@ module.exports = {
         ctx.transaction = await sequelize.transaction();
 
         let date = new Date();
-        result.payStartTime = date;
+        let momentDate = moment(date);
+        result.payStartTime = momentDate.utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
+        result.payEndTime = momentDate.add(30, 'minute').utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
         result.totalPrice = qOrder.totalPrice;
         
-        let uptRet = await sequelize.query('UPDATE `order` SET status = 2, updatedAt = :updatedAt, version = version + 1 ' + 
+        let uptRet = await sequelize.query('UPDATE `order` SET status = 2, payStartTime = :payStartTime, updatedAt = now(), version = version + 1 ' + 
                                            'WHERE id = :id AND userId = :userId AND status = 1 AND version = :version',
-                              { replacements: { id: orderId, userId: userIdIn, version: qOrder.version, updatedAt: date }, transaction: ctx.transaction });
+                              { replacements: { id: orderId, userId: userIdIn, version: qOrder.version, payStartTime: date }, transaction: ctx.transaction });
         if (uptRet[0].affectedRows != 1) {
             throw new APIError('settlement:invalid_order', '订单不存在或已失效');
         }
@@ -167,6 +175,34 @@ module.exports = {
         };
         ctx.timeoutFunTime = 30 * 60 * 1000; //30分钟的支付订单的有效时间
         ctx.timeoutFunKey = 'confirmOrder' + orderId;
+        
+        return result;
+    },
+
+    //支付订单
+    payOrder: async (ctx, orderId, totalPrice, userIdIn) => {
+        let result = new Object();
+
+        let qOrder = await order.findOne( {where: {id: orderId, userId: userIdIn}} );
+        if (qOrder) {
+            if (qOrder.status != 2) {
+                throw new APIError('settlement:invalid_order', '订单状态不正确');
+            }
+            if (qOrder.totalPrice != totalPrice) {
+                throw new APIError('settlement:error_totalPrice', '金额不正确');
+            }
+        } else {
+            throw new APIError('settlement:invalid_order', '订单不存在或已失效'); 
+        }
+        
+        let uptRet = await sequelize.query('UPDATE `order` SET status = 3, updatedAt = now(), version = version + 1 ' + 
+                                           'WHERE id = :id AND userId = :userId AND status = 2 AND version = :version',
+                              { replacements: { id: orderId, userId: userIdIn, version: qOrder.version } });
+        if (uptRet[0].affectedRows != 1) {
+            throw new APIError('settlement:invalid_order', '订单不存在或已失效');
+        }
+        
+        clearTimeout(timeoutFunMap.get('confirmOrder' + orderId));
         
         return result;
     }

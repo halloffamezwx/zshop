@@ -38,5 +38,32 @@ module.exports = {
 
         let result = await orderService.confirmOrder(ctx, orderId, userId);
         ctx.rest(result);
+    },
+
+    //支付订单
+    'POST /userapi/payOrder': async (ctx, next) => {
+        let orderId = ctx.request.body.orderId;
+        let totalPrice = ctx.request.body.totalPrice;
+        let userId = ctx.session.user.userId;
+        if (!orderId || orderId.trim() == '') {
+            throw new APIError('settlement:empty_orderId', 'orderId不能为空');
+        }
+        if (!totalPrice || totalPrice.trim() == '') {
+            throw new APIError('settlement:empty_totalPrice', 'totalPrice不能为空');
+        }
+
+        let result = await orderService.payOrder(ctx, orderId, totalPrice, userId);
+        ctx.rest(result);
+    },
+
+    //支付成功页
+    'GET /user/paySuccess/:orderId': async (ctx, next) => {
+        let orderId = ctx.params.orderId;
+        //let userId = ctx.session.user.userId;
+        if (!orderId || orderId.trim() == '') {
+            throw 'orderId不能为空';
+        }
+        
+        ctx.render('pay-success.html', {orderId: orderId});
     }
 };

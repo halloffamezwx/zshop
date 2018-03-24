@@ -47,17 +47,17 @@ function defineModel(name, attributes) {
     
     attrs.createdAt = {
         type: Sequelize.DATE,
-        allowNull: false,
-        get() {
-            return moment(this.getDataValue('ServiceTime')).utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
-        }
+        allowNull: false
+        //get() {
+        //    return moment(this.getDataValue('ServiceTime')).utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
+        //}
     };
     attrs.updatedAt = {
         type: Sequelize.DATE,
-        allowNull: false,
-        get() {
-            return moment(this.getDataValue('ServiceTime')).utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
-        }
+        allowNull: false
+        //get() {
+        //    return moment(this.getDataValue('ServiceTime')).utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
+        //}
     };
     attrs.version = {
         type: Sequelize.BIGINT,

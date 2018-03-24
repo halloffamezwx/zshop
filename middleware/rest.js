@@ -1,5 +1,7 @@
+var timeoutFunMap = new Map();
+
 module.exports = {
-    timeoutFunMap: new Map(),
+    timeoutFunMap: timeoutFunMap,
     APIError: function (code, message) {
         this.code = code || 'internal:unknown_error';
         this.message = message || '';
