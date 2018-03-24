@@ -44,12 +44,17 @@ module.exports = {
                     timeoutFunMap.set(ctx.timeoutFunKey, taskTimeOutId);
                 }
             } catch (e) {
-                console.log('Process API error...' + e.stack);
+                console.log('Process error: ' + JSON.stringify(e));
+                if (e.stack) console.log(e.stack);
                 if (ctx.transaction) ctx.transaction.rollback();
                 if (isRest) {
                     ctx.rest({code: e.code || 'internal:unknown_error', message: e.message || ''}, 400);
                 } else {
-                    throw e;
+                    //throw e;
+                    //let msg = "系统出现错误";
+                    //if (typeof e == "string") msg = e;
+                    //ctx.response.redirect('/static/html/500.html?msg=' + encodeURI(msg));
+                    ctx.response.redirect('/static/html/500.html');
                 }
             }
         };

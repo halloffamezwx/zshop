@@ -93,8 +93,15 @@ module.exports = {
     //订单信息
     orderDetail: async (orderId, userIdIn) => {
         let result = new Object();
+        result.status = 'success';
 
         let qOrder = await order.findOne( {where: {id: orderId, userId: userIdIn}} );
+        if (!qOrder) {
+            //throw "订单不存在";
+            result.status = 'fail';
+            result.msg = "订单不存在";
+            return result;
+        }
         if (qOrder.deliveryType == 1) {
             qOrder.deliveryTypeName = "快递";
         }

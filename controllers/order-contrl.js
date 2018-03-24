@@ -13,7 +13,11 @@ module.exports = {
         }
 
         let result = await orderService.orderDetail(orderId, userId);
-        ctx.render('settlement.html', result);
+        if (result.status == 'success') {
+            ctx.render('settlement.html', result);
+        } else {
+            ctx.render('msg.html', result);
+        }
     },
 
     //结算
