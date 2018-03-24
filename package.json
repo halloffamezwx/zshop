@@ -29,6 +29,7 @@
         "mysql": "2.11.1",
         "koa-session2": "",
         "log4js": "",
-        "captchapng": ""
+        "captchapng": "",
+        "moment": ""
     }
 }

@@ -3,6 +3,7 @@ const model = require('../middleware/model');
 const productService = require('./product-service');
 const uuid = require('node-uuid');
 const APIError = require('../middleware/rest').APIError;
+const timeoutFunMap = require('../middleware/rest').timeoutFunMap;
 
 let order = model.order;
 let orderProd = model.order_prod;
@@ -62,7 +63,7 @@ module.exports = {
             expressNumber: ''
         }, { transaction: ctx.transaction });
 
-        let taskTimeOutId = setTimeout(async function() { 
+        ctx.timeoutFun = async function() { 
             let timeTransaction;
             try {
                 timeTransaction = await sequelize.transaction();
@@ -81,8 +82,9 @@ module.exports = {
                 console.log(e.stack);
                 if (timeTransaction) timeTransaction.rollback();
             }
-        }, 10 * 60 * 1000); //10分钟的确认支付订单的有效时间
-        ctx.taskTimeOutId = taskTimeOutId;
+        };
+        ctx.timeoutFunTime = 5 * 60 * 1000; //5分钟的确认订单的有效时间
+        ctx.timeoutFunKey = 'settlementAct' + genOrderId;
         
         return genOrderId;
     },
@@ -107,6 +109,64 @@ module.exports = {
 
         result.order = qOrder;
         result.opArr = opArr;
+        
+        return result;
+    },
+
+    //确认订单
+    confirmOrder: async (ctx, orderId, userIdIn) => {
+        let result = new Object();
+
+        let qOrder = await order.findOne( {where: {id: orderId, userId: userIdIn}} );
+        if (qOrder) {
+            if (qOrder.status == 2) {
+                result.payStartTime = qOrder.updatedAt;
+                result.totalPrice = qOrder.totalPrice;
+                return result;
+            }
+        } else {
+            throw new APIError('settlement:invalid_order', '订单不存在或已失效'); 
+        }
+        ctx.transaction = await sequelize.transaction();
+
+        let date = new Date();
+        result.payStartTime = date;
+        result.totalPrice = qOrder.totalPrice;
+        
+        let uptRet = await sequelize.query('UPDATE `order` SET status = 2, updatedAt = :updatedAt, version = version + 1 ' + 
+                                           'WHERE id = :id AND userId = :userId AND status = 1 AND version = :version',
+                              { replacements: { id: orderId, userId: userIdIn, version: qOrder.version, updatedAt: date }, transaction: ctx.transaction });
+        if (uptRet[0].affectedRows != 1) {
+            throw new APIError('settlement:invalid_order', '订单不存在或已失效');
+        }
+        let opArr = await orderProd.findAll({where: {orderId: orderId}});
+        for (let i = 0; i < opArr.length; i++) {
+            await cart.destroy({where: {id: opArr[i].cartId, userId: userIdIn}, transaction: ctx.transaction});
+        }
+        clearTimeout(timeoutFunMap.get('settlementAct' + orderId));
+
+        ctx.timeoutFun = async function() { 
+            let timeTransaction;
+            try {
+                timeTransaction = await sequelize.transaction();
+                let delSize = await order.destroy({where: {id: orderId, status: 2}, transaction: timeTransaction});
+
+                if (delSize == 1) {
+                    let orderProds = await orderProd.findAll({where: {orderId: orderId}});
+                    for (let i = 0; i < orderProds.length; i++) {
+                        await sequelize.query('UPDATE product SET stock = stock + :count, updatedAt = now(), version = version + 1 WHERE id = :id', 
+                                            { replacements: { count: orderProds[i].count, id: orderProds[i].prodId }, transaction: timeTransaction });
+                    }
+                    await orderProd.destroy({where: {orderId: orderId}, transaction: timeTransaction});
+                }
+                timeTransaction.commit();
+            } catch (e) {
+                console.log(e.stack);
+                if (timeTransaction) timeTransaction.rollback();
+            }
+        };
+        ctx.timeoutFunTime = 30 * 60 * 1000; //30分钟的支付订单的有效时间
+        ctx.timeoutFunKey = 'confirmOrder' + orderId;
         
         return result;
     }

@@ -1,4 +1,5 @@
 module.exports = {
+    timeoutFunMap: new Map(),
     APIError: function (code, message) {
         this.code = code || 'internal:unknown_error';
         this.message = message || '';
@@ -36,10 +37,13 @@ module.exports = {
             try {
                 await next();
                 if (ctx.transaction) ctx.transaction.commit();
+                if (ctx.timeoutFun) {
+                    let taskTimeOutId = setTimeout(ctx.timeoutFun, ctx.timeoutFunTime);
+                    timeoutFunMap.set(ctx.timeoutFunKey, taskTimeOutId);
+                }
             } catch (e) {
                 console.log('Process API error...' + e.stack);
                 if (ctx.transaction) ctx.transaction.rollback();
-                if (ctx.taskTimeOutId) clearTimeout(ctx.taskTimeOutId);
                 if (isRest) {
                     ctx.rest({code: e.code || 'internal:unknown_error', message: e.message || ''}, 400);
                 } else {

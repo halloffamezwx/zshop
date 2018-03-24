@@ -26,5 +26,17 @@ module.exports = {
 
         let orderId = await orderService.settlementAct(ctx, cartIds, userId);
         ctx.rest({orderId: orderId});
+    },
+
+    //确认订单
+    'POST /userapi/confirmOrder': async (ctx, next) => {
+        let orderId = ctx.request.body.orderId;
+        let userId = ctx.session.user.userId;
+        if (!orderId || orderId.trim() == '') {
+            throw new APIError('settlement:empty_orderId', 'orderId不能为空');
+        }
+
+        let result = await orderService.confirmOrder(ctx, orderId, userId);
+        ctx.rest(result);
     }
 };

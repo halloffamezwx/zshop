@@ -35,7 +35,8 @@ module.exports = {
 
     //修改购物车商品数量
     updateCardProdCount: async (id, count) => {
-        //await cart.update({count: parseInt(count), updatedAt: Date.now()}, {where: {id: parseInt(id)}});
+        //let uptRet = await cart.update({count: parseInt(count), updatedAt: Date.now()}, {where: {id: parseInt(id)}});
+        //console.log(uptRet[0]);
         await sequelize.query('UPDATE cart SET count = :count, updatedAt = now(), version = version + 1 WHERE id = :id', 
                         { replacements: { count: parseInt(count), id: parseInt(id) } });
     },

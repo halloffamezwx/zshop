@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-
+const moment = require('moment');
 const uuid = require('node-uuid');
 
 const config = require('./config');
@@ -18,7 +18,10 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
         min: 0,
         idle: 10000
     },
-    timezone: '+08:00'
+    timezone: '+08:00' //东八时区
+    //logging: function(sql) {    
+    //  console.log(sql);  
+    //} 
 });
 
 const ID_TYPE = Sequelize.STRING(50);
@@ -44,11 +47,17 @@ function defineModel(name, attributes) {
     
     attrs.createdAt = {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        get() {
+            return moment(this.getDataValue('ServiceTime')).utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
+        }
     };
     attrs.updatedAt = {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        get() {
+            return moment(this.getDataValue('ServiceTime')).utcOffset(8).format('YYYY-MM-DD HH:mm:ss');
+        }
     };
     attrs.version = {
         type: Sequelize.BIGINT,

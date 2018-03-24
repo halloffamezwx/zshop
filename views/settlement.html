@@ -38,6 +38,8 @@
 			</div>
 		</div>
 
+		<input type="hidden" id="orderId" name="orderId" value="{{order.id}}"/>
+
 		<div class="weui-panel weui-panel_access" >
 			<div class="weui-panel__bd">
 				{% for op in opArr %}
@@ -90,10 +92,11 @@
 			</div>
 			
 			<div class="weui-cell" >
-				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="" style="width:100%;font-size: 14px;height:39px;">微信支付</a>
+				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="wePayBtn" style="width:100%;font-size: 14px;height:39px;">微信支付</a>
 			</div>
 		</div>
 
-    </div>
+	</div>
+	{% include "public-tip.html" %}
 </body>
 </html>
