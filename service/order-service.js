@@ -4,6 +4,7 @@ const productService = require('./product-service');
 const uuid = require('node-uuid');
 const APIError = require('../middleware/rest').APIError;
 const timeoutFunMap = require('../middleware/rest').timeoutFunMap;
+const commonUtil = require('../utils/common');
 const moment = require('moment');
 
 let order = model.order;
@@ -194,6 +195,15 @@ module.exports = {
     //支付订单
     payOrder: async (ctx, orderId, totalPrice, userIdIn) => {
         let result = new Object();
+
+        try {
+            console.log('sleep start');
+            let result = await commonUtil.sleep(2000); 
+            console.log('sleep result:' + result);
+            console.log('sleep end');
+        } catch (err) {
+            console.log('sleep err' + err); 
+        }
 
         let qOrder = await order.findOne( {where: {id: orderId, userId: userIdIn}} );
         if (qOrder) {

@@ -16,7 +16,11 @@ define(["jquery"], function($){
 	var showConfirm = function (msg, confirmFun, cancelFun) {
 		$('#confirmDialogContent').html(msg);
 		$('#confirmMain').unbind();
-		$('#confirmMain').on('click', confirmFun);
+		$('#confirmMain').on('click', function(){
+			$('#confirmDialogContent').html('');
+			$('#confirmDialog').hide();
+			confirmFun();
+		});
 		if (!cancelFun) {
 			cancelFun = function(){
 				$('#confirmDialogContent').html('');
