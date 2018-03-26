@@ -12,7 +12,7 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
 <b>二 涉及的技术框架：</b></br>
 
 <b><i>1</i></b> 前端：`weui.css`，`jquery`，`jquery.spinner`，`requirejs`，`swiper-4.1.6`，`vue`，`vue-resource`；</br>
-<b><i>2</i></b> 后端：`koa2`，`koa-bodyparser`，`koa-router`，`nunjucks`，`mime`，`mz`，`koa-compress`，`sequelize`，`mysql`，`koa-session2`，`log4js`。
+<b><i>2</i></b> 后端：`koa2`，`koa-bodyparser`，`koa-router`，`nunjucks`，`mime`，`mz`，`koa-compress`，`sequelize`，`mysql`，`koa-session2`，`log4js`，`moment`。
 
 <b>三 工程目录的主要结构：</b></br>
 |-zshop</br>
@@ -22,6 +22,7 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
 &nbsp;&nbsp;&nbsp;|-models            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//数据库实体</br>
 &nbsp;&nbsp;&nbsp;|-service           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//service</br>
 &nbsp;&nbsp;&nbsp;|-static            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//静态文件目录，包括图片，js，css等，这部分可以部署在nginx</br>
+&nbsp;&nbsp;&nbsp;|-utils             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//工具函数目录</br>
 &nbsp;&nbsp;&nbsp;|-views             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//模板页面文件</br>
 &nbsp;&nbsp;&nbsp;|-app.js            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//程序主入口文件</br>
 &nbsp;&nbsp;&nbsp;|-init-db.js        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//执行这个可以初始化数据库表和表数据，谨慎执行</br>
@@ -38,6 +39,7 @@ zshop是一个nodejs写的商城系统，看完廖雪峰的[《javaScript全栈�
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/5.jpg)
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/6.jpg)
 ![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/8.jpg)
+![image](https://github.com/halloffamezwx/zshop/raw/master/html_template/screenshot/9.jpg)
 
 <b>五 如果你觉得对你有所启发，star一下或者扫码请我喝杯咖啡，金额任意。</b></br>
 
