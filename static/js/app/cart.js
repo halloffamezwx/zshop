@@ -54,9 +54,23 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 
 		$("#cart-all").click(function () {
 			if ( $(this).prop('checked') ) { 
+				var isLessStock = false;
+
 				$("input[name=cartpro]").each(function () {
-					$(this).prop("checked", true);
+					var cid = $(this).attr("id").replace(/cart-pto/g, "");
+					var cidSpinner = $("#spinner_" + cid); 
+					var count = cidSpinner.find("input").val();
+					var stock = cidSpinner.attr("stock");
+
+					if (count <= stock) {
+						$(this).prop("checked", true);
+					} else {
+						isLessStock = true;
+					}
 				});
+				if (isLessStock) {
+					publicTip.showTipForStr("有商品库存不足");
+				}
 			} else {
 				$("input[name=cartpro]").each(function () {
 					$(this).prop("checked", false);
@@ -65,8 +79,34 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 		});
 		
 		$("input[type=checkbox]").click(function () {
+			var that = this;
+			var id = $(that).attr("id");
+
+			if (id != 'cart-all') {
+				var cid = id.replace(/cart-pto/g, "");
+				var cidSpinner = $("#spinner_" + cid); 
+				var count = cidSpinner.find("input").val();
+				var stock = cidSpinner.attr("stock");
+
+				if (count > stock) {
+					publicTip.showAlert('该商品库存不足', null, function () {
+						$(that).prop("checked", false);
+					});
+					return;
+				} 
+			}
+			
 			var cartCheckedSize = $("input[name='cartpro']:checked").size();
-			var cartSize = $("input[name='cartpro']").size();
+			var cartSize = 0; //$("input[name='cartpro']").size();
+			$("input[name='cartpro']").each(function () {
+				var cid = $(this).attr("id").replace(/cart-pto/g, "");
+				var cidSpinner = $("#spinner_" + cid); 
+				var count = cidSpinner.find("input").val();
+				var stock = cidSpinner.attr("stock");
+				if (count <= stock) {
+					cartSize++;
+				} 
+			});
 			
 			if ( cartCheckedSize >= 1 ) {
 				$("#settlement").css("background-color", "green");

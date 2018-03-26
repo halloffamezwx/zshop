@@ -25,7 +25,7 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				$("#wePayBtn").removeClass('weui-btn_loading');
 				$("#payLoading").removeClass('weui-loading');
 
-				var confirmMsg = "确认支付<font color='red'>" + r.totalPrice + "</font>元！</br>截止时间：" + r.payEndTime;
+				var confirmMsg = "确认支付<font color='red'>" + r.totalPrice + "</font>元！<div style='margin-top: 8px;'>截止时间：" + r.payEndTime + "</div>";
 				publicTip.showConfirm(confirmMsg, function() {
 					payOrder(r.totalPrice);
 				});

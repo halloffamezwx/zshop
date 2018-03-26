@@ -1,11 +1,12 @@
 define(["jquery"], function($){
-	var showAlert = function (msg, iKnowFun){
+	var showAlert = function (msg, iKnowFun, exFun){
 		$('#alertDialogContent').html(msg);
 		//$('#alertDialogTitle').html(result.code);
 		if (!iKnowFun) {
 			iKnowFun = function(){
 				$('#alertDialogContent').html('');
 				$('#alertDialog').hide();
+				if (exFun) exFun();
 			}
 		}
 		$('#iKnow').one('click', iKnowFun);

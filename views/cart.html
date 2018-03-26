@@ -32,15 +32,16 @@
 				<div class="weui-media-box weui-media-box_appmsg">
 					<div class="weui-media-box__hd weui-cells_checkbox">
 						<label class="weui-check__label" for="cart-pto{{ucp.cid}}">
-							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto{{ucp.cid}}"><i class="weui-icon-checked"></i></div>
+							<div class="weui-cell__hd" ><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto{{ucp.cid}}" ><i class="weui-icon-checked"></i></div>
 						</label>
 					</div>
 					<a href="/zshop/prodDetail/{{ucp.pid}}" class="weui-media-box__hd" style="width:92px;height:92px;">
 						<img class="weui-media-box__thumb" src="{{ucp.image}}" alt="">
 					</a>
 					<div class="weui-media-box__bd" >
-						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:5px;">{{ucp.name}}</h4>
-						<p class="weui-media-box__desc" style="margin-bottom:10px;-webkit-line-clamp:1;">{{ucp.attriValuesStr}}</p>
+						<h4 class="weui-media-box__title" style="font-size:14px;margin-bottom:1px;">{{ucp.name}}</h4>
+						<p class="weui-media-box__desc" style="margin-bottom:1px;-webkit-line-clamp:1;">{{ucp.attriValuesStr}}</p>
+						<div style="font-size:13px;color:#999;margin-bottom:1px;">库存 {{ucp.stock}} 件</div>
 						<p class="weui-media-box__desc" id="pricep_{{ucp.cid}}" style="color:red;">¥{{ucp.price}}</p>
 					</div>
 					<div class="weui-media-box__bd" >

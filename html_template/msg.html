@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>消息提示</title>
-    <link rel="stylesheet" href="./style/weui.min.css"/>
+	<link rel="stylesheet" href="./style/weui.min.css"/>
+	<link rel="stylesheet" href="./style/style.css"/>
 </head>
 
 <body>
-	<div class="weui-msg">
+	<header class="wy-header">
+		<div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
+		<div class="wy-header-title">zshop商城</div>
+		<div class="wy-header-icon-index"><a href="index.html"></a></div>
+	</header>
+
+	<div class="weui-msg" style="padding-top: 70px;">
 		<div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
 		<div class="weui-msg__text-area">
 			<h2 class="weui-msg__title" style="font-size: 16px;">操作成功</h2>
@@ -16,8 +23,8 @@
 		</div>
 		<div class="weui-msg__opr-area">
 			<p class="weui-btn-area">
-				<a href="javascript:history.back();" class="weui-btn weui-btn_primary" style="font-size: 14px;">推荐操作</a>
-				<a href="javascript:history.back();" class="weui-btn weui-btn_default" style="font-size: 14px;">辅助操作</a>
+				<a href="javascript:history.back();" class="weui-btn weui-btn_primary" style="font-size: 14px;height:39px;">推荐操作</a>
+				<a href="javascript:history.back();" class="weui-btn weui-btn_default" style="font-size: 14px;height:39px;">辅助操作</a>
 			</p>
 		</div>
 		<div class="weui-msg__extra-area">

@@ -67,6 +67,7 @@ module.exports = {
         ctx.timeoutFun = async function() { 
             let timeTransaction;
             try {
+                timeoutFunMap.delete('settlementAct' + genOrderId);
                 timeTransaction = await sequelize.transaction();
                 let delSize = await order.destroy({where: {id: genOrderId, status: 1}, transaction: timeTransaction});
 
@@ -158,11 +159,15 @@ module.exports = {
         for (let i = 0; i < opArr.length; i++) {
             await cart.destroy({where: {id: opArr[i].cartId, userId: userIdIn}, transaction: ctx.transaction});
         }
-        clearTimeout(timeoutFunMap.get('settlementAct' + orderId));
+
+        let timeoutFunKey = 'settlementAct' + orderId;
+        clearTimeout(timeoutFunMap.get(timeoutFunKey));
+        timeoutFunMap.delete(timeoutFunKey);
 
         ctx.timeoutFun = async function() { 
             let timeTransaction;
             try {
+                timeoutFunMap.delete('confirmOrder' + orderId);
                 timeTransaction = await sequelize.transaction();
                 let delSize = await order.destroy({where: {id: orderId, status: 2}, transaction: timeTransaction});
 
@@ -209,7 +214,9 @@ module.exports = {
             throw new APIError('settlement:invalid_order', '订单不存在或已失效');
         }
         
-        clearTimeout(timeoutFunMap.get('confirmOrder' + orderId));
+        let timeoutFunKey = 'confirmOrder' + orderId;
+        clearTimeout(timeoutFunMap.get(timeoutFunKey));
+        timeoutFunMap.delete(timeoutFunKey);
         
         return result;
     }

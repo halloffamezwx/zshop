@@ -29,17 +29,17 @@ app.use(async (ctx, next) => {
     var
         start = new Date().getTime(),
         execTime;
+        
     await next();
-    ctx.response.set('logid', logid);
-    execTime = new Date().getTime() - start;
-    ctx.response.set('X-Response-Time', `${execTime}ms`);
 
     console.log("ctx.response.status=" + ctx.response.status);
-    //console.log("ctx.response.type=" + ctx.response.type);
-    //console.log("ctx.response.body=" + ctx.response.body);
     if (ctx.response.status == 404) {
         ctx.response.redirect('/static/html/404.html');
     }
+
+    ctx.response.set('logid', logid);
+    execTime = new Date().getTime() - start;
+    ctx.response.set('X-Response-Time', `${execTime}ms`); 
 });
 
 app.use(compress({
