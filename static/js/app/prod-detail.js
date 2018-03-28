@@ -218,6 +218,28 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 			});
 		});
 
+		$("#buyNowBtn").click(function () {
+			if (stock <= 0) {
+				publicTip.showAlert("库存为空");
+				return;
+			}
+			publicTip.showLoadingToast(true, "操作中");
+			$.ajax({
+				type: 'post',
+				dataType: 'json',
+				url: '/zshop/userapi/buyNow',
+				data: {
+					pid: $("#pid").val(), 
+					pcount: $("#pcs").find("input").val()
+				}
+			}).done(function (r) {
+				window.location.href = "/zshop/user/settlement/" + r.orderId;
+			}).fail(function (jqXHR, textStatus) { 
+				publicTip.showLoadingToast(false);
+				publicTip.showTip(jqXHR.responseJSON);
+			});
+		});
+
 		$("#collectionHref").click(function () {
 			var id = $("#collectionId").val();
 			var msg = '取消收藏';
@@ -251,6 +273,26 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 				publicTip.showTip(jqXHR.responseJSON);
 			});
 		});
+
+		var $iosActionsheet = $('#iosActionsheet');
+        var $iosMask = $('#iosMask');
+
+        function hideActionSheet() {
+            $iosActionsheet.removeClass('weui-actionsheet_toggle');
+            $iosMask.fadeOut(200);
+        }
+
+        $iosMask.on('click', hideActionSheet);
+        $('#iosActionsheetCancel').on('click', hideActionSheet);
+        $("#kefuHref").on("click", function(){
+            $iosActionsheet.addClass('weui-actionsheet_toggle');
+            $iosMask.fadeIn(200);
+		});
+		
+		$("#callKfNumD").on("click", function(){
+			document.getElementById("callKfNumA").click();
+            hideActionSheet();
+        });
 	});
 	
 })

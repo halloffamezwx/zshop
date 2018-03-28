@@ -46,10 +46,13 @@ module.exports = {
     },
 
     addCartProd: async (pid, pcount, userId) => {
+        let pcountInt = parseInt(pcount);
         await cart.create({
             userId: userId,
             prodId: parseInt(pid),
-            count: parseInt(pcount)
+            count: pcountInt
         });
+
+        return pcountInt;
     }
 };

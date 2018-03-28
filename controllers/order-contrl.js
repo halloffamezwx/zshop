@@ -20,6 +20,22 @@ module.exports = {
         }
     },
 
+    //订单详情页
+    'GET /user/orderDetail/:orderId': async (ctx, next) => {
+        let orderId = ctx.params.orderId;
+        let userId = ctx.session.user.userId;
+        if (!orderId || orderId.trim() == '') {
+            throw 'orderId不能为空';
+        }
+
+        let result = await orderService.orderDetail(orderId, userId);
+        if (result.status == 'success') {
+            ctx.render('order-detail.html', result);
+        } else {
+            ctx.render('msg.html', result);
+        }
+    },
+
     //结算
     'POST /userapi/settlementAct': async (ctx, next) => {
         let cartIds = ctx.request.body.cartIds;
@@ -29,6 +45,22 @@ module.exports = {
         }
 
         let orderId = await orderService.settlementAct(ctx, cartIds, userId);
+        ctx.rest({orderId: orderId});
+    },
+
+    //立即购买
+    'POST /userapi/buyNow': async (ctx, next) => {
+        let pid = ctx.request.body.pid;
+        let pcount = ctx.request.body.pcount;
+        let userId = ctx.session.user.userId;
+        if (!pid || pid.trim() == '') {
+            throw new APIError('settlement:empty_pid', 'pid不能为空');
+        }
+        if (!pcount || pcount.trim() == '' || parseInt(pcount) <= 0) {
+            throw new APIError('settlement:invalid_pcount', '无效的pcount');
+        }
+
+        let orderId = await orderService.buyNow(ctx, pid, pcount, userId);
         ctx.rest({orderId: orderId});
     },
 

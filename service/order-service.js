@@ -14,6 +14,29 @@ let cart = model.cart;
 let userAddress = model.user_address;
 let sequelize = model.sequelize;
 
+//定时清除未确认支付的初始化订单
+var initOrderTimer = async function (key, genOrderId) { 
+    let timeTransaction;
+    try {
+        timeoutFunMap.delete(key + genOrderId);
+        timeTransaction = await sequelize.transaction();
+        let delSize = await order.destroy({where: {id: genOrderId, status: 1}, transaction: timeTransaction});
+
+        if (delSize == 1) {
+            let orderProds = await orderProd.findAll({where: {orderId: genOrderId}});
+            for (let i = 0; i < orderProds.length; i++) {
+                await sequelize.query('UPDATE product SET stock = stock + :count, updatedAt = now(), version = version + 1 WHERE id = :id', 
+                                    { replacements: { count: orderProds[i].count, id: orderProds[i].prodId }, transaction: timeTransaction });
+            }
+            await orderProd.destroy({where: {orderId: genOrderId}, transaction: timeTransaction});
+        }
+        timeTransaction.commit();
+    } catch (e) {
+        console.log(e.stack);
+        if (timeTransaction) timeTransaction.rollback();
+    }
+};
+
 module.exports = {
     //结算
     settlementAct: async (ctx, cartIds, userIdIn) => {
@@ -65,29 +88,70 @@ module.exports = {
             expressNumber: ''
         }, { transaction: ctx.transaction });
 
-        ctx.timeoutFun = async function() { 
-            let timeTransaction;
-            try {
-                timeoutFunMap.delete('settlementAct' + genOrderId);
-                timeTransaction = await sequelize.transaction();
-                let delSize = await order.destroy({where: {id: genOrderId, status: 1}, transaction: timeTransaction});
-
-                if (delSize == 1) {
-                    let orderProds = await orderProd.findAll({where: {orderId: genOrderId}});
-                    for (let i = 0; i < orderProds.length; i++) {
-                        await sequelize.query('UPDATE product SET stock = stock + :count, updatedAt = now(), version = version + 1 WHERE id = :id', 
-                                            { replacements: { count: orderProds[i].count, id: orderProds[i].prodId }, transaction: timeTransaction });
-                    }
-                    await orderProd.destroy({where: {orderId: genOrderId}, transaction: timeTransaction});
-                }
-                timeTransaction.commit();
-            } catch (e) {
-                console.log(e.stack);
-                if (timeTransaction) timeTransaction.rollback();
-            }
+        let key = "settlementAct";
+        ctx.timeoutFun = function () {
+            initOrderTimer(key, genOrderId); 
         };
         ctx.timeoutFunTime = 5 * 60 * 1000; //5分钟的确认订单的有效时间
-        ctx.timeoutFunKey = 'settlementAct' + genOrderId;
+        ctx.timeoutFunKey = key + genOrderId;
+        
+        return genOrderId;
+    },
+
+    //立即购买
+    buyNow: async (ctx, pid, pcount, userIdIn) => {
+        ctx.transaction = await sequelize.transaction();
+
+        let genOrderId = uuid.v4();
+        let prodPrice = 0.00;
+        let deliveryFee = 10.00;
+        let pidInt = parseInt(pid);
+        let pcountInt = parseInt(pcount);
+
+        await sequelize.query('UPDATE product SET stock = stock - :count, updatedAt = now(), version = version + 1 WHERE id = :id', 
+                                { replacements: { count: pcountInt, id: pidInt }, transaction: ctx.transaction });
+
+        let qProduct = await product.findById(pidInt, { transaction: ctx.transaction });
+        if (qProduct.stock < 0) {
+            let realStock = qProduct.stock + pcountInt;
+            throw new APIError('settlement:lack_stock', qProduct.name + '不够库存了，只剩下' + realStock + '件');
+        }
+        prodPrice = qProduct.price * pcountInt;
+
+        await orderProd.create({
+            orderId: genOrderId, 
+            prodId: qProduct.id, 
+            price: qProduct.price, 
+            count: pcountInt,
+            cartId: 0 
+        }, { transaction: ctx.transaction });
+
+        let qUserAddress = await userAddress.findOne( {where: {type: 1, userId: userIdIn}} );
+        if (!qUserAddress) {
+            qUserAddress = new Object();
+        }
+        await order.create({
+            id: genOrderId,
+            userId: userIdIn, 
+            province: qUserAddress.province || '', 
+            city: qUserAddress.city || '', 
+            area: qUserAddress.area || '', 
+            address: qUserAddress.address || '',
+            recipient: qUserAddress.name || '请选择一个收件地址',
+            recipientPhone: qUserAddress.phone || '',
+            deliveryFee: deliveryFee,
+            prodPrice: prodPrice,
+            totalPrice: prodPrice + deliveryFee,
+            expressCompany: '', 
+            expressNumber: ''
+        }, { transaction: ctx.transaction });
+
+        let key = "buyNow";
+        ctx.timeoutFun =  function () {
+            initOrderTimer(key, genOrderId); 
+        }; 
+        ctx.timeoutFunTime = 5 * 60 * 1000; //5分钟的确认订单的有效时间
+        ctx.timeoutFunKey = key + genOrderId;
         
         return genOrderId;
     },

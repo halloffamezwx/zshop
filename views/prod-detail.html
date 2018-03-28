@@ -101,7 +101,7 @@
 	<span id="tophovertree" title="返回顶部"></span>
 	
 	<div class="weui-tabbar" style="line-height: 16px;position:fixed;">
-	    <a href="javascript:;" class="promotion-foot-menu-items">
+	    <a href="javascript:;" id='kefuHref' class="promotion-foot-menu-items">
 			<div class="weui-tabbar__icon promotion-foot-menu-kefu" style="width:20px;height:20px;"></div>
 			<p class="weui-tabbar__label">客服</p>
 	    </a>
@@ -126,12 +126,28 @@
 	    <a href="javascript:;" id="addCart" class="weui-tabbar__item" style="background-color:green;">
 			<p class="promotion-foot-menu-label">加入购物车</p>
 	    </a>
-	    <a href="javascript:;" class="weui-tabbar__item" >
+	    <a href="javascript:;" id="buyNowBtn" class="weui-tabbar__item" >
 			<p class="promotion-foot-menu-label" style="color:gray;">立即购买</p>
 	    </a>
 	</div>
 
 	{% include "public-tip.html" %}
 	<input type="hidden" id="gavJsonStr" value="{{product.gavJsonStr}}"/>
+
+	<div >
+		<div class="weui-mask" id="iosMask" style="display: none"></div>
+		<div class="weui-actionsheet" id="iosActionsheet">
+			<div class="weui-actionsheet__title" style="height: 42px;color:green;display:none;">
+				<p class="weui-actionsheet__title-text" style="font-size:14px;">客服小姐姐电话</p>
+			</div>
+			<div class="weui-actionsheet__menu" id="callKfNumD">
+				<div class="weui-actionsheet__cell" style="font-size:14px;color: #888;"><span style="color:green;">呼叫</span> 400-800-8000</div>
+				<a id="callKfNumA" href="tel:400-800-8000"></a>
+			</div>
+			<div class="weui-actionsheet__action">
+				<div class="weui-actionsheet__cell" id="iosActionsheetCancel" style="font-size:14px;color:#888;;">取消</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
