@@ -171,6 +171,29 @@ module.exports = {
         if (qOrder.deliveryType == 1) {
             qOrder.deliveryTypeName = "快递";
         }
+        if (qOrder.expressCompany == '') {
+            qOrder.expressCompany = "暂无";
+        }
+        if (qOrder.expressNumber == '') {
+            qOrder.expressNumber = "暂无";
+        }
+        qOrder.createdAtFormat = moment(qOrder.createdAt).format('YYYY-MM-DD HH:mm:ss');
+
+        let orderStatus = qOrder.status;
+        if (orderStatus == 1) {
+            qOrder.statusName = "初始化";
+        } else if (orderStatus == 2) {
+            qOrder.statusName = "待付款";
+        } else if (orderStatus == 3) {
+            qOrder.statusName = "待发货";
+        } else if (orderStatus == 4) {
+            qOrder.statusName = "待收货";
+        } else if (orderStatus == 5) {
+            qOrder.statusName = "待评价";          
+        }  else if (orderStatus == 6) {
+            qOrder.statusName = "已评价";
+        }
+
         let opArr = await orderProd.findAll({where: {orderId: orderId}});
 
         for (let i = 0; i < opArr.length; i++) {
@@ -256,13 +279,67 @@ module.exports = {
         return result;
     },
 
+    //确认收货
+    confirmReceipt: async (ctx, orderId, userIdIn) => {
+        let result = new Object();
+        
+        let uptRet = await sequelize.query('UPDATE `order` SET status = 5, updatedAt = now(), version = version + 1 ' + 
+                                           'WHERE id = :id AND userId = :userId AND status = 4',
+                              { replacements: { id: orderId, userId: userIdIn } });
+        if (uptRet[0].affectedRows != 1) {
+            throw new APIError('order:invalid_order', '订单不存在或状态不对');
+        }
+        
+        return result;
+    },
+
+    //删除订单
+    delOrder: async (ctx, orderId, userIdIn) => {
+        let result = new Object();
+        ctx.transaction = await sequelize.transaction();
+        
+        let delSize = await order.destroy({where: {id: orderId, userId: userIdIn, status: 6}, transaction: ctx.transaction});
+        if (delSize == 1) {
+            await orderProd.destroy({where: {orderId: orderId}, transaction: ctx.transaction});
+        } else {
+            throw new APIError('order:invalid_order', '订单不存在或状态不对');
+        }
+        
+        return result;
+    },
+
+    //取消订单
+    cancelOrder: async (ctx, orderId, userIdIn) => {
+        let result = new Object();
+        ctx.transaction = await sequelize.transaction();
+        
+        let delSize = await order.destroy({
+            where: {
+                id: orderId, 
+                userId: userIdIn, 
+                $or: [
+                    {status: 1},
+                    {status: 2}
+                ]
+            }, 
+            transaction: ctx.transaction
+        });
+        if (delSize == 1) {
+            await orderProd.destroy({where: {orderId: orderId}, transaction: ctx.transaction});
+        } else {
+            throw new APIError('order:invalid_order', '订单不存在或状态不对');
+        }
+        
+        return result;
+    },
+
     //支付订单
     payOrder: async (ctx, orderId, totalPrice, userIdIn) => {
         let result = new Object();
 
         try {
             console.log('sleep start');
-            let result = await commonUtil.sleep(2000); 
+            let result = await commonUtil.sleep(1000); 
             console.log('sleep result:' + result);
             console.log('sleep end');
         } catch (err) {

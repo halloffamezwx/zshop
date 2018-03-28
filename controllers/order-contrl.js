@@ -76,6 +76,42 @@ module.exports = {
         ctx.rest(result);
     },
 
+    //确认收货
+    'POST /userapi/confirmReceipt': async (ctx, next) => {
+        let orderId = ctx.request.body.orderId;
+        let userId = ctx.session.user.userId;
+        if (!orderId || orderId.trim() == '') {
+            throw new APIError('order:empty_orderId', 'orderId不能为空');
+        }
+
+        let result = await orderService.confirmReceipt(ctx, orderId, userId);
+        ctx.rest(result);
+    },
+
+    //删除订单
+    'POST /userapi/delOrder': async (ctx, next) => {
+        let orderId = ctx.request.body.orderId;
+        let userId = ctx.session.user.userId;
+        if (!orderId || orderId.trim() == '') {
+            throw new APIError('order:empty_orderId', 'orderId不能为空');
+        }
+
+        let result = await orderService.delOrder(ctx, orderId, userId);
+        ctx.rest(result);
+    },
+
+    //取消订单
+    'POST /userapi/cancelOrder': async (ctx, next) => {
+        let orderId = ctx.request.body.orderId;
+        let userId = ctx.session.user.userId;
+        if (!orderId || orderId.trim() == '') {
+            throw new APIError('order:empty_orderId', 'orderId不能为空');
+        }
+
+        let result = await orderService.cancelOrder(ctx, orderId, userId);
+        ctx.rest(result);
+    },
+
     //支付订单
     'POST /userapi/payOrder': async (ctx, next) => {
         let orderId = ctx.request.body.orderId;
