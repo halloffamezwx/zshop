@@ -208,9 +208,9 @@ requirejs(["jquery", "publicTip", "swiper-4.1.6.min", "jquery.Spinner"], functio
 				//console.log(JSON.stringify(r));
 				publicTip.showLoadingToast(false);
 				publicTip.showToast("已加入");
-				var cardProdNum = parseInt($("#cardProdNum").html());
-				cardProdNum = cardProdNum + 1;
-				$("#cardProdNum").html(cardProdNum);
+				//var cardProdNum = parseInt($("#cardProdNum").html());
+				//cardProdNum = cardProdNum + 1;
+				$("#cardProdNum").html(r.cartSize);
 				$("#cardProdNum").show();
 			}).fail(function (jqXHR, textStatus) { 
 				publicTip.showLoadingToast(false);

@@ -30,7 +30,7 @@ module.exports = {
         if (!pid || pid.trim() == '') {
             throw new APIError('cart:empty_pid', '商品ID不能为空');
         }
-        await cartService.addCartProd(pid, pcount, ctx.session.user.userId); 
-        ctx.rest();
+        let cartSize = await cartService.addCartProd(pid, pcount, ctx.session.user.userId); 
+        ctx.rest({cartSize: cartSize});
     }
 };

@@ -47,12 +47,15 @@ module.exports = {
 
     addCartProd: async (pid, pcount, userId) => {
         let pcountInt = parseInt(pcount);
-        await cart.create({
-            userId: userId,
-            prodId: parseInt(pid),
-            count: pcountInt
-        });
+        let pidInt = parseInt(pid);
 
-        return pcountInt;
+        let uptRet = await sequelize.query('UPDATE cart SET count = :count, updatedAt = now(), version = version + 1 WHERE prodId = :prodId AND userId = :userId', 
+                        { replacements: { count: pcountInt, prodId: pidInt, userId: userId } });
+        if (uptRet[0].affectedRows != 1) {
+            await cart.create({userId: userId, prodId: pidInt, count: pcountInt});
+        }
+        let cartSize = await cart.count({userId: userId});
+        //console.log("cartSize=" + cartSize);
+        return cartSize;
     }
 };
