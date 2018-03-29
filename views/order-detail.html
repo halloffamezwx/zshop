@@ -25,55 +25,49 @@
 	</header>
 
 	<div class="weui-tab__panel" style="padding-top:41px">
-		<div class="weui-cells" style="margin-top:0px;">
-			<div class="weui-cell" style="padding: 6px 15px;margin-top:12px;">
-				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">订单状态：<span style="color:gray;"> {{order.statusName}}</span></p>
-				</div>
-			</div>
-			<div class="weui-cell" style="padding: 5px 15px;margin-bottom: 10px;">
-				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">下单时间：<span style="color:gray;"> {{order.createdAtFormat}}</span></p>
-				</div>
-			</div>
-		</div>
-
-		<div class="wy-media-box weui-media-box_text address-select" id="addressArea" style="margin-top: 11px;margin-bottom:0px;border-top: 0px solid #e1e1e1;">
-			<div class="weui-media-box_appmsg"> 
-				<div class="weui-media-box__hd proinfo-txt-l" style="width:20px;margin-right:20px;margin-left:6px;"><span class="promotion-label-tit"><img src="/static/images/icon_nav_city.png" /></span></div>
-				<div class="weui-media-box__bd">
-					<a href="javascript:void(0);" >
-						<p class="address-name"><span>{{order.recipient}}</span><span>{{order.recipientPhone}}</span></p>
-						<div class="address-txt">{{order.province}}{{order.city}}{{order.area}}{{order.address}}</div>
-					</a>
-				</div>
-			</div>
-		</div>
-
 		<div class="weui-cells" style="margin-top:0px;" >
-			<div class="weui-cell" style="padding: 4px 15px;margin-top:5px;">
+			<div class="weui-cell" style="padding: 5px 15px;">
 				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">配送方式</p>
+					<p style="font-size:14px;">订单状态 <span style="color:gray;margin-left: 31px;"> {{order.statusName}}</span></p>
 				</div>
-				<div style="margin-right:4px;font-size:14px;color:gray;">{{order.deliveryTypeName}}</div>
 			</div>
-			<div class="weui-cell" style="padding: 4px 15px;">
+			<div class="weui-cell" style="padding: 5px 15px;">
 				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">快递公司</p>
+					<p style="font-size:14px;">下单时间 <span style="color:gray;margin-left: 31px;"> {{order.createdAtFormat}}</span></p>
 				</div>
-				<div style="margin-right:4px;font-size:14px;color:gray;">{{order.expressCompany}}</div>
 			</div>
-			<div class="weui-cell" style="padding: 4px 15px;">
+		</div>
+
+		<div class="weui-cells" style="margin-top:10px;" >
+			<div class="weui-cell" style="padding: 5px 15px;">
 				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">快递单号</p>
+					<p style="font-size:14px;">配送方式 <span style="color:gray;margin-left: 31px;"> {{order.deliveryTypeName}}</span></p>
 				</div>
-				<div style="margin-right:4px;font-size:14px;color:gray;">{{order.expressNumber}}</div>
 			</div>
-			<div class="weui-cell" style="padding: 4px 15px;">
+			<div class="weui-cell" style="padding: 5px 15px;">
 				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">物流详情</p>
+					<p style="font-size:14px;">收件人名 <span style="color:gray;margin-left: 31px;"> {{order.recipient}} {{order.recipientPhone}}</span></p>
 				</div>
-				<div style="margin-right:4px;font-size:14px;color:gray;">暂无</div>
+			</div>
+			<div class="weui-cell" style="padding: 5px 15px;">
+				<div class="weui-cell__bd">
+					<p style="font-size:14px;">收件地址 <span style="color:gray;margin-left: 31px;"> {{order.province}}{{order.city}}{{order.area}}{{order.address}}</span></p>
+				</div>
+			</div>
+			<div class="weui-cell" style="padding: 5px 15px;">
+				<div class="weui-cell__bd">
+					<p style="font-size:14px;">快递公司 <span style="color:gray;margin-left: 31px;"> {{order.expressCompany}}</span></p>
+				</div>
+			</div>
+			<div class="weui-cell" style="padding: 5px 15px;">
+				<div class="weui-cell__bd">
+					<p style="font-size:14px;">快递单号 <span style="color:gray;margin-left: 31px;"> {{order.expressNumber}}</span></p>
+				</div>
+			</div>
+			<div class="weui-cell" style="padding: 5px 15px;">
+				<div class="weui-cell__bd">
+					<p style="font-size:14px;">物流详情 <span style="color:gray;margin-left: 31px;"> 暂无信息</span></p>
+				</div>
 			</div>
 		</div>
 
@@ -102,37 +96,34 @@
 		</div>
 
 		<div class="weui-cells weui-cells_form" style="margin-top:10px;" >
-			<div class="weui-cell" style="padding: 4px 15px;">
+			<div class="weui-cell" style="padding: 5px 15px;">
 				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">商品金额</p>
+					<p style="font-size:14px;">商品金额 <span style="color:red;margin-left: 31px;"> ¥{{order.prodPrice}}</span></p>
 				</div>
-				<div style="margin-right:4px;font-size:14px;color:red;">¥{{order.prodPrice}}</div>
 			</div>
-			<div class="weui-cell" style="padding: 4px 15px;">
+			<div class="weui-cell" style="padding: 5px 15px;">
 				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">物流运费</p>
+					<p style="font-size:14px;">物流运费 <span style="color:red;margin-left: 31px;"> + ¥{{order.deliveryFee}}</span></p>
 				</div>
-				<div style="margin-right:4px;font-size:14px;color:red;">+ ¥{{order.deliveryFee}}</div>
 			</div>
-			<div class="weui-cell" style="padding: 4px 15px;">
+			<div class="weui-cell" style="padding: 5px 15px;">
 				<div class="weui-cell__bd">
-					<p style="font-size:14px;margin-left:0px;">总的金额</p>
+					<p style="font-size:14px;">总的金额 <span style="color:red;margin-left: 31px;"> ¥{{order.totalPrice}}</span></p>
 				</div>
-				<div style="margin-right:4px;font-size:14px;color:red;">¥{{order.totalPrice}}</div>
 			</div>
 			
 			<div class="weui-btn-area" style="margin-top:5px;margin-bottom: 7px;">
 				{% if order.status == 1 or order.status == 2 %}
-				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="wePayBtn" style="width:100%;font-size: 14px;height:39px;"><i id="payLoading"></i>微信支付</a>
-				<a class="weui-btn weui-btn_default" href="javascript:void(0);" id="cancelBtn" style="width:100%;font-size: 14px;height:39px;"><i id="cancelLoading"></i>取消订单</a>
+				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="wePayBtn" style="font-size: 14px;height:39px;"><i id="payLoading"></i>微信支付</a>
+				<a class="weui-btn weui-btn_default" href="javascript:void(0);" id="cancelBtn" style="font-size: 14px;height:39px;"><i id="cancelLoading"></i>取消订单</a>
 				{% elif order.status == 3 %}
-				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="reminderBtn" style="width:100%;font-size: 14px;height:39px;"><i id="reminderLoading"></i>提醒发货</a>
+				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="reminderBtn" style="font-size: 14px;height:39px;"><i id="reminderLoading"></i>提醒发货</a>
 				{% elif order.status == 4 %}
-				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="confirmBtn" style="width:100%;font-size: 14px;height:39px;"><i id="confirmLoading"></i>确认收货</a>
+				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="confirmBtn" style="font-size: 14px;height:39px;"><i id="confirmLoading"></i>确认收货</a>
 				{% elif order.status == 5 %}
-				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="evaluateBtn" style="width:100%;font-size: 14px;height:39px;"><i id="evaluateLoading"></i>去评价</a>
+				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="evaluateBtn" style="font-size: 14px;height:39px;"><i id="evaluateLoading"></i>去评价</a>
 				{% elif order.status == 6 %}
-				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="delBtn" style="width:100%;font-size: 14px;height:39px;"><i id="delLoading"></i>删除</a>
+				<a class="weui-btn weui-btn_primary" href="javascript:void(0);" id="delBtn" style="font-size: 14px;height:39px;"><i id="delLoading"></i>删除</a>
 				{% endif %}
 			</div>
 		</div>

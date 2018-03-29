@@ -112,6 +112,18 @@ module.exports = {
         ctx.rest(result);
     },
 
+    //支付成功取消订单
+    'POST /userapi/paySuccCancelOrder': async (ctx, next) => {
+        let orderId = ctx.request.body.orderId;
+        let userId = ctx.session.user.userId;
+        if (!orderId || orderId.trim() == '') {
+            throw new APIError('order:empty_orderId', 'orderId不能为空');
+        }
+
+        let result = await orderService.paySuccCancelOrder(ctx, orderId, userId);
+        ctx.rest(result);
+    },
+
     //支付订单
     'POST /userapi/payOrder': async (ctx, next) => {
         let orderId = ctx.request.body.orderId;

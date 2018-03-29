@@ -6,6 +6,7 @@
     <title>支付成功</title>
 	<link rel="stylesheet" href="/static/css/weui.min.css"/>
 	<link rel="stylesheet" href="/static/css/style.css"/>
+	<script data-main="/static/js/app/pay-success" src="/static/js/lib/require.js" defer async="true"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 		<div class="weui-msg__opr-area">
 			<p class="weui-btn-area">
 				<a href="javascript:void(0);" class="weui-btn weui-btn_primary" style="font-size: 14px;height:39px;">订单列表</a>
-				<a href="javascript:void(0);" class="weui-btn weui-btn_default" style="font-size: 14px;height:39px;">取消订单</a>
+				<a href="javascript:void(0);" id="cancelOrderBtn" class="weui-btn weui-btn_default" style="font-size: 14px;height:39px;"><i id="cancelOrderLoading"></i>取消订单</a>
 			</p>
 		</div>
 		<div class="weui-msg__extra-area">
@@ -36,5 +37,9 @@
 			</div>
 		</div>
 	</div>
+
+	<input type="hidden" id="orderId" name="orderId" value="{{orderId}}"/>
+
+	{% include "public-tip.html" %}
 </body>
 </html>

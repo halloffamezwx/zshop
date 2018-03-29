@@ -245,7 +245,9 @@ module.exports = {
         }
         let opArr = await orderProd.findAll({where: {orderId: orderId}});
         for (let i = 0; i < opArr.length; i++) {
-            await cart.destroy({where: {id: opArr[i].cartId, userId: userIdIn}, transaction: ctx.transaction});
+            if (opArr[i].cartId != 0) {
+                await cart.destroy({where: {id: opArr[i].cartId, userId: userIdIn}, transaction: ctx.transaction});
+            }
         }
 
         let timeoutFunKey = 'settlementAct' + orderId;
@@ -321,6 +323,40 @@ module.exports = {
                     {status: 1},
                     {status: 2}
                 ]
+            }, 
+            transaction: ctx.transaction
+        });
+        if (delSize == 1) {
+            await orderProd.destroy({where: {orderId: orderId}, transaction: ctx.transaction});
+        } else {
+            throw new APIError('order:invalid_order', '订单不存在或状态不对');
+        }
+
+        let timeoutFunKey = "settlementAct" + orderId;
+        clearTimeout(timeoutFunMap.get(timeoutFunKey));
+        timeoutFunMap.delete(timeoutFunKey);
+
+        timeoutFunKey = "buyNow" + orderId;
+        clearTimeout(timeoutFunMap.get(timeoutFunKey));
+        timeoutFunMap.delete(timeoutFunKey);
+
+        timeoutFunKey = "confirmOrder" + orderId;
+        clearTimeout(timeoutFunMap.get(timeoutFunKey));
+        timeoutFunMap.delete(timeoutFunKey);
+        
+        return result;
+    },
+
+    //支付成功取消订单
+    paySuccCancelOrder: async (ctx, orderId, userIdIn) => {
+        let result = new Object();
+        ctx.transaction = await sequelize.transaction();
+        
+        let delSize = await order.destroy({
+            where: {
+                id: orderId, 
+                userId: userIdIn, 
+                status: 3
             }, 
             transaction: ctx.transaction
         });
