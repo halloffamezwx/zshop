@@ -62,7 +62,7 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 					var count = cidSpinner.find("input").val();
 					var stock = cidSpinner.attr("stock");
 
-					if (count <= stock) {
+					if (parseInt(count) <= parseInt(stock)) {
 						$(this).prop("checked", true);
 					} else {
 						isLessStock = true;
@@ -88,7 +88,7 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 				var count = cidSpinner.find("input").val();
 				var stock = cidSpinner.attr("stock");
 
-				if (count > stock) {
+				if (parseInt(count) > parseInt(stock)) {
 					publicTip.showAlert('该商品库存不足', null, function () {
 						$(that).prop("checked", false);
 					});
@@ -103,7 +103,7 @@ requirejs(["jquery", "publicTip", "jquery.Spinner"], function($, publicTip){
 				var cidSpinner = $("#spinner_" + cid); 
 				var count = cidSpinner.find("input").val();
 				var stock = cidSpinner.attr("stock");
-				if (count <= stock) {
+				if (parseInt(count) <= parseInt(stock)) {
 					cartSize++;
 				} 
 			});
