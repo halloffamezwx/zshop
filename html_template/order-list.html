@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>我的订单</title>
+    <link rel="stylesheet" href="./style/weui.min.css"/>
+	<link rel="stylesheet" href="./style/style.css"/>
+	<style>
+		.weui-media-box {
+			padding: 1px;
+		}
+		.weui-cells:after{
+			border-bottom: 0px solid #e5e5e5;
+		}
+	</style>
+</head>
+
+<body>
+	<header class="wy-header">
+	    <div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
+	    <div class="wy-header-title">我的订单</div>
+		<div class="wy-header-icon-index"><a href="index.html"></a></div>
+	</header>
+	
+	<div class='weui-content' style="padding-top:85px;">
+		<div class="weui-tab">
+			<div class="weui-navbar" style="position:fixed; top:42px; left:0; right:0; height:44px; background:#fff;">
+			    <a class="weui-navbar__item proinfo-tab-tit font-14 weui-bar__item--on" href="#tab1">全部</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab2">待付款</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab3">待发货</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab4">待收货</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-14" href="#tab5">待评价</a>
+			</div>
+		</div>
+		
+		<div class="weui-panel weui-panel_access">
+			<div class="weui-panel__bd">
+				<a href="order-detail.html" class="weui-cell_access weui-cell" >
+					<div class="weui-cell__bd">
+						<p style="font-size:13px;">创建时间：<span style="color: gray;">2018-04-17 00:00:00</span></p>
+					</div>
+					<div style="font-size:13px;color:gray;">待付款</div>
+				</a>
+				
+				<a href="prod-detail.html" class="weui-media-box weui-media-box_appmsg weui-cell_access">
+					<div class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" src="./images/good3.jpg" alt="">
+					</div>
+					<div class="weui-media-box__bd">
+						<h4 class="weui-media-box__title" style="font-size:13px;margin-bottom:10px;">魅蓝 Note6</h4>
+						<p class="weui-media-box__desc" style="font-size:13px;margin-bottom:10px;-webkit-line-clamp:1;">公开版 深空灰 64GB</p>
+						<p class="weui-media-box__desc" style="font-size:13px;color:red;">¥1099</p>
+					</div>
+					<div class="weui-media-box__bd" >
+						<div style="float:right;">
+							<p style="font-size:14px;color: #999;margin-right:19px;margin-top:4px;">x1</p>
+						</div>
+					</div>
+				</a>
+				<a href="prod-detail.html" class="weui-media-box weui-media-box_appmsg weui-cell_access">
+					<div class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" src="./images/good2.jpg" alt="">
+					</div>
+					<div class="weui-media-box__bd">
+						<h4 class="weui-media-box__title" style="font-size:13px;margin-bottom:10px;">魅蓝 Note6</h4>
+						<p class="weui-media-box__desc" style="font-size:13px;margin-bottom:10px;-webkit-line-clamp:1;">公开版 深空灰 64GB</p>
+						<p class="weui-media-box__desc" style="font-size:13px;color:red;">¥1099</p>
+					</div>
+					<div class="weui-media-box__bd" >
+						<div style="float:right;">
+							<p style="font-size:14px;color: #999;margin-right:19px;margin-top:4px;">x3</p>
+						</div>
+					</div>
+				</a>
+				
+				<a href="order-detail.html" class="weui-media-box weui-media-box_appmsg weui-cell_access" style="height:37px;">
+					<div class="weui-media-box__bd" >
+						<div style="float:right;">
+							<p style="font-size:13px;color: gray;margin-right:15px;">共2件商品，总金额：<span style="color:red;">¥592.00</span> (含运费¥0.00)</p>
+						</div>
+					</div>
+				</a>
+				<div class="weui-media-box weui-media-box_appmsg" >
+					<div class="weui-media-box__bd" style="margin-right:15px;">
+						<div style="float:right;">
+							<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="margin-top:8px;margin-left:5px;">取 消</a>
+							<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-top:8px;margin-left:5px;">去付款</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="weui-panel weui-panel_access">
+			<div class="weui-panel__bd">
+				<a href="order-detail.html" class="weui-cell_access weui-cell" >
+					<div class="weui-cell__bd">
+						<p style="font-size:13px;">创建时间：<span style="color: gray;">2018-04-17 00:00:00</span></p>
+					</div>
+					<div style="font-size:13px;color:gray;">待付款</div>
+				</a>
+				
+				<a href="prod-detail.html" class="weui-media-box weui-media-box_appmsg weui-cell_access">
+					<div class="weui-media-box__hd" style="width:92px;height:92px;">
+						<img class="weui-media-box__thumb" src="./images/good4.jpg" alt="">
+					</div>
+					<div class="weui-media-box__bd">
+						<h4 class="weui-media-box__title" style="font-size:13px;margin-bottom:10px;">魅蓝 Note6</h4>
+						<p class="weui-media-box__desc" style="font-size:13px;margin-bottom:10px;-webkit-line-clamp:1;">公开版 深空灰 64GB</p>
+						<p class="weui-media-box__desc" style="font-size:13px;color:red;">¥1099</p>
+					</div>
+					<div class="weui-media-box__bd" >
+						<div style="float:right;">
+							<p style="font-size:14px;color: #999;margin-right:19px;margin-top:4px;">x1</p>
+						</div>
+					</div>
+				</a>
+				
+				<a href="order-detail.html" class="weui-media-box weui-media-box_appmsg weui-cell_access" style="height:37px;">
+					<div class="weui-media-box__bd" >
+						<div style="float:right;">
+							<p style="font-size:13px;color: gray;margin-right:15px;">共1件商品，总金额：<span style="color:red;">¥592.00</span> (含运费¥0.00)</p>
+						</div>
+					</div>
+				</a>
+				<div class="weui-media-box weui-media-box_appmsg" >
+					<div class="weui-media-box__bd" style="margin-right:15px;">
+						<div style="float:right;">
+							<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="margin-top:8px;margin-left:5px;">取 消</a>
+							<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-top:8px;margin-left:5px;">去付款</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="weui-panel__ft">
+			<a href="javascript:void(0);" id="loadmore-button" class="weui-cell weui-cell_access weui-cell_link">
+				<div class="weui-cell__bd" style="text-align:center;font-size:13px;" >点击加载更多</div>
+			</a>    
+			<a href="javascript:void(0);" id="loadmore-loading" style="text-align:center;display:none;" class="weui-cell weui-cell_access weui-cell_link">
+				<div class="weui-cell__bd" >
+					<i class="weui-loading"></i>
+					<span class="weui-loadmore__tips" style="font-size:13px;">正在加载</span>
+				</div>
+			</a>			
+		</div>
+		
+	</div>
+
+</body>
+</html>

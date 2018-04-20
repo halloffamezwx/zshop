@@ -86,3 +86,11 @@ body,html {
 .address-name{font-size:14px; color:black;}
 .address-name span{margin-right:10px;}
 .address-txt{font-size:13px; color:#999; line-height:29px;}
+
+.weui-navbar__item.proinfo-tab-tit{padding:10px 0;color:#999;}
+.weui-navbar__item.proinfo-tab-tit:after{display:none;}
+.weui-navbar__item.proinfo-tab-tit.weui-bar__item--on:before{content:""; width:34px; height:1px; background:green; position:absolute; left:50%; margin-left:-17px; bottom:0px; z-index:10;}
+.weui-navbar__item.weui-bar__item--on{color:green; background-color:inherit;}
+.weui-navbar + .weui-tab__bd.proinfo-tab-con{padding-top:44px;}
+
+.font-14{font-size:14px; font-weight:normal;}
