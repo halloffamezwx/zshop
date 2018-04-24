@@ -62,9 +62,12 @@ define(["jquery"], function($){
 			}, 2000);
 		}
 	}
-	var showTipForStr = function (tipMsg) {
+	var showTipForStr = function (tipMsg, tipCode) {
 		var msgObj = new Object();
 		msgObj.message = tipMsg;
+		if (tipCode) {
+			msgObj.code = tipCode;
+		}
 		showTip(msgObj);
 	}
 

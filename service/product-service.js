@@ -24,7 +24,12 @@ module.exports = {
             orderStr = "price ASC";
         } else if (orderType == 4) {
             orderStr = "price DESC";            
-        } 
+        }
+        
+        let limitInt = parseInt(limit);
+        if (limitInt > 50) {
+            limitInt = 50;
+        }
 
         var products = await product.findAndCountAll({
             where: {
@@ -33,7 +38,7 @@ module.exports = {
                     {description: {$like: '%' + searchKey + '%'}}
                 ]
             },
-            limit: parseInt(limit),
+            limit: limitInt,
             offset: parseInt(offset),
             order: orderStr
         });

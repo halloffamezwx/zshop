@@ -149,5 +149,23 @@ module.exports = {
         }
         
         ctx.render('pay-success.html', {orderId: orderId});
+    },
+
+    //订单列表页
+    'GET /user/orderList': async (ctx, next) => {
+        let status = ctx.query.status || 0;
+        ctx.render('order-list.html', {status: status});
+    },
+
+    //查询订单列表
+    'POST /userapi/getOrderList': async (ctx, next) => {
+        let limit = ctx.request.body.limit || 3;
+        let offset = ctx.request.body.offset || 0;
+        let status = ctx.request.body.status || 0;
+        let userId = ctx.session.user.userId;
+
+        let orders = await orderService.getOrderList(limit, offset, userId, status);
+        //console.log(JSON.stringify(orders));
+        ctx.rest(orders);
     }
 };

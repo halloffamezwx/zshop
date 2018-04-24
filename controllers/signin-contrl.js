@@ -1,5 +1,6 @@
 //登录ctrl
 const userService = require('../service/user-service');
+const orderService = require('../service/order-service');
 const APIError = require('../middleware/rest').APIError;
 const indexContrl = require('../controllers/index-contrl');
 //const captchapng = require('captchapng');
@@ -38,7 +39,8 @@ module.exports = {
     },
 
     'POST /userapi/getLoginUserInfo': async (ctx, next) => {
-        ctx.rest(ctx.session.user);
+        let orderCount = await orderService.countOrder("1111", ctx.session.user.userId);
+        ctx.rest({user: ctx.session.user, orderCount: orderCount});
     },
 
     'GET /captcha': async (ctx, next) => {

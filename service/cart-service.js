@@ -54,7 +54,7 @@ module.exports = {
         if (uptRet[0].affectedRows != 1) {
             await cart.create({userId: userId, prodId: pidInt, count: pcountInt});
         }
-        let cartSize = await cart.count({userId: userId});
+        let cartSize = await cart.count({where: {userId: userId}});
         //console.log("cartSize=" + cartSize);
         return cartSize;
     }

@@ -44,16 +44,43 @@ define(["jquery", "vue", "vue-resource", "publicTip", "swiper-4.1.6.min", "publi
 			var tabbarItemJqObj = $(this);
 			var currentId = tabbarItemJqObj.attr("id");
 
-			if (currentId == 'my' && $('#userName').html() == '') {
+			//if (currentId == 'my' && $('#userName').html() == '') {
+			if (currentId == 'my') {
 				publicTip.showLoadingToast(true);
 				$.ajax({
 					type: 'post',
 					dataType: 'json',
 					url: '/zshop/userapi/getLoginUserInfo'
 				}).done(function (r) {
-					$('#userName').html(r.name);
-					$('#userId').html(r.userId);
-					$('#userHeadImage').attr("src", r.headImage);
+					$('#userName').html(r.user.name);
+					$('#userId').html(r.user.userId);
+					$('#userHeadImage').attr("src", r.user.headImage);
+
+					if (r.orderCount.paySize > 0) {
+						$('#payBadge').html(r.orderCount.paySize);
+						$('#payBadge').show();
+					} else {
+						$('#payBadge').hide();
+					}
+					if (r.orderCount.sendSize > 0) {
+						$('#sendBadge').html(r.orderCount.sendSize);
+						$('#sendBadge').show();
+					} else {
+						$('#sendBadge').hide();
+					}
+					if (r.orderCount.recvieSize > 0) {
+						$('#recvieBadge').html(r.orderCount.recvieSize);
+						$('#recvieBadge').show();
+					} else {
+						$('#recvieBadge').hide();
+					}
+					if (r.orderCount.evalSize > 0) {
+						$('#evalBadge').html(r.orderCount.evalSize);
+						$('#evalBadge').show();
+					} else {
+						$('#evalBadge').hide();
+					}
+
 					publicTip.showLoadingToast(false);
 					changeTabbarStyle(tabbarItemJqObj, currentId);
 				}).fail(function (jqXHR, textStatus) { 

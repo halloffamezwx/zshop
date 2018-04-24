@@ -50,7 +50,7 @@
 		<div class="weui-flex wy-iconlist-box">
 			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu2.png"></div><p>正在建设</p></a></div>
 			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu3.png"></div><p>正在建设</p></a></div>
-			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu4.png"></div><p>订单管理</p></a></div>
+			<div class="weui-flex__item"><a href="/zshop/user/orderList" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu4.png"></div><p>订单管理</p></a></div>
 			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/menu1.png"></div><p>正在建设</p></a></div>
 		</div>
 		<img src="{{mAdImg}}" style="width: 100%;margin-top:5px;"/>
@@ -169,7 +169,7 @@
 			<span class="weui-loadmore__tips" style="background-color: #f8f8f8;">暂无数据</span>
 		</div>
 
-		<div id="loadingToast" v-show="loading && !loadMoreflag">
+		<div v-show="loading && !loadMoreflag">
 			<div class="weui-mask_transparent"></div>
 			<div class="weui-toast">
 				<i class="weui-loading weui-icon_toast"></i>
@@ -197,7 +197,7 @@
 		</div>
 		
 		<div class="weui-cells">
-			<a href="javascript:;" class="weui-cell weui-cell_access">
+			<a href="/zshop/user/orderList" class="weui-cell weui-cell_access">
 				<div class="weui-cell__hd">
 					<img src="/static/images/center-icon-order-all.png" alt="" class="center-list-icon">
 				</div>
@@ -208,10 +208,34 @@
 			</a>
 		</div>
 		<div class="weui-flex wy-iconlist-box">
-			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/center-icon-order-dfk.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待付款</p></a></div>
-			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/center-icon-order-dfh.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待发货</p></a></div>
-			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/center-icon-order-dsh.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待收货</p></a></div>
-			<div class="weui-flex__item"><a href="javascript:;" class="wy-links-iconlist"><div class="img"><img src="/static/images/center-icon-order-dpj.png" style="height: 24px;width: auto;"></div><p style="margin-top:0px;">待评价</p></a></div>
+			<div class="weui-flex__item">
+				<a href="/zshop/user/orderList?status=2" class="wy-links-iconlist" style="position:relative;">
+					<span class="weui-badge" id="payBadge" style="position: absolute;top:-7px;right:10px; font-size:10px;"></span>
+					<div class="img"><img src="/static/images/center-icon-order-dfk.png" style="height: 24px;width: auto;"></div>
+					<p style="margin-top:0px;">待付款</p>
+				</a>
+			</div>
+			<div class="weui-flex__item">
+				<a href="/zshop/user/orderList?status=3" class="wy-links-iconlist" style="position:relative;">
+					<span class="weui-badge" id="sendBadge" style="position: absolute;top:-7px;right:10px; font-size:10px;"></span>
+					<div class="img"><img src="/static/images/center-icon-order-dfh.png" style="height: 24px;width: auto;"></div>
+					<p style="margin-top:0px;">待发货</p>
+				</a>
+			</div>
+			<div class="weui-flex__item">
+				<a href="/zshop/user/orderList?status=4" class="wy-links-iconlist" style="position:relative;">
+					<span class="weui-badge" id="recvieBadge" style="position: absolute;top:-7px;right:10px; font-size:10px;"></span>
+					<div class="img"><img src="/static/images/center-icon-order-dsh.png" style="height: 24px;width: auto;"></div>
+					<p style="margin-top:0px;">待收货</p>
+				</a>
+			</div>
+			<div class="weui-flex__item">
+				<a href="/zshop/user/orderList?status=5" class="wy-links-iconlist" style="position:relative;">
+					<span class="weui-badge" id="evalBadge" style="position: absolute;top:-7px;right:10px; font-size:10px;"></span>
+					<div class="img"><img src="/static/images/center-icon-order-dpj.png" style="height: 24px;width: auto;"></div>
+					<p style="margin-top:0px;">待评价</p>
+				</a>
+			</div>
 		</div>
 		
 		<div class="weui-cells">

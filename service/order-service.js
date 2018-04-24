@@ -406,5 +406,96 @@ module.exports = {
         timeoutFunMap.delete(timeoutFunKey);
         
         return result;
+    },
+
+    //订单列表
+    getOrderList: async (limit, offset, userIdIn, status) => {
+        let whereObj = new Object();
+        whereObj.userId = userIdIn;
+
+        let statusInt = parseInt(status);
+        if (statusInt == 0) { //查询全部
+            whereObj.status = {$ne: 1}
+        } else {
+            whereObj.status = statusInt;
+        }
+        let limitInt = parseInt(limit);
+        if (limitInt > 50) {
+            limitInt = 50;
+        }
+
+        let orders = await order.findAll({
+            where: whereObj,
+            limit: limitInt,
+            offset: parseInt(offset),
+            order: "createdAt DESC"
+        });
+        let orderArray = new Array();
+
+        for (let i = 0; i < orders.length; i++) {
+            let orderObj = new Object();
+
+            let orderProds =  await sequelize.query('SELECT p.id, p.`name`, p.price, p.image, op.count ' 
+                                                  + 'FROM order_prod op '
+                                                  + 'LEFT JOIN product p ON op.prodId = p.id '
+                                                  + 'WHERE op.orderId = :orderId',
+                                    {replacements: {orderId: orders[i].id}, type: sequelize.QueryTypes.SELECT});
+            for (let j = 0; j < orderProds.length; j++) {
+                let attriValueStr = await productService.getProdAttriValueStr(orderProds[j].id);
+                orderProds[j].attriValueStr = attriValueStr;
+            }
+            orderObj.orderProds = orderProds;
+            orderObj.id = orders[i].id;
+            orderObj.status = orders[i].status;
+            orderObj.deliveryFee = orders[i].deliveryFee;
+            orderObj.totalPrice = orders[i].totalPrice;
+            orderObj.prodSize = orderProds.length;
+
+            let orderStatus = orders[i].status;
+            if (orderStatus == 1) {
+                orderObj.statusName = "初始化";
+            } else if (orderStatus == 2) {
+                orderObj.statusName = "待付款";
+            } else if (orderStatus == 3) {
+                orderObj.statusName = "待发货";
+            } else if (orderStatus == 4) {
+                orderObj.statusName = "待收货";
+            } else if (orderStatus == 5) {
+                orderObj.statusName = "待评价";          
+            }  else if (orderStatus == 6) {
+                orderObj.statusName = "已评价";
+            }
+            orderObj.createdAtFormat = moment(orders[i].createdAt).format('YYYY-MM-DD HH:mm:ss');
+
+            orderArray.push(orderObj);
+        }
+        
+        return orderArray;
+    },
+
+    countOrder: async (conStr, userIdIn) => {
+        let result = new Object();
+        result.paySize = 0;
+        result.sendSize = 0;
+        result.recvieSize = 0;
+        result.evalSize = 0;
+
+        if (!userIdIn) return result;
+        if (!conStr || conStr.length != 4) conStr = "1111";
+
+        if (conStr.charAt(0) == '1') {
+            result.paySize = await order.count({where: {status: 2, userId: userIdIn}}); //待付款
+        }
+        if (conStr.charAt(1) == '1') {
+            result.sendSize = await order.count({where: {status: 3, userId: userIdIn}}); //待发货
+        }
+        if (conStr.charAt(2) == '1') {
+            result.recvieSize = await order.count({where: {status: 4, userId: userIdIn}}); //待收货
+        }
+        if (conStr.charAt(3) == '1') {
+            result.evalSize = await order.count({where: {status: 5, userId: userIdIn}}); //待评价
+        }
+        
+        return result;
     }
 };
