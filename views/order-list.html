@@ -29,7 +29,7 @@
 
 	<input id="orderStatus" name="orderStatus" type="hidden" value="{{status}}"/>
 	
-	<div class='weui-content' id="orderContent" style="padding-top:85px;">
+	<div class='weui-content' id="orderContent" style="padding-top:86px;">
 		<div class="weui-tab">
 			<div class="weui-navbar" style="position:fixed; top:42px; left:0; right:0; height:44px; background:#fff;">
 			    <a class="weui-navbar__item proinfo-tab-tit font-14" v-bind:class="[status == 0 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 0)">全部</a>
@@ -40,13 +40,13 @@
 			</div>
 		</div>
 		
-		<div class="weui-panel weui-panel_access" v-for="so in sorders">
+		<div class="weui-panel weui-panel_access" v-for="so in sorders" style="display:none;" v-show="sorders.length > 0">
 			<div class="weui-panel__bd">
 				<a :href="'/zshop/user/orderDetail/' + so.id" class="weui-cell_access weui-cell" style="border-bottom: 1px solid rgb(244, 244, 244);">
 					<div class="weui-cell__bd">
 						<p style="font-size:13px;">创建时间：<span style="color: gray;" v-text="so.createdAtFormat"></span></p>
 					</div>
-					<div style="font-size:13px;color:gray;" v-text="so.statusName"></div>
+					<div style="font-size:13px;color:red;" v-text="so.statusName"></div>
 				</a>
 				
 				<a :href="'/zshop/prodDetail/' + op.id" class="weui-media-box weui-media-box_appmsg weui-cell_access" v-for="op in so.orderProds">
@@ -56,7 +56,7 @@
 					<div class="weui-media-box__bd">
 						<h4 class="weui-media-box__title" style="font-size:13px;margin-bottom:10px;" v-text="op.name"></h4>
 						<p class="weui-media-box__desc" style="font-size:13px;margin-bottom:10px;-webkit-line-clamp:1;" v-text="op.attriValueStr"></p>
-						<p class="weui-media-box__desc" style="font-size:13px;color:red;" v-text="'¥' + op.price"></p>
+						<p class="weui-media-box__desc" style="font-size:13px;" v-text="'¥' + op.price"></p>
 					</div>
 					<div class="weui-media-box__bd" >
 						<div style="float:right;">
@@ -65,11 +65,11 @@
 					</div>
 				</a>
 				
-				<a :href="'/zshop/user/orderDetail/' + so.id" class="weui-media-box weui-media-box_appmsg weui-cell_access" style="height:32px;border-top: 1px solid rgb(244, 244, 244);">
+				<a :href="'/zshop/user/orderDetail/' + so.id" class="weui-media-box weui-media-box_appmsg weui-cell_access" style="height:36px;border-top: 1px solid rgb(244, 244, 244);border-bottom: 1px solid rgb(244, 244, 244);">
 					<div class="weui-media-box__bd" >
 						<div style="float:right;">
 							<p style="font-size:13px;margin-right:15px;">
-								共<span style="color:gray;" v-text="so.prodSize"></span>件商品，总金额：
+								共<span style="color:red;" v-text="so.prodSize"></span>件商品，总金额：
 								<span style="color:red;" v-text="'¥' + so.totalPrice"></span> 
 								<span style="color:gray;">(含运费<span v-text="'¥' + so.deliveryFee"></span>)</span>
 							</p>
@@ -80,20 +80,20 @@
 					<div class="weui-media-box__bd" style="margin-right:15px;">
 						<div style="float:right;">
 							<template v-if="so.status == 2">
-								<a href="javascript:;" v-on:click="cancelV(so.id)" class="weui-btn weui-btn_mini weui-btn_default" style="margin-bottom:5px;margin-top:0px;margin-left:5px;">取 消</a>
-								<a href="javascript:;" v-on:click="wePayV(so.id)" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:5px;margin-top:0px;margin-left:5px;">微信支付</a>
+								<a href="javascript:;" v-on:click="cancelV(so.id)" class="weui-btn weui-btn_mini weui-btn_default" style="margin-bottom:2px;margin-top:7px;margin-left:5px;">取 消</a>
+								<a href="javascript:;" v-on:click="wePayV(so.id)" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:2px;margin-top:7px;margin-left:5px;">微信支付</a>
 							</template>
 							<template v-else-if="so.status == 3">
-								<a href="javascript:;" v-on:click="reminderV(so.id)" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:5px;margin-top:0px;margin-left:5px;">提醒发货</a>
+								<a href="javascript:;" v-on:click="reminderV(so.id)" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:2px;margin-top:7px;margin-left:5px;">提醒发货</a>
 							</template>
 							<template v-else-if="so.status == 4">
-								<a href="javascript:;" v-on:click="confirmV(so.id)" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:5px;margin-top:0px;margin-left:5px;">确认收货</a>
+								<a href="javascript:;" v-on:click="confirmV(so.id)" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:2px;margin-top:7px;margin-left:5px;">确认收货</a>
 							</template>
 							<template v-else-if="so.status == 5">
-								<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:5px;margin-top:0px;margin-left:5px;">去评价</a>
+								<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:2px;margin-top:7px;margin-left:5px;">去评价</a>
 							</template>
 							<template v-else-if="so.status == 6">
-								<a href="javascript:;" v-on:click="delV(so.id)" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:5px;margin-top:0px;margin-left:5px;">删 除</a>	
+								<a href="javascript:;" v-on:click="delV(so.id)" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-bottom:2px;margin-top:7px;margin-left:5px;">删 除</a>	
 							</template>
 						</div>
 					</div>
@@ -101,20 +101,20 @@
 			</div>
 		</div>
 
-		<div class="weui-panel__ft" v-show="hasdata">
+		<div class="weui-panel__ft" v-show="hasdata" style="background-color:#feebdd;display:none;">
 			<a href="javascript:void(0);" v-on:click="getOrderList(true, null)" v-show="!loading" id="loadmore-button" class="weui-cell weui-cell_access weui-cell_link">
-				<div class="weui-cell__bd" style="text-align:center;" >点击加载更多</div>
+				<div class="weui-cell__bd" style="text-align:center;font-size:13px;color:#999;" >点击加载更多</div>
 			</a>    
 			<a href="javascript:void(0);" id="loadmore-loading" v-show="loading && loadMoreflag" style="text-align:center;display:none;" class="weui-cell weui-cell_access weui-cell_link">
 				<div class="weui-cell__bd" >
 					<i class="weui-loading"></i>
-					<span class="weui-loadmore__tips">正在加载</span>
+					<span class="weui-loadmore__tips" style="font-size:13px;color:#999;">正在加载</span>
 				</div>
 			</a> 
 		</div>
 
 		<div class="weui-loadmore weui-loadmore_line" id="nodata" v-show="!hasdata">
-			<span class="weui-loadmore__tips" style="background-color: #f8f8f8;">暂无数据</span>
+			<span class="weui-loadmore__tips" style="background-color: #f8f8f8;font-size:13px;">暂无数据</span>
 		</div>
 
 		<div v-show="loading && !loadMoreflag">

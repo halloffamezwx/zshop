@@ -30,6 +30,7 @@
         "koa-session2": "",
         "log4js": "",
         "captchapng": "",
-        "moment": ""
+        "moment": "",
+        "koa-body": ""
     }
 }

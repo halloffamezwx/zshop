@@ -3,7 +3,8 @@ const db = require('../middleware/db');
 module.exports = db.defineModel('user', {
     email: {
         type: db.STRING(100),
-        unique: true
+        unique: true,
+        allowNull: true
     },
     mobile: {
         type: db.STRING(11),

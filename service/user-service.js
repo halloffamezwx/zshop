@@ -13,5 +13,16 @@ module.exports = {
             }
         });
         return quser;
+    },
+
+    regist: async (mobile, password) => {
+        let cuser = await user.create({
+            mobile: mobile,
+            userId: mobile,
+            passwd: password,
+            name: '墨菲',
+            headImage: '/static/images/head/bear.jpg'
+        });
+        return cuser;
     }
 };

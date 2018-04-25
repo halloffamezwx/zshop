@@ -4,6 +4,7 @@ const orderService = require('../service/order-service');
 const APIError = require('../middleware/rest').APIError;
 const indexContrl = require('../controllers/index-contrl');
 //const captchapng = require('captchapng');
+const fs = require('fs');
 
 module.exports = {
     'POST /api/signin': async (ctx, next) => {
@@ -36,6 +37,33 @@ module.exports = {
 
     'GET /login': async (ctx, next) => {
         ctx.render('login.html', {loginSuccUrl: ctx.query.loginSuccUrl});
+    },
+
+    'GET /registPage': async (ctx, next) => {
+        ctx.render('register.html');
+    },
+
+    'POST /api/regist': async (ctx, next) => {
+        /* let file = ctx.request.body.files.file1; // 获取上传文件
+        let reader = fs.createReadStream(file.path); // 创建可读流
+        let ext = file.name.split('.').pop(); // 获取上传文件扩展名
+        let upStream = fs.createWriteStream(`static/images/head/${Math.random().toString()}.${ext}`); // 创建可写流
+        reader.pipe(upStream); // 可读流通过管道写入可写流 */
+
+        let mobile = ctx.request.body.mobile || '';
+        let password = ctx.request.body.password || '';
+        let passwordConfirm = ctx.request.body.passwordConfirm || '';
+
+        if (mobile.trim() == '' || password.trim() == '' || passwordConfirm.trim() == '') {
+            throw new APIError('regist:error_input', '手机号，密码和确认密码必传');
+        }
+        if (password != passwordConfirm) {
+            throw new APIError('regist:error_input', '密码和确认密码不一致');
+        }
+
+        let cuser = await userService.regist(mobile, password);
+        ctx.session.user = cuser;
+        ctx.rest({});
     },
 
     'POST /userapi/getLoginUserInfo': async (ctx, next) => {

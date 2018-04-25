@@ -6,6 +6,7 @@ console.log = sysLogger.info.bind(sysLogger);
 
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
+const koaBody = require('koa-body');
 const controller = require('./middleware/controller');
 const templating = require('./middleware/templating');
 const compress = require('koa-compress');
@@ -61,6 +62,12 @@ app.use(session({
     app.use(staticFiles('/static/', __dirname + '/static'));
 //}
 
+app.use(koaBody({ 
+    multipart: true,
+    formidable: {
+        maxFileSize: 200 * 1024 * 1024 //设置上传文件大小最大限制，默认2M
+    } 
+}));
 // parse request body:
 app.use(bodyParser());
 
