@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>注册</title>
-    <link rel="stylesheet" href="/static/css/weui.min.css"/>
-	<link rel="stylesheet" href="/static/css/style.css"/>
-	<script data-main="/static/js/app/register" src="/static/js/lib/require.js" defer async="true"></script>
+    <link rel="stylesheet" href="./style/weui.min.css"/>
+	<link rel="stylesheet" href="./style/style.css"/>
+	
     <style>
 	.weui-cells:after {
 		border-bottom: 0px solid #e5e5e5;
@@ -18,10 +18,10 @@
 	<header class="wy-header">
 		<div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
 		<div class="wy-header-title">注册</div>
-		<div class="wy-header-icon-index"><a href="/zshop/"></a></div>
+		<div class="wy-header-icon-index"><a href="index.html"></a></div>
 	</header>
 	
-	<form action="/zshop/api/regist" method="post" enctype="multipart/form-data"> 
+	<form action="index.html" method="post" enctype="multipart/form-data"> 
 		<div class="weui-cells weui-cells_form" style="padding-top: 44px;margin-top: 0px;">
 			<div class="weui-cell" style="font-size: 14px;">
 				<div class="weui-cell__hd" ><label class="weui-label">手机号码</label></div>
@@ -67,8 +67,6 @@
 			<p class="weui-footer__text">Copyright &copy; 2018-2099 zshop</p>
 		</div>
 	</div>
-
-	{% include "public-tip.html" %}
 
 </body>
 </html>
