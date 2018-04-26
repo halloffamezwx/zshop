@@ -1,5 +1,6 @@
 //用户service
 const model = require('../middleware/model');
+const APIError = require('../middleware/rest').APIError;
 
 let user = model.user;
 
@@ -15,7 +16,19 @@ module.exports = {
         return quser;
     },
 
+    countUser: async (userCon) => {
+        let whereObj = new Object();
+        if (userCon.mobile) {
+            whereObj.mobile = userCon.mobile;
+        }
+        return await user.count({where: whereObj});
+    },
+
     regist: async (mobile, password) => {
+        let countInt = await user.count({where: {mobile: mobile}});
+        if (countInt > 0) {
+            throw new APIError('regist:repeat_mobile', '该手机号码已存在');
+        }
         let cuser = await user.create({
             mobile: mobile,
             userId: mobile,

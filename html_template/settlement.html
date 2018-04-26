@@ -14,6 +14,12 @@
 		.weui-cell:before{
 			border-top: 0px solid #e5e5e5;
 		}
+		.addressPicClass {
+			font-size: 14px;
+		}
+		.weui-picker__action {
+			font-size: 14px;
+		}
 	</style>
 </head>
 
@@ -26,7 +32,7 @@
 
 	<div class="weui-tab__panel" style="padding-top:41px">
 		<div class="wy-media-box weui-media-box_text address-select">
-			<div class="weui-media-box_appmsg weui-cell_access"> 
+			<div class="weui-media-box_appmsg weui-cell_access" id="addressSelect"> 
 				<div class="weui-media-box__hd proinfo-txt-l" style="width:20px;margin-right:20px;margin-left:6px;"><span class="promotion-label-tit"><img src="images/icon_nav_city.png" /></span></div>
 				<div class="weui-media-box__bd">
 					<a href="javascript:void(0);" class="weui-cell_access">
@@ -122,6 +128,7 @@
 			</div>
 		</div>
 
-    </div>
+	</div>
+	<div id="addressPicContainer"></div>
 </body>
 </html>

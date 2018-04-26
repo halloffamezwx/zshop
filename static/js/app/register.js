@@ -8,6 +8,31 @@ requirejs.config({
 
 requirejs(["jquery", "publicTip"], function($, publicTip){
 	$(function() {
+		$("#mobile").blur(function () {
+			var mobile = $("#mobile").val();
+			if (mobile.trim() == '') {
+				publicTip.showTipForStr("手机号必填");
+				return;
+			}
+			if ( !/^1\d{10}$/.test(mobile) ) {
+				publicTip.showTipForStr("手机号格式不正确");
+				return;
+			}
+
+			$.ajax({
+				type: 'post',
+				dataType: 'json',
+				url: '/zshop/api/countUserMobile',
+				data: {mobile: mobile}
+			}).done(function (r) {
+				if (r.countInt > 0) {
+					publicTip.showTipForStr("该手机号码已存在");
+				}
+			}).fail(function (jqXHR, textStatus) { // Not 200
+				publicTip.showTip(jqXHR.responseJSON);
+			});
+		});
+
 		$("#confirmBtn").click(function () {
 			var mobile = $("#mobile").val();
 			var password = $("#password").val(); 

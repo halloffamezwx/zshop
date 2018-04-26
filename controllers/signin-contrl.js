@@ -66,6 +66,15 @@ module.exports = {
         ctx.rest({});
     },
 
+    'POST /api/countUserMobile': async (ctx, next) => {
+        let mobile = ctx.request.body.mobile || '';
+        if (mobile.trim() == '') {
+            throw new APIError('regist:error_input', '手机号必传');
+        }
+        let countInt = await userService.countUser({mobile: mobile});
+        ctx.rest({countInt: countInt});
+    },
+
     'POST /userapi/getLoginUserInfo': async (ctx, next) => {
         let orderCount = await orderService.countOrder("1111", ctx.session.user.userId);
         ctx.rest({user: ctx.session.user, orderCount: orderCount});

@@ -32,11 +32,11 @@
 	<div class='weui-content' id="orderContent" style="padding-top:86px;">
 		<div class="weui-tab">
 			<div class="weui-navbar" style="position:fixed; top:42px; left:0; right:0; height:44px; background:#fff;">
-			    <a class="weui-navbar__item proinfo-tab-tit font-14" v-bind:class="[status == 0 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 0)">全部</a>
-			    <a class="weui-navbar__item proinfo-tab-tit font-14" v-bind:class="[status == 2 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 2)">待付款</a>
-			    <a class="weui-navbar__item proinfo-tab-tit font-14" v-bind:class="[status == 3 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 3)">待发货</a>
-			    <a class="weui-navbar__item proinfo-tab-tit font-14" v-bind:class="[status == 4 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 4)">待收货</a>
-			    <a class="weui-navbar__item proinfo-tab-tit font-14" v-bind:class="[status == 5 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 5)">待评价</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-13" v-bind:class="[status == 0 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 0)">全部</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-13" v-bind:class="[status == 2 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 2)">待付款</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-13" v-bind:class="[status == 3 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 3)">待发货</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-13" v-bind:class="[status == 4 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 4)">待收货</a>
+			    <a class="weui-navbar__item proinfo-tab-tit font-13" v-bind:class="[status == 5 ? 'weui-bar__item--on' : '']" href="javascript:;" v-on:click="getOrderList(false, 5)">待评价</a>
 			</div>
 		</div>
 		
@@ -44,7 +44,7 @@
 			<div class="weui-panel__bd">
 				<a :href="'/zshop/user/orderDetail/' + so.id" class="weui-cell_access weui-cell" style="border-bottom: 1px solid rgb(244, 244, 244);">
 					<div class="weui-cell__bd">
-						<p style="font-size:13px;">创建时间：<span style="color: gray;" v-text="so.createdAtFormat"></span></p>
+						<p style="font-size:13px;">下单时间：<span style="color: gray;" v-text="so.createdAtFormat"></span></p>
 					</div>
 					<div style="font-size:13px;color:red;" v-text="so.statusName"></div>
 				</a>
