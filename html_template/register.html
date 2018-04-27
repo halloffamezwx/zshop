@@ -11,6 +11,31 @@
 	.weui-cells:after {
 		border-bottom: 0px solid #e5e5e5;
 	}
+	.zindex-9999{
+		z-index:9999;
+	}
+	.weui-mask{
+		z-index:9999;
+	}
+	.weui-dialog {
+		z-index:9999;
+	}
+	.weui-dialog__btn {
+		font-size: 14px;
+	}
+	.weui-dialog__bd {
+		font-size: 14px;
+	}
+	.weui-skin_android .weui-dialog__bd {
+		font-size: 14px;
+	}
+
+	.weui_avatar {
+		width: 52px;
+		height: 52px;
+		border-radius: 4px;
+		vertical-align: middle;
+	}
 	</style>
 </head>
 
@@ -23,17 +48,23 @@
 	
 	<form action="index.html" method="post" enctype="multipart/form-data"> 
 		<div class="weui-cells weui-cells_form" style="padding-top: 44px;margin-top: 0px;">
-			<div class="weui-cell" style="font-size: 14px;">
+			<div class="weui-cell " style="font-size: 14px;">
 				<div class="weui-cell__hd" ><label class="weui-label">手机号码</label></div>
 				<div class="weui-cell__bd">
-					<input class="weui-input" type="number" placeholder="请输入手机号" id="mobile" name="mobile"/>
+					<input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入手机号" id="mobile" name="mobile"/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
 				</div>
 			</div>
 
-			<div class="weui-cell" style="font-size: 14px;">
+			<div class="weui-cell weui-cell_warn" style="font-size: 14px;">
 				<div class="weui-cell__hd" ><label class="weui-label">密<span style="margin-left: 28px;">码</span></label></div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="password" placeholder="请您输入密码" id="password" name="password"/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
 				</div>
 			</div>
 			<div class="weui-cell" style="font-size: 14px;">
@@ -45,7 +76,7 @@
 
 			<div class="weui-cell weui-cell_vcode" >
 				<div class="weui-cell__bd" >
-					<input class="weui-input" type="text" placeholder="短信验证码" style="font-size: 14px; ">
+					<input class="weui-input" type="text" placeholder="短信验证" style="font-size: 14px; ">
 				</div>
 				<div class="weui-cell__ft">
 					<a href="javascript:;" class="weui-vcode-btn" style="font-size: 14px;/*width: 83px;*/text-align:center;height: 41px;">获取验证码</a>
@@ -61,12 +92,20 @@
 				</div>
 			</div>
 
-			<div class="weui-cell">
+			<input style="display:none;" id="headFile" name="headFile" type="file" accept="image/*"/>
+			<div class="weui-cell weui-cell_access" style="font-size: 14px;" id="headDiv">
+				<div class="weui-cell__hd" ><label class="weui-label">头像上传</label></div>
+				<div class="weui_cell_ft " >
+					<img class="weui_avatar" src="./images/bear.jpg" alt="">
+				</div>
+			</div>
+
+			<div class="weui-cell" id="uploader">
 				<div class="weui-cell__bd">
 					<div class="weui-uploader">
 						<div class="weui-uploader__hd" style="font-size: 14px;">
-							<p class="weui-uploader__title">头像上传</p>
-							<div class="weui-uploader__info">0/2</div>
+							<p class="weui-uploader__title">图片上传</p>
+							<div class="weui-uploader__info"><span id="uploadCount">3</span>/5</div>
 						</div>
 						<div class="weui-uploader__bd">
 							<ul class="weui-uploader__files" id="uploaderFiles">
@@ -83,7 +122,8 @@
 								</li>
 							</ul>
 							<div class="weui-uploader__input-box">
-								<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+								<!-- <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple=""/> -->
+								<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple=""/>
 							</div>
 						</div>
 					</div>
@@ -93,7 +133,7 @@
 			<div class="weui-cell weui-cell_vcode">
 			</div>
 			
-			<div class="weui-btn-area" >
+			<div class="weui-btn-area" style="margin-bottom: 140px;">
 				<!-- input class="weui-btn weui-btn_primary" type="submit" id="confirmBtn" style="font-size: 14px;height:39px;" value="确 定"/> -->
 				<a class="weui-btn weui-btn_primary" href="javascript:" id="confirmBtn" style="font-size: 14px;height:39px;"><i id="confirmLoading"></i>确 定</a>
 			</div>

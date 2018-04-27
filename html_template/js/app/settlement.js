@@ -11,7 +11,7 @@ requirejs(["jquery", "weui.min", "city"], function($, weui, city){
             weui.picker(city.cityData, {
                 className: 'addressPicClass',
                 container: '#addressPicContainer',
-                defaultValue: [0, 1, 1],
+                defaultValue: ['440000', '440100', '440106'],
                 onChange: function (result) {
                     console.log(result)
                 },
