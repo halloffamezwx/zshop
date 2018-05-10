@@ -18,7 +18,9 @@
         "url": "https://github.com/halloffamezwx/zshop.git"
     },
     "dependencies": {
-        "koa": "2.0.0",
+        "koa": "2.0.1",
+        "koa-session2": "",
+        "node-uuid": "*",
         "koa-bodyparser": "3.2.0",
         "koa-router": "7.0.0",
         "nunjucks": "2.4.2",
@@ -27,7 +29,6 @@
         "koa-compress": "",
         "sequelize": "3.24.1",
         "mysql": "2.11.1",
-        "koa-session2": "",
         "log4js": "",
         "captchapng": "",
         "moment": "",
