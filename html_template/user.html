@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>用户</title>
+    <link rel="stylesheet" href="./style/weui.min.css"/>
+	<link rel="stylesheet" href="./style/style.css"/>
+	<script data-main="js/app/user.js" src="js/lib/require.js" defer async="true"></script>
+    <style>
+	.weui-cells:after {
+		border-bottom: 0px solid #e5e5e5;
+	}
+
+	.weui_avatar {
+		width: 52px;
+		height: 52px;
+		border-radius: 4px;
+		vertical-align: middle;
+	}
+	</style>
+</head>
+
+<body style="background-color: #ffffff;">
+	<header class="wy-header">
+		<div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
+		<div class="wy-header-title">用户</div>
+		<div class="wy-header-icon-index"><a href="index.html"></a></div>
+	</header>
+	
+	<form action="index.html" method="post" enctype="multipart/form-data"> 
+		<div class="weui-cells weui-cells_form" style="padding-top: 44px;margin-top: 0px;">
+			<div class="weui-cell weui-cell_warn" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">用户的ID <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="text" placeholder="请您输入用户ID" id="userId" name="userId"/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
+			</div>
+			<div class="weui-cell" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">用户名称 <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="text" placeholder="请输入用户名称" id="name" name="name"/>
+				</div>
+			</div>
+
+			<div class="weui-cell " style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">电子邮箱</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="email" placeholder="请输入电子邮箱" id="email" name="email"/>
+				</div>
+			</div>
+
+			<div class="weui-gallery" id="gallery" style="z-index:9999;">
+				<span class="weui-gallery__img" id="galleryImg"></span>
+				<!-- div class="weui-gallery__opr">
+					<a href="javascript:" class="weui-gallery__del">
+						<i class="weui-icon-delete weui-icon_gallery-delete"></i>
+					</a>
+				</div -->
+			</div>
+
+			<input style="display:none;" id="headFile" name="headFile" type="file" accept="image/*"/>
+			<div class="weui-cell weui-cell_access" style="font-size: 14px;" id="headDiv">
+				<div class="weui-cell__hd" ><label class="weui-label">选择头像</label></div>
+				<div class="weui_cell_ft " >
+					<img class="weui_avatar" id="headImage" name="headImage" src="./images/bear.jpg" alt="">
+				</div>
+			</div>
+			
+			<div class="weui-cell weui-cell_vcode">
+			</div>
+			
+			<div class="weui-btn-area" style="margin-bottom: 140px;">
+				<input class="weui-btn weui-btn_primary" type="submit" id="confirmBtn" style="font-size: 14px;height:39px;" value="确 定"/> 
+				<!-- <a class="weui-btn weui-btn_primary" href="javascript:" id="confirmBtn" style="font-size: 14px;height:39px;"><i id="confirmLoading"></i>确 定</a> -->
+			</div>
+		</div>
+	</form>
+
+	<div class="weui-msg__extra-area">
+		<div class="weui-footer">
+			<p class="weui-footer__text">Copyright &copy; 2018-2099 zshop</p>
+		</div>
+	</div>
+
+</body>
+</html>

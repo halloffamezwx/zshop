@@ -26,7 +26,7 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				data: {mobile: mobile}
 			}).done(function (r) {
 				if (r.countInt > 0) {
-					publicTip.showTipForStr("该手机号码已存在");
+					publicTip.showTipForStr("该手机号码已被占用");
 				}
 			}).fail(function (jqXHR, textStatus) { // Not 200
 				publicTip.showTip(jqXHR.responseJSON);

@@ -61,7 +61,8 @@ function defineModel(name, attributes) {
     };
     attrs.version = {
         type: Sequelize.BIGINT,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     };
     console.log('model defined for table: ' + name + '\n' + JSON.stringify(attrs, function (k, v) {
         if (k === 'type') {
@@ -99,7 +100,7 @@ function defineModel(name, attributes) {
                     }
                     obj.createdAt = now;
                     obj.updatedAt = now;
-                    obj.version = 0;
+                    //obj.version = 0;
                 } else {
                     console.log('will update entity...');
                     obj.updatedAt = now;

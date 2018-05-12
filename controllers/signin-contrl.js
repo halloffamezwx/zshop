@@ -19,6 +19,7 @@ module.exports = {
         var user = await userService.getOneUser(userIn); 
         if (user) {
             var userTemp = new Object();
+            userTemp.id = user.id;
             userTemp.name = user.name;
             userTemp.userId = user.userId;
             userTemp.headImage = user.headImage;
@@ -77,7 +78,14 @@ module.exports = {
 
     'POST /userapi/getLoginUserInfo': async (ctx, next) => {
         let orderCount = await orderService.countOrder("1111", ctx.session.user.userId);
-        ctx.rest({user: ctx.session.user, orderCount: orderCount});
+        let user = await userService.getOneUser({userId: ctx.session.user.userId});
+
+        var userTemp = new Object();
+        userTemp.name = user.name;
+        userTemp.userId = user.userId;
+        userTemp.headImage = user.headImage;
+
+        ctx.rest({user: userTemp, orderCount: orderCount});
     },
 
     'GET /captcha': async (ctx, next) => {
