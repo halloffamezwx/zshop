@@ -83,6 +83,9 @@ module.exports = {
         if (userValue.headImage && userValue.headImage.trim() != '') {
             uptUserInfo.headImage = userValue.headImage;
         }
+        if (userValue.passwd && userValue.passwd.trim() != '') {
+            uptUserInfo.passwd = userValue.passwd;
+        }
 
         let whereObj = new Object();
         if (userCon.id) {

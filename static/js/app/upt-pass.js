@@ -1,27 +1,26 @@
 requirejs.config({
 	"baseUrl": "/static/js/lib",
 	"paths": {
-		"publicTip": "/static/js/app/public-tip",
-		"zepto": "zepto.min"
+		"publicTip": "/static/js/app/public-tip"
     }
 });
 
 requirejs(["jquery", "publicTip"], function($, publicTip){
 	$(function() {
-		var $mobile = $("#mobile");
 		var $password = $("#password"); 
 		var $passwordConfirm = $("#passwordConfirm");
+		var $oldPassword = $("#oldPassword");
 
 		$password.blur(function () {
 			var password = $(this).val();
 			if (password.trim() == '') {
-				publicTip.showTipForStr("密码必填");
+				publicTip.showTipForStr("新的密码必填");
 				$("#passwordCell").addClass('weui-cell_warn');
 				return;
 			} 
 			var passwordConfirm = $passwordConfirm.val();
 			if (passwordConfirm != '' && passwordConfirm != password) {
-				publicTip.showTipForStr("密码和确认密码不一致");
+				publicTip.showTipForStr("新的密码和确认密码不一致");
 				$("#passwordCell").addClass('weui-cell_warn');
 				return;
 			}
@@ -31,7 +30,7 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 		$passwordConfirm.blur(function () {
 			var password = $password.val();
 			if (password.trim() == '') {
-				publicTip.showTipForStr("请先输入密码");
+				publicTip.showTipForStr("请先输入新的密码");
 				$("#passwordCell").addClass('weui-cell_warn');
 				return;
 			}
@@ -42,41 +41,31 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				return;
 			} 
 			if (passwordConfirm != password) {
-				publicTip.showTipForStr("密码和确认密码不一致");
+				publicTip.showTipForStr("新的密码和确认密码不一致");
 				$("#passwordConfirmCell").addClass('weui-cell_warn');
 				return;
 			}
 			$("#passwordConfirmCell").removeClass('weui-cell_warn');
 		});
 
-		$mobile.blur(function () {
-			var mobile = $(this).val();
-			if (mobile.trim() == '') {
-				publicTip.showTipForStr("手机号必填");
-				$("#mobileCell").addClass('weui-cell_warn');
-				return;
-			}
-			if ( !/^1\d{10}$/.test(mobile) ) {
-				publicTip.showTipForStr("手机号格式不正确");
-				$("#mobileCell").addClass('weui-cell_warn');
+		$oldPassword.blur(function () {
+			var oldPassword = $(this).val();
+			if (oldPassword.trim() == '') {
+				publicTip.showTipForStr("原的密码必填");
+				$("#oldPasswordCell").addClass('weui-cell_warn');
 				return;
 			}
 
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
-				url: '/zshop/api/countUserMobile',
-				data: {mobile: mobile}
+				url: '/zshop/userapi/checkPassword',
+				data: {oldPassword: oldPassword}
 			}).done(function (r) {
-				if (r.countInt > 0) {
-					publicTip.showTipForStr("该手机号码已被占用");
-					$("#mobileCell").addClass('weui-cell_warn');
-				} else {
-					$("#mobileCell").removeClass('weui-cell_warn');
-				}
+				$("#oldPasswordCell").removeClass('weui-cell_warn');
 			}).fail(function (jqXHR, textStatus) { // Not 200
 				publicTip.showTip(jqXHR.responseJSON);
-				$("#mobileCell").addClass('weui-cell_warn');
+				$("#oldPasswordCell").addClass('weui-cell_warn');
 			});
 		});
 
@@ -85,22 +74,17 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				return;
 			}
 
-			var mobile = $mobile.val();
+			var oldPassword = $oldPassword.val();
 			var password = $password.val(); 
 			var passwordConfirm = $passwordConfirm.val();
 
-			if (mobile.trim() == '') {
-				publicTip.showTipForStr("手机号必填");
-				$("#mobileCell").addClass('weui-cell_warn');
-				return;
-			}
-			if ( !/^1\d{10}$/.test(mobile) ) {
-				publicTip.showTipForStr("手机号格式不正确");
-				$("#mobileCell").addClass('weui-cell_warn');
+			if (oldPassword.trim() == '') {
+				publicTip.showTipForStr("原的密码必填");
+				$("#oldPasswordCell").addClass('weui-cell_warn');
 				return;
 			}
 			if (password.trim() == '') {
-				publicTip.showTipForStr("密码必填");
+				publicTip.showTipForStr("新的密码必填");
 				$("#passwordCell").addClass('weui-cell_warn');
 				return;
 			}
@@ -110,14 +94,14 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				return;
 			}
 			if (password != passwordConfirm) {
-				publicTip.showTipForStr("密码和确认密码不一致");
+				publicTip.showTipForStr("新的密码和确认密码不一致");
 				$("#passwordCell").addClass('weui-cell_warn');
 				$("#passwordConfirmCell").addClass('weui-cell_warn');
 				return;
 			}
 
 			var userReq = {
-                mobile: mobile,
+                oldPassword: oldPassword,
 				password: password,
 				passwordConfirm: passwordConfirm
             };
@@ -128,14 +112,18 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				type: 'post',
 				dataType: 'json',
 				contentType: 'application/json',
-				url: '/zshop/api/regist',
+				url: '/zshop/userapi/uptPass',
 				data: JSON.stringify(userReq)
 			}).done(function (r) {
-				window.location.href = '/zshop?actTabbar=my';
+				publicTip.showConfirm('修改成功！重新登录？', function(){
+					window.location.href = "/zshop/login";
+				});
+				$("#confirmBtn").removeClass('weui-btn_loading');
+				$("#confirmLoading").removeClass('weui-loading');
 			}).fail(function (jqXHR, textStatus) { // Not 200
 				publicTip.showTip(jqXHR.responseJSON);
-				if (jqXHR.responseJSON.code == 'regist:repeat_mobile') {
-					$("#mobileCell").addClass('weui-cell_warn');
+				if (jqXHR.responseJSON.code == 'index:error_password') {
+					$("#oldPasswordCell").addClass('weui-cell_warn');
 				}
 				$("#confirmBtn").removeClass('weui-btn_loading');
 				$("#confirmLoading").removeClass('weui-loading');

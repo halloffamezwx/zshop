@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>密码修改</title>
+    <link rel="stylesheet" href="/static/css/weui.min.css"/>
+	<link rel="stylesheet" href="/static/css/style.css"/>
+	<script data-main="/static/js/app/upt-pass" src="/static/js/lib/require.js" defer async="true"></script>
+    <style>
+	.weui-cells:after {
+		border-bottom: 0px solid #e5e5e5;
+	}
+	</style>
+</head>
+
+<body style="background-color: #ffffff;">
+	<header class="wy-header">
+		<div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
+		<div class="wy-header-title">密码修改</div>
+		<div class="wy-header-icon-index"><a href="/zshop/"></a></div>
+	</header>
+	
+	<form action="/" method="post"> 
+		<div class="weui-cells weui-cells_form" style="padding-top: 44px;margin-top: 0px;">
+			<div class="weui-cell " id="oldPasswordCell" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">原的密码 <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="password" placeholder="请输入原的密码" id="oldPassword" name="oldPassword"/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
+			</div>
+
+			<div class="weui-cell" id="passwordCell" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">新的密码 <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="password" placeholder="请输入新的密码" id="password" name="password"/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
+			</div>
+			
+			<div class="weui-cell " id="passwordConfirmCell" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">确认密码 <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="password" placeholder="请输入确认密码" id="passwordConfirm" name="passwordConfirm"/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
+			</div>
+			
+			<div class="weui-cell weui-cell_vcode">
+			</div>
+			
+			<div class="weui-btn-area" style="margin-bottom: 140px;">
+				<!-- input class="weui-btn weui-btn_primary" type="submit" id="confirmBtn" style="font-size: 14px;height:39px;" value="确 定"/> -->
+				<a class="weui-btn weui-btn_primary" href="javascript:" id="confirmBtn" style="font-size: 14px;height:39px;"><i id="confirmLoading"></i>确 定</a> 
+			</div>
+		</div>
+	</form>
+
+	<div class="weui-msg__extra-area">
+		<div class="weui-footer">
+			<p class="weui-footer__text">Copyright &copy; 2018-2099 zshop</p>
+		</div>
+	</div>
+	{% include "public-tip.html" %}
+</body>
+</html>

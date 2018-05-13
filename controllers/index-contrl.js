@@ -130,5 +130,36 @@ module.exports = {
         }
 
         ctx.rest({});
+    },
+
+    'GET /user/uptPassPage': async (ctx, next) => { 
+        ctx.render('upt-pass.html');
+    },
+
+    'POST /userapi/checkPassword': async (ctx, next) => {
+        let oldPassword = ctx.request.body.oldPassword || '';
+        let user = await userService.getOneUser({userId: ctx.session.user.userId});
+
+        if ( oldPassword != user.passwd ) {
+            throw new APIError('index:error_password', '原的密码错误');
+        }
+
+        ctx.rest({});
+    },
+
+    'POST /userapi/uptPass': async (ctx, next) => {
+        let oldPassword = ctx.request.body.oldPassword || '';
+        let password = ctx.request.body.password || '';
+        //let passwordConfirm = ctx.request.body.passwordConfirm || '';
+        let user = await userService.getOneUser({userId: ctx.session.user.userId});
+
+        if ( oldPassword != user.passwd ) {
+            throw new APIError('index:error_password', '原的密码错误');
+        }
+
+        let userValue = new Object();
+        await userService.uptUser({id: user.id, version: user.version}, {passwd: password});
+
+        ctx.rest({});
     }
 };

@@ -49,9 +49,9 @@
 			</div>
 		</div>
 		<div class="weui-cell weui-cell_vcode" id="captchaCell" style="font-size: 14px;">
-			<div class="weui-cell__hd" ><label class="weui-label">验证码 <span style="color:red;">*</span></label></div>
+			<div class="weui-cell__hd" ><label class="weui-label">验证码 {% if openCaptcha %}<span style="color:red;">*</span>{% endif %}</label></div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" placeholder="请输入验证码" id="captcha" name="captcha"/>
+				<input class="weui-input" {% if openCaptcha %}type="number" pattern="[0-9]*"{% endif %} placeholder="请输入验证码" id="captcha" name="captcha"/>
 			</div>
 			<div class="weui-cell__ft">
 				<i class="weui-icon-warn" style="font-size: 20px;"></i>
