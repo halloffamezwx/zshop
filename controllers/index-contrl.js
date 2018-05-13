@@ -87,7 +87,7 @@ module.exports = {
             }
             userValue.userId = userId;
         } 
-        if (email != user.email) {
+        if (email.trim() != '' && email != user.email) {
             if (await userService.countUser({email: email}) >= 1) {
                 throw new APIError('uptUserInfo:repeat_email', '该电子邮箱已被占用');
             }

@@ -40,7 +40,7 @@ module.exports = {
     regist: async (mobile, password) => {
         let countInt = await user.count({where: {mobile: mobile}});
         if (countInt > 0) {
-            throw new APIError('regist:repeat_mobile', '该手机号码已存在');
+            throw new APIError('regist:repeat_mobile', '该手机号码已被占用');
         }
         let cuser = await user.create({
             mobile: mobile,

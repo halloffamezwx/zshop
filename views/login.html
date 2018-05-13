@@ -22,10 +22,13 @@
 	</header>
 	
 	<div class="weui-cells weui-cells_form" style="padding-top: 44px;margin-top: 0px;">
-		<div class="weui-cell" style="font-size: 14px;">
-			<div class="weui-cell__hd" ><label class="weui-label">手机号</label></div>
+		<div class="weui-cell" id="mobileCell" style="font-size: 14px;">
+			<div class="weui-cell__hd" ><label class="weui-label">手机号 <span style="color:red;">*</span></label></div>
 			<div class="weui-cell__bd">
 				<input class="weui-input" type="number" placeholder="请输入手机号" id="mobile" name="mobile"/>
+			</div>
+			<div class="weui-cell__ft">
+				<i class="weui-icon-warn" style="font-size: 20px;"></i>
 			</div>
 		</div>
 		<div class="weui-cell weui-cell_vcode" style="font-size: 14px; display:none;">
@@ -36,20 +39,29 @@
 				<a href="javascript:;" class="weui-vcode-btn" style="font-size: 14px;width: 90px;text-align:center;">获取验证码</a>
 			</div>
 		</div>
-		<div class="weui-cell" style="font-size: 14px;">
-			<div class="weui-cell__hd" ><label class="weui-label">密<span style="margin-left: 13px;">码</span></label></div>
+		<div class="weui-cell" id="passwordCell" style="font-size: 14px;">
+			<div class="weui-cell__hd" ><label class="weui-label">密<span style="margin-left: 13px;">码</span> <span style="color:red;">*</span></label></div>
 			<div class="weui-cell__bd">
 				<input class="weui-input" type="password" placeholder="请您输入密码" id="password" name="password"/>
 			</div>
+			<div class="weui-cell__ft">
+				<i class="weui-icon-warn" style="font-size: 20px;"></i>
+			</div>
 		</div>
-		<div class="weui-cell weui-cell_vcode" style="font-size: 14px;">
-			<div class="weui-cell__hd" ><label class="weui-label">验证码</label></div>
+		<div class="weui-cell weui-cell_vcode" id="captchaCell" style="font-size: 14px;">
+			<div class="weui-cell__hd" ><label class="weui-label">验证码 <span style="color:red;">*</span></label></div>
 			<div class="weui-cell__bd">
-				<input class="weui-input" placeholder="请输入验证码"/>
+				<input class="weui-input" placeholder="请输入验证码" id="captcha" name="captcha"/>
 			</div>
 			<div class="weui-cell__ft">
-				<img class="weui-vcode-img" src="/static/images/vcode.jpg" />
-				<!-- img class="weui-vcode-img" src="/zshop/captcha" /> -->
+				<i class="weui-icon-warn" style="font-size: 20px;"></i>
+			</div>
+			<div class="weui-cell__ft">
+				{% if openCaptcha %}
+				<img class="weui-vcode-img" src="" id="captchaImg"/>
+				{% else %}
+				<img class="weui-vcode-img" src="/static/images/vcode.jpg" /> 
+				{% endif %} 
 			</div>
 		</div>
 		<div class="weui-cell weui-cell_vcode">
@@ -67,7 +79,7 @@
 			</span>
 			
 			<span class="weui-agree__text" style="float:right;">
-				<a href="javascript:void(0);">忘记密码？</a>
+				<a href="javascript:window.location.href='/zshop/resetPass?mobile='+document.getElementById('mobile').value;">忘记密码？</a>
 			</span>
 		</label>
 		
@@ -80,6 +92,7 @@
 	</div>
 
 	<input type="hidden" id="loginSuccUrl" value="{{loginSuccUrl}}"/>
+	<input type="hidden" id="openCaptcha" value="{{openCaptcha}}"/>
 	{% include "public-tip.html" %}
 
 </body>

@@ -3,18 +3,30 @@ const userService = require('../service/user-service');
 const orderService = require('../service/order-service');
 const APIError = require('../middleware/rest').APIError;
 const indexContrl = require('../controllers/index-contrl');
-//const captchapng = require('captchapng');
+let captchapng = null;
 const fs = require('fs');
+const openCaptcha = process.env.OPEN_CAPTCHA === 'true';
+console.log(`openCaptcha = [${openCaptcha}]`);
+if (openCaptcha) {
+    captchapng = require('captchapng');
+}
 
 module.exports = {
     'POST /api/signin': async (ctx, next) => {
         //console.log(JSON.stringify(ctx.request.body));
-        var
+        let
             mobile = ctx.request.body.mobile || '',
             password = ctx.request.body.password || '',
+            captcha = ctx.request.body.captcha || '',
+            sessionCaptcha = ctx.session.sessionCaptcha,
             userIn = new Object();
         userIn.mobile = mobile;
         userIn.passwd = password;
+        console.log("sessionCaptcha=" + sessionCaptcha);
+
+        if ( openCaptcha && (!sessionCaptcha || sessionCaptcha != captcha) ) {
+            throw new APIError('login:error_captcha', '验证码错误');
+        }
 
         var user = await userService.getOneUser(userIn); 
         if (user) {
@@ -37,7 +49,11 @@ module.exports = {
     },
 
     'GET /login': async (ctx, next) => {
-        ctx.render('login.html', {loginSuccUrl: ctx.query.loginSuccUrl});
+        ctx.render('login.html', {loginSuccUrl: ctx.query.loginSuccUrl, openCaptcha: openCaptcha});
+    },
+
+    'GET /resetPass': async (ctx, next) => {
+        ctx.render('reset-pass.html', {mobile: ctx.query.mobile});
     },
 
     'GET /registPage': async (ctx, next) => {
@@ -88,10 +104,24 @@ module.exports = {
         ctx.rest({user: userTemp, orderCount: orderCount});
     },
 
+    'POST /api/checkCaptcha': async (ctx, next) => {
+        let captcha = ctx.request.body.captcha || '',
+            sessionCaptcha = ctx.session.sessionCaptcha;
+        console.log("checkCaptcha-sessionCaptcha=" + sessionCaptcha);
+
+        if ( openCaptcha && (!sessionCaptcha || sessionCaptcha != captcha) ) {
+            throw new APIError('login:error_captcha', '验证码错误');
+        }
+
+        ctx.rest({});
+    },
+
     'GET /captcha': async (ctx, next) => {
+        //const captchapng = require('captchapng');
+
         var numeric = parseInt(Math.random()*9000+1000);
-        //console.log("captcha=" + numeric);
-        ctx.session.captcha = numeric;
+        console.log("captcha=" + numeric);
+        ctx.session.sessionCaptcha = numeric;
 
         var p = new captchapng(110,45,numeric); // width,height,numeric captcha
         p.color(248, 248, 248, 255);  // First color: background (red, green, blue, alpha)

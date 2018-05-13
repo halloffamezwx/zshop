@@ -23,23 +23,32 @@
 	
 	<form action="/zshop/api/regist" method="post" enctype="multipart/form-data"> 
 		<div class="weui-cells weui-cells_form" style="padding-top: 44px;margin-top: 0px;">
-			<div class="weui-cell" style="font-size: 14px;">
-				<div class="weui-cell__hd" ><label class="weui-label">手机号码</label></div>
+			<div class="weui-cell" id="mobileCell" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">手机号码 <span style="color:red;">*</span></label></div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="number" placeholder="请输入手机号" id="mobile" name="mobile"/>
 				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
 			</div>
 
-			<div class="weui-cell" style="font-size: 14px;">
-				<div class="weui-cell__hd" ><label class="weui-label">密<span style="margin-left: 28px;">码</span></label></div>
+			<div class="weui-cell" id="passwordCell" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">密<span style="margin-left: 28px;">码</span> <span style="color:red;">*</span></label></div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="password" placeholder="请您输入密码" id="password" name="password"/>
 				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
 			</div>
-			<div class="weui-cell" style="font-size: 14px;">
-				<div class="weui-cell__hd" ><label class="weui-label">确认密码</label></div>
+			<div class="weui-cell" id="passwordConfirmCell" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">确认密码 <span style="color:red;">*</span></label></div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="password" placeholder="请您确认密码" id="passwordConfirm" name="passwordConfirm"/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
 				</div>
 			</div>
 

@@ -87,7 +87,10 @@ requirejs(["jquery", "weui.min", "publicTip"], function($, weui, publicTip){
 
 		$email.blur(function () {
 			var email = $email.val();
-			if (email != '' && !emailRegex.test(email)) {
+			if (email.trim() == '') {
+				return;
+			}
+			if (!emailRegex.test(email)) {
 				publicTip.showTipForStr("电子邮箱格式不正确");
 				$("#emailCell").addClass('weui-cell_warn');
 				return;
