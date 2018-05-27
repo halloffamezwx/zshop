@@ -13,8 +13,8 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 		var $captcha = $("#captcha");
 
 		var openCaptcha = $("#openCaptcha").val();
+		var $captchaImg = $("#captchaImg");
 		if (openCaptcha == "true") {
-			$captchaImg = $("#captchaImg");
 			$captchaImg.attr("src", '/zshop/captcha?r=' + Math.random());
 			$captchaImg.click(function () {
 				$(this).attr("src", '/zshop/captcha?r=' + Math.random());
@@ -138,6 +138,10 @@ requirejs(["jquery", "publicTip"], function($, publicTip){
 				publicTip.showTip(jqXHR.responseJSON);
 				$("#loginBtn").removeClass('weui-btn_loading');
 				$("#loginLoading").removeClass('weui-loading');
+
+				if (openCaptcha == "true" && jqXHR.responseJSON.code != "login:error_captcha") {
+					$captchaImg.click();
+				}
 			});
 			
 		});

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>收件地址</title>
+    <link rel="stylesheet" href="./style/weui.min.css"/>
+	<link rel="stylesheet" href="./style/style.css"/>
+	<script data-main="js/app/address" src="js/lib/require.js" defer async="true"></script>
+    <style>
+	.weui-cells:after {
+		border-bottom: 0px solid #e5e5e5;
+	}
+
+	[class*=" weui-icon-"]:before, [class^=weui-icon-]:before {
+    	margin-left: 0em; 
+	}
+
+	.addressPicClass {
+		font-size: 14px;
+	}
+	.weui-picker__action {
+		font-size: 14px;
+	}
+	</style>
+</head>
+
+<body style="background-color: #ffffff;">
+	<header class="wy-header">
+		<div class="wy-header-icon-back"><a href="javascript:window.history.back();"></a></div>
+		<div class="wy-header-title">收件地址</div>
+		<div class="wy-header-icon-index"><a href="index.html"></a></div>
+	</header>
+
+	<div style="padding-top: 41px;" id="listDiv">
+		<div class="weui-panel weui-panel_access" >
+			<div class="weui-panel__bd">
+				<div class="weui-media-box weui-media-box_text weui-media-box_appmsg">
+					<div class="weui-cells_checkbox">
+						<label class="weui-check__label" for="cart-pto1">
+							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto1"><i class="weui-icon-checked"></i></div>
+						</label>
+					</div>
+					<div>	
+						<h4 class="weui-media-box__title" style="font-size: 14px;">朱某某 189****3850
+							<span style="border-radius: 5px;color:white;background-color: gray;margin-left: 10px;display:none;">
+								<span style="margin: 3px;font-size: 13px;">默认地址</span> 
+							</span>
+						</h4>
+						<p class="weui-media-box__desc">广东省广州市天河区电商产业园105号</p>
+					</div>	
+					<div class="weui-media-box__bd">
+						<img src="images/icon-edit.png" style="width:17px;height: 17px;float: right;margin-right: 3px;margin-top: 1px;"/>
+					</div>
+				</div>
+				<div class="weui-media-box weui-media-box_text weui-media-box_appmsg">
+					<div class="weui-cells_checkbox">
+						<label class="weui-check__label" for="cart-pto2">
+							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto2"><i class="weui-icon-checked"></i></div>
+						</label>
+					</div>
+					<div>	
+						<h4 class="weui-media-box__title" style="font-size: 14px;">朱某某 189****3850
+							<span style="border-radius: 5px;color:white;background-color: gray;margin-left: 10px;">
+								<span style="margin: 3px;font-size: 13px;">默认地址</span> 
+							</span>
+						</h4>
+						<p class="weui-media-box__desc">广东省广州市天河区电商产业园105号</p>
+					</div>	
+					<div class="weui-media-box__bd">
+						<img src="images/icon-edit.png" style="width:17px;height: 17px;float: right;margin-right: 3px;margin-top: 1px;"/>
+					</div>
+				</div>
+				<div class="weui-media-box weui-media-box_text weui-media-box_appmsg">
+					<div class="weui-cells_checkbox">
+						<label class="weui-check__label" for="cart-pto3">
+							<div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="cartpro" id="cart-pto3"><i class="weui-icon-checked"></i></div>
+						</label>
+					</div>
+					<div>	
+						<h4 class="weui-media-box__title" style="font-size: 14px;">朱某某 189****3850
+							<span style="border-radius: 5px;color:white;background-color: gray;margin-left: 10px;display:none;">
+								<span style="margin: 3px;font-size: 13px;">默认地址</span> 
+							</span>
+						</h4>
+						<p class="weui-media-box__desc">广东省广州市天河区电商产业园105号</p>
+					</div>	
+					<div class="weui-media-box__bd">
+						<img src="images/icon-edit.png" style="width:17px;height: 17px;float: right;margin-right: 3px;margin-top: 1px;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="weui-btn-area" > 
+			<a class="weui-btn weui-btn_primary" href="javascript:" id="confirmBtn" style="font-size: 14px;height:39px;"><i id="confirmLoading"></i>确 定</a>
+			<a class="weui-btn weui-btn_default" href="javascript:" id="addBtn" style="font-size: 14px;height:39px;"><i id=""></i>新 增</a>
+		</div>
+	</div>
+	
+	<form action="address.html" method="post" style="display:none;" id="editForm"> 
+		<div class="weui-cells weui-cells_form" style="padding-top: 44px;margin-top: 0px;">
+			<div class="weui-cell " style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">收件人名 <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="text" placeholder="请输入收件人名" id="" name=""/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
+			</div>
+
+			<div class="weui-cell weui-cell_warn" style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">收件手机 <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="number" placeholder="请输入收件手机" id="" name=""/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
+			</div>
+			
+			<div class="weui-cell " style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">所在地区 <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="text" placeholder="请选择所在地区" id="area" name="area"/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
+			</div>
+
+			<div class="weui-cell " style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">详细地址 <span style="color:red;">*</span></label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" type="text" placeholder="请输入详细地址" id="" name=""/>
+				</div>
+				<div class="weui-cell__ft">
+					<i class="weui-icon-warn" style="font-size: 20px;"></i>
+				</div>
+			</div>
+
+			<div class="weui-cell " style="font-size: 14px;">
+				<div class="weui-cell__hd" ><label class="weui-label">设为默认地址</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-switch" type="checkbox" style="float:right;" id="" name=""/>
+				</div>
+			</div>
+			
+			<div class="weui-cell weui-cell_vcode">
+			</div>
+			
+			<div class="weui-btn-area" style="margin-bottom: 140px;">
+				<input class="weui-btn weui-btn_primary" type="submit" id="saveBtn" style="font-size: 14px;height:39px;" value="保 存"/>
+				<a class="weui-btn weui-btn_default" href="javascript:" id="backBtn" style="font-size: 14px;height:39px;"><i id=""></i>返 回</a> 
+			</div>
+		</div>
+	</form>
+
+	<div id="addressPicContainer"></div>
+</body>
+</html>

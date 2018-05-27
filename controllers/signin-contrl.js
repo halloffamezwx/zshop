@@ -28,6 +28,7 @@ module.exports = {
             throw new APIError('login:error_captcha', '验证码错误');
         }
 
+        ctx.session.sessionCaptcha = null;
         var user = await userService.getOneUser(userIn); 
         if (user) {
             var userTemp = new Object();
@@ -36,6 +37,7 @@ module.exports = {
             userTemp.userId = user.userId;
             userTemp.headImage = user.headImage;
             ctx.session.user = userTemp;
+
             ctx.rest({user: userTemp});
         } else {
             throw new APIError('login:error_mobile_passwd', '手机号或密码错误');
